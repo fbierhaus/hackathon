@@ -1,0 +1,14 @@
+﻿Terms & Conditions NGM Download
+Welcome to the next generation messaging experience. This application includes group and location messaging.  Location messages and group messages are charged as multimedia messages (MMS). Data usage shall apply when using certain location & search functionality such as the map tool for location messaging and searching place of interest. All data usage will be billed according to your plan.  By using location messaging, you consent and permit Verizon Wireless to disclose your location information to others. There is no representation, warranty or guarantee of reliability or of accuracy, completeness or timeliness of any data by using this location based service.
+
+Messaging Client Software 
+Copyright 2011 Buongiorno USA, Inc.
+End User License Agreement with Verizon customers for the Messaging Client Software in object code format.
+
+Certain software or technical information is provided by and licensed from third parties including TeleCommunication Systems, Inc., which may be covered by one or more U.S. Patents; and pending U.S. patent Apps, as well as pending counterpart European and international patents. 
+
+Your use of this application is also subject to the following Apache License Agreement as modified from time to time. 
+
+The Messaging Client Software also contains code Copyright 2005-2008 The Android Open Source Project (the "Android Code"). The Android Code is licensed to you under the terms and conditions of the Apache License, Version 2.0, set forth below:
+
+http://www.apache.org/licenses/

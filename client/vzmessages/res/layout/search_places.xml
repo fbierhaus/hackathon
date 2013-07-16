@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main_view"
+    android:layout_width="match_parent"
+    android:layout_height="fill_parent"
+    android:background="#ffffff"
+    android:orientation="vertical">
+
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:layout_gravity="center_vertical"
+       android:background="#9c9e9c"
+       android:orientation="horizontal"
+       android:paddingLeft="5dp" 
+       android:paddingRight="5dp">
+
+       <EditText
+           android:id="@+id/searchText"
+           android:layout_width="0dp"
+           android:layout_height="wrap_content"
+		   android:background="@drawable/customedittext"
+           android:layout_gravity="left|center_vertical"
+           android:layout_marginTop="2dp"
+           android:layout_weight="0.97"
+           android:inputType="textPhonetic"
+           android:textSize="18dp"/>
+
+       <Button
+           android:id="@+id/goButton"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_marginTop="1.5dp"
+           android:layout_gravity="right|center_vertical"
+           android:layout_marginLeft="10dip"
+           android:ems="4"
+           android:text="@string/places_go_text"/>
+   </LinearLayout>
+    
+   <ListView android:layout_height="wrap_content" android:id="@+id/placeslistview"
+		android:scrollbars="vertical" android:layout_width="fill_parent"
+		android:gravity="center_horizontal" android:fadingEdge="none"
+	    android:background="@android:color/white"
+        android:cacheColorHint="@android:color/white" android:visibility="gone" />
+</LinearLayout>

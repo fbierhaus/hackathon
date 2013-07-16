@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <drawable name="conversation_background">#ffdadada</drawable>
+    <drawable name="link_preview_background">#fff2f2f2</drawable>
+    <drawable name="group_chooser_background">#ff5a5a5a</drawable>
+    <!-- Activity background color -->
+    <drawable name="class_zero_background">#7f040000</drawable>
+
+    <!-- Widget background -->
+    <drawable name="light_blue_background">#ffecfbff</drawable>
+    <drawable name="white_background">#ffffffff</drawable>
+    <drawable name="message_status_background">#91000000</drawable>
+    <drawable name="message_src_status_background">#07000000</drawable>
+
+    <!-- text color -->
+    <drawable name="text_color">#ffffffff</drawable>
+    <drawable name="text_color_red">#ffff0000</drawable>
+    <drawable name="text_color_black">#ff000000</drawable>
+    <drawable name="text_color_white">#ffffffff</drawable>
+    <drawable name="text_color_offwhite">#55ffffff</drawable>
+    <drawable name="text_color_light_gray">#ff787878</drawable>
+    <drawable name="text_color_medium_gray">#ff515151</drawable>
+    <drawable name="text_color_dark_gray">#ff333333</drawable>
+    <drawable name="text_date">#848484</drawable>
+    <drawable name="text_subject">#515151</drawable>
+    <drawable name="text_color_links">#ff0099e0</drawable>
+    <color name="text_color_list_selected">#ffF3F3F3</color>
+
+    <!-- Chat "sent time" text background -->
+    <color name="timestamp_color">#bf000000</color>
+
+    <!-- the background color used for unread conversation -->
+
+    <color name="read_bgcolor">#ffeeeeee</color>
+    <color name="transparent">#00000000</color>
+
+    <drawable name="contact_item_pressed">#e6e6e6</drawable>
+    <drawable name="contact_item">#ffffff</drawable>
+
+    <color name="blank_contact">#ffbfbfbf</color>
+        
+    <color name="highlightgrey">#ff848484</color>
+    <color name="grey">#ff808080</color>
+    <color name="black">#ff000000</color>
+    <color name="light_grey">#ff787878</color>
+    <color name="white">#ffffffff</color>
+    <color name="red">#ffff0000</color>
+    <color name="prov_bgcolor">#800400</color>
+
+    
+    <!-- colors for  message info -->
+	<color name="divider_color">#ffb3b3b3</color>
+	<color name="message_report_background">#75000000</color>
+	<color name="tnc_highlight">#0000FF</color>
+
+	<!-- customization bubble divider color -->
+	<color name="divider_light">#ffe4e4e4</color>
+	<color name="divider_dark">#ff3e3e3e</color>
+	
+	<!-- Pop Up notification -->
+	<color name="popupbg">#ff000000</color>
+</resources>

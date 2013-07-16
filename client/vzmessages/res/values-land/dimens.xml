@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+	<!-- minimum and maximum widths of message content for text-only messages -->
+	<dimen name="minTextMessageWidth">246.40dp</dimen>
+	<dimen name="maxTextMessageWidth">402.14dp</dimen>
+
+	<!-- preview text width = maxTextMessageWidth - (2 * messageLeftRightBorder) -->
+	<dimen name="previewTextWidth">382.9dp</dimen>
+</resources>

@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/addlocation"
+    android:background="@color/white" >
+
+    <RelativeLayout
+        android:id="@+id/header"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/headerHeight"
+        android:background="@drawable/bg_header1"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginBottom="3dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="3dp"
+            android:text="@string/add_location_header"
+            android:textColor="#FFFFFF"
+            android:textSize="18dp" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/search_info"
+        android:layout_below="@id/header"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="#CCCCCCCC"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:id="@+id/addressentrylayout"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+			android:background="@drawable/bottom_bar"
+            android:orientation="horizontal"
+            android:paddingBottom="8dp"
+            android:paddingTop="8dp" >
+
+            <com.verizon.mms.ui.widget.SingleSearchField
+                android:id="@+id/search_field"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+				android:layout_marginLeft="7.3dip"
+				android:layout_marginRight="7.3dip"
+				android:background="#ffffff"
+				android:imeOptions="actionSend|flagNoEnterAction"
+				android:inputType="textShortMessage|textAutoCorrect|textCapSentences|textMultiLine"
+				android:focusable="true"
+				android:focusableInTouchMode="true"
+				android:maxLines="6"
+				android:minHeight="42.18dp"
+				android:paddingLeft="4dp"
+				android:paddingRight="4dp"
+				android:scrollbars="vertical"
+				style="?messageEditorText"
+                android:layout_gravity="center_vertical"
+                android:layout_weight=".7"
+                android:hint="@string/search_txt"
+                android:lines="1"
+                android:maxLength="255"
+                android:scrollHorizontally="true"
+                android:singleLine="true" />
+
+            <com.verizon.mms.ui.widget.ImageViewButton
+                android:id="@+id/searchicon"
+                android:layout_width="wrap_content"
+                android:layout_height="42.18dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="8.13dp"
+                android:contentDescription="@string/desc"
+				android:scaleType="fitXY"
+                android:src="@drawable/recently_used" />
+
+            <ImageView
+                android:id="@+id/staricon"
+                android:layout_width="wrap_content"
+                android:layout_height="42.18dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="8.13dp"
+                android:layout_marginRight="8.13dp"
+                android:contentDescription="@string/desc"
+				android:scaleType="fitXY"
+                android:src="@drawable/list_favorites" />
+        </LinearLayout>
+
+        <ListView
+            android:id="@+id/recent_list"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="50dp"
+            android:layout_marginLeft="10dp"
+            android:background="#FFFFFF"
+            android:cacheColorHint="#FFFFFF"
+            android:focusable="false"
+            android:visibility="visible"
+            android:focusableInTouchMode="false"
+            android:footerDividersEnabled="false" />
+
+        <ListView
+            android:id="@+id/suggestion_list"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+			android:layout_marginRight="50dp"
+            android:layout_marginLeft="10dp"
+            android:background="#FFFFFF"
+            android:cacheColorHint="#FFFFFF"
+            android:focusable="false"
+            android:visibility="gone"
+            android:focusableInTouchMode="false"
+            android:footerDividersEnabled="false" />
+    </LinearLayout>
+
+    <com.nbi.map.android.MapView
+        android:id="@+id/mapview"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@id/search_info" />
+
+    <ListView
+        android:id="@+id/favRecentlyUsedList"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@id/search_info"
+        android:cacheColorHint="@color/transparent"
+        android:visibility="gone" />
+
+    <RelativeLayout
+        android:id="@+id/bottom_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="53dp"
+        android:layout_alignParentBottom="true"
+	    android:background="@drawable/bottom_bar"
+        android:paddingBottom="8dp" >
+
+        <com.verizon.mms.ui.widget.ImageViewButton
+            android:id="@+id/zoomin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/ico_zoom_in" />
+
+        <com.verizon.mms.ui.widget.ImageViewButton
+            android:id="@+id/zoomout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/zoomin"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@id/zoomin"
+            android:src="@drawable/ico_zoom_out" />
+
+        <com.verizon.mms.ui.widget.ImageViewButton
+            android:id="@+id/findpin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/zoomin"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@id/zoomout"
+            android:src="@drawable/btn_center_map" />
+
+        <com.verizon.mms.ui.widget.TextButton
+            android:id="@+id/attachbutton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/findpin"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="7dp"
+            android:background="@drawable/attach_button_box"
+            style="?textButton"
+            android:text="@string/attach"
+            android:textColor="#000000" />
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/navigate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="1dp"
+        android:layout_marginRight="7dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:text="@string/navigate"
+        android:visibility="gone" />
+
+</RelativeLayout>

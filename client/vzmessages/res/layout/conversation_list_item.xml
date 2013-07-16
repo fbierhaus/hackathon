@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/conversation_item_background_unread"
+    android:paddingRight="@dimen/convListItemRightPad" >
+
+    <com.verizon.mms.ui.ContactImage
+        android:id="@+id/avatar"
+		android:layout_width="@dimen/convListItemHeight"
+	    android:layout_height="@dimen/convListItemHeight"
+	    android:layout_alignParentLeft="true"
+        android:paddingTop="@dimen/convListItemAvatarTopBottomPad"
+        android:paddingBottom="@dimen/convListItemAvatarTopBottomPad"
+        android:paddingLeft="@dimen/convListItemAvatarLeftPad"
+        android:paddingRight="@dimen/convListItemAvatarRightPad"
+        android:layout_centerVertical="true"
+        />
+
+	<RelativeLayout
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_marginTop="3dp"
+	    android:layout_marginBottom="3dp"
+	    android:layout_centerVertical="true"
+		android:layout_toRightOf="@id/avatar"
+	    >
+
+	    <!-- NB: singleLine is workaround for android issue 10554 -->
+	    <com.verizon.mms.ui.FromTextView android:id="@+id/from"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        style="?convItemRecip"
+	        android:textAppearance="@style/TextAppearance"
+	      	android:maxLines="1"
+	        android:singleLine="true"
+	        android:layout_alignParentTop="true"
+	        android:layout_alignParentLeft="true"
+	        android:layout_toLeftOf="@+id/draft"
+	        android:layout_alignWithParentIfMissing="true"
+	        android:ellipsize="end"
+	        />
+	
+	    <TextView android:id="@+id/draft"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        style="?convItemDraft"
+	        android:textAppearance="@style/TextAppearance"
+	        android:textColor="@drawable/text_color_red"
+	        android:maxLines="1"
+	        android:layout_marginLeft="3dip"
+	        android:layout_alignBaseline="@id/from"
+	        android:layout_toLeftOf="@+id/date"
+	        android:text="@string/has_draft"
+	        android:ellipsize="none"
+	        />
+	
+	    <TextView android:id="@+id/date"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:minWidth="@dimen/convListItemDateMinWidth"
+	        style="?convItemDate"
+	        android:textAppearance="@style/TextAppearance"     
+	        android:textColor="@drawable/text_date"        
+	        android:gravity="right"
+	        android:maxLines="1"
+	        android:singleLine="true"
+	        android:layout_marginLeft="11dp"
+	        android:layout_alignBaseline="@id/from"
+	        android:layout_toLeftOf="@+id/checkBox"
+	        android:layout_alignWithParentIfMissing="true"
+	        />
+	        
+	    <CheckBox android:id="@+id/checkBox"
+	    	android:layout_width="wrap_content"
+	    	android:layout_height="wrap_content"
+	    	android:layout_alignBaseline="@+id/date"
+	    	android:layout_alignParentRight="true"
+	    	android:button="@drawable/restore_checkbox"
+	    	android:padding="8dip"
+	    	android:layout_marginLeft="8dip"
+	    	android:visibility="visible"
+	    	android:focusable="false"
+	    	/>
+	
+	    <!-- NB: singleLine is workaround for android issue 10554 -->
+	    <com.verizon.mms.ui.widget.JellyBeanSpanFixTextView android:id="@+id/subject"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        style="?convItemText"
+	        android:textColor="@drawable/text_subject"
+	        android:textAppearance="@style/TextAppearance"
+	        android:maxLines="1"
+	        android:singleLine="true"
+	        android:layout_alignLeft="@id/from"
+	        android:layout_alignRight="@id/from"
+	        android:layout_below="@id/from"
+	        android:layout_toLeftOf="@+id/icon"
+	        android:maxLength="200"
+	        android:layout_alignWithParentIfMissing="true"
+	        android:ellipsize="end" />
+	
+	    <ImageView android:id="@+id/icon"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentRight="true"
+	        android:layout_alignBottom="@id/subject"
+	        android:layout_below="@id/date"
+	    	android:layout_marginTop="3dip"
+	        android:visibility="gone"
+	        />
+
+	</RelativeLayout>
+
+    <!-- TODO set height/width of image to wrap_content when images are available in correct sizes -->
+    <RelativeLayout android:id="@+id/mybox"
+        android:layout_width="21.9dp"
+        android:layout_height="16.11dp"
+		android:layout_marginLeft="@dimen/convListMsgCountLeftMargin"
+	    android:layout_marginTop="@dimen/convListMsgCountTopMargin"
+	    android:background="@drawable/ico_notification">
+        
+        
+        <TextView
+            android:id="@+id/unreadcount"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            style="?convItemUnreadText"
+            android:textAppearance="@style/TextAppearance"
+            android:textColor="@drawable/text_color_white"
+            android:layout_centerInParent="true"
+            android:gravity="center"/>
+        
+    </RelativeLayout>
+
+</RelativeLayout>

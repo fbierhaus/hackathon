@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<declare-styleable name="MultilineCheckedTextView">
+		<attr name="checkMark" format="integer" />
+		<attr name="checked" format="boolean" />
+		<attr name="subTextSize" format="dimension" />
+		<attr name="subTextColor" format="color|integer" />
+	</declare-styleable>
+	
+		<!-- Theme custom attributes-->
+	
+	<!-- Conversation List -->
+	<attr name="convItemUnread" format="reference" />
+	<attr name="convItemUnreadText" format="reference" />
+	<attr name="convItemRecip" format="reference" />
+	<attr name="convItemText" format="reference" />
+	<attr name="convItemDraft" format="reference" />
+	<attr name="convItemDate" format="reference" />
+	
+	<!-- Generic Button -->
+	<attr name="textButton" format="reference"/>
+	
+	<!-- Conversation View -->
+	<attr name="sendButtonText" format="reference" />
+	<attr name="messageEditorText" format="reference" />
+	<attr name="recipientEditorText" format="reference" />
+	<attr name="msgItemSender" format="reference"/>
+	<attr name="msgItemTime" format="reference"/>
+	<attr name="msgItemLinkTitle" format="reference"/>
+	<attr name="msgItemLinkDesc" format="reference"/>
+	<attr name="groupRecipReply" format="reference"/>
+	<attr name="groupPromptText" format="reference"/>
+	<attr name="groupPromptDisclaimer" format="reference"/>
+	
+	<attr name="deliveryItemName" format="reference"/>
+	<attr name="deliveryItemNumber" format="reference"/>
+	<attr name="deliveryItemStatus" format="reference"/>
+	<attr name="msgInfoTitle" format="reference"/>
+	
+	<!-- Quick Action menu -->
+	<attr name="popupMenuTitleText" format="reference"/>
+	<attr name="popupMenuItemText" format="reference"/>
+	
+	<!-- Recipients List -->
+	<attr name="recipContItemName" format="reference"/>
+	<attr name="recipContItemNumber" format="reference"/>
+	
+	<!-- Custom Dialog -->
+	<attr name="appAlignedDialogTitle" format="reference"/>
+	<attr name="appAlignedDialogMessage" format="reference"/>
+
+	<!-- PopUp Notification texts -->
+	<attr name="popUpNotifAttachText" format="reference"/>
+	<attr name="popUpNotifHeader" format="reference"/>
+			
+	<!-- Location Suggestion, Recent & Favorite -->
+	<attr name="locationSugline2" format="reference"/>
+	<attr name="locationAddressTitle" format="reference"/>
+	 
+	 </resources>

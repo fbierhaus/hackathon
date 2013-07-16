@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#FFFFFF" >
+
+    <RelativeLayout
+        android:id="@+id/headerlayout"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/headerHeight"
+        android:background="@drawable/bottom_bar" >
+
+        <ImageView
+            android:id="@+id/titleicon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+			android:layout_alignParentLeft="true"
+			android:layout_marginLeft="14dip"
+			android:contentDescription="@string/desc"
+			android:src="@drawable/ico_shared_locations" />
+        
+        <TextView
+            android:id="@+id/locationtitletext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:layout_toRightOf="@id/titleicon"
+            android:layout_centerVertical="true"
+            android:text="@string/locationtitle"
+            android:textColor="#FFFFFF"
+            android:textSize="20dp" />
+        
+    </RelativeLayout>
+
+    <ListView android:id="@+id/locationlist"
+        android:layout_height="fill_parent"
+        android:layout_width="fill_parent"
+        android:layoutAnimation="@anim/layout_gallery_animation_row"
+        style="?android:attr/listViewWhiteStyle"
+		android:cacheColorHint="@android:color/white"
+		android:fadingEdgeLength="16dip" />
+
+</LinearLayout>

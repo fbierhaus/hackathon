@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include android:id="@+id/nosharedcontentheader"
+        layout="@layout/shared_content_header" />
+
+    <ScrollView android:layout_height="fill_parent"
+       	android:layout_width="fill_parent"
+       	android:layout_below="@id/nosharedcontentheader"
+       	android:background="#DADADA">
+
+        <RelativeLayout 
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/attachment_thumb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/headerlayout"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="70dp"
+                android:contentDescription="@string/desc"
+                android:src="@drawable/img_empty_media_panel" />
+
+            <TextView
+                android:id="@+id/screen_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/attachment_thumb"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="35dp"
+                android:gravity="center"
+                android:textColor="#333333"
+                style="?messageEditorText" />
+
+            <com.verizon.mms.ui.widget.TextButton
+                android:id="@+id/startsharing"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/screen_description"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="30dp"
+                android:textColor="#000000"
+                android:text="@string/btn_start_sharing"
+                style="?textButton"
+                android:paddingLeft="14dp"
+                android:paddingRight="14dp"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
+                android:textStyle="bold"
+                android:background="@drawable/btn_start_sharing" />
+          
+            <ProgressBar
+                android:id="@+id/progress_loading_gallery"
+                style="?android:attr/progressBarStyleInverse"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/screen_description"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="30dp"
+                android:visibility="visible" />
+
+        </RelativeLayout>
+    </ScrollView>
+
+</RelativeLayout>

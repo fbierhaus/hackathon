@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme" parent="android:Theme.NoTitleBar">
+    </style>
+
+    <style name="Theme.Normal">
+        <item name="android:windowNoTitle">true</item>        
+ 
+        <item name="sendButtonText">@style/sendButtonText_normal</item>
+        <item name="recipientEditorText">@style/recipientEditorText_normal</item>
+        <item name="messageEditorText">@style/messageEditorText_normal</item>
+        
+		<item name="convItemUnreadText">@style/convItemUnreadText_normal</item>
+		<item name="convItemRecip">@style/convItemRecip_normal</item>
+		<item name="convItemText">@style/convItemText_normal</item>
+		<item name="convItemDraft">@style/convItemDraft_normal</item>
+		<item name="convItemDate">@style/convItemDate_normal</item>
+		
+		<item name="textButton">@style/textButton_normal</item>
+		
+		<item name="msgItemSender">@style/msgItemSender_normal</item>
+		<item name="msgItemTime">@style/msgItemTime_normal</item>
+		<item name="deliveryItemName">@style/deliveryItemName_normal</item>
+		<item name="deliveryItemNumber">@style/deliveryItemNumber_normal</item>
+		<item name="msgInfoTitle">@style/msgInfoTitle_normal</item>
+		<item name="groupRecipReply">@style/groupRecipReply_normal</item>
+		<item name="groupPromptText">@style/groupPromptText_normal</item>
+		<item name="groupPromptDisclaimer">@style/groupPromptDisclaimer_normal</item>
+		<item name="msgItemLinkTitle">@style/msgItemLinkTitle_normal</item>
+		<item name="msgItemLinkDesc">@style/msgItemLinkDesc_normal</item>
+		
+		<item name="popupMenuTitleText">@style/popupMenuTitleText_normal</item>
+		<item name="popupMenuItemText">@style/popupMenuItemText_normal</item>
+		
+		<item name="recipContItemName">@style/recipContItemName_normal</item>
+		<item name="recipContItemNumber">@style/recipContItemNumber_normal</item>
+		
+		<item name="appAlignedDialogTitle">@style/appAlignedDialogTitle_normal</item>
+		<item name="appAlignedDialogMessage">@style/appAlignedDialogMessage_normal</item>
+		
+		<item name="locationSugline2">@style/locationSugline2_normal</item>
+		<item name="locationAddressTitle">@style/locationAddressTitle_normal</item>
+          
+    </style>
+
+    <style name="Theme.Large">
+        <item name="sendButtonText">@style/sendButtonText_large</item>
+        <item name="recipientEditorText">@style/recipientEditorText_large</item>
+        <item name="messageEditorText">@style/messageEditorText_large</item>
+        
+        <item name="convItemUnreadText">@style/convItemUnreadText_large</item>
+		<item name="convItemRecip">@style/convItemRecip_large</item>
+		<item name="convItemText">@style/convItemText_large</item>
+		<item name="convItemDraft">@style/convItemDraft_large</item>
+		<item name="convItemDate">@style/convItemDate_large</item>
+		
+		<item name="textButton">@style/textButton_large</item>
+		
+		<item name="msgItemSender">@style/msgItemSender_large</item>
+		<item name="msgItemTime">@style/msgItemTime_large</item>
+		<item name="msgItemLinkTitle">@style/msgItemLinkTitle_large</item>
+		<item name="msgItemLinkDesc">@style/msgItemLinkDesc_large</item>
+		
+		<item name="deliveryItemName">@style/deliveryItemName_large</item>
+		<item name="deliveryItemNumber">@style/deliveryItemNumber_large</item>
+		<item name="msgInfoTitle">@style/msgInfoTitle_large</item>
+		<item name="groupRecipReply">@style/groupRecipReply_large</item>
+		<item name="groupPromptText">@style/groupPromptText_large</item>
+		<item name="groupPromptDisclaimer">@style/groupPromptDisclaimer_large</item>
+		
+		
+		<item name="popupMenuTitleText">@style/popupMenuTitleText_large</item>
+		<item name="popupMenuItemText">@style/popupMenuItemText_large</item>
+		
+		
+		<item name="recipContItemName">@style/recipContItemName_large</item>
+		<item name="recipContItemNumber">@style/recipContItemNumber_large</item>
+		
+		
+		<item name="appAlignedDialogTitle">@style/appAlignedDialogTitle_large</item>
+		<item name="appAlignedDialogMessage">@style/appAlignedDialogMessage_large</item>	
+              
+		 <item name="locationSugline2">@style/locationSugline2_large</item>
+		 <item name="locationAddressTitle">@style/locationAddressTitle_large</item>
+    </style>
+
+   <style name="PopUpDialogNormal" parent="PopUpDialog">
+        <item name="popUpNotifAttachText">@style/popUpNotifAttachText_normal</item>
+        <item name="popUpNotifHeader">@style/popUpNotifHeader_normal</item>
+        <item name="messageEditorText">@style/messageEditorText_normal</item>
+        <item name="textButton">@style/textButton_normal</item>
+        <item name="convItemDate">@style/convItemDate_normal</item>
+        
+        
+		<item name="appAlignedDialogTitle">@style/appAlignedDialogTitle_normal</item>
+		<item name="appAlignedDialogMessage">@style/appAlignedDialogMessage_normal</item>
+    </style>
+
+    <style name="PopUpDialogLarge" parent="PopUpDialog">
+        <item name="popUpNotifAttachText">@style/popUpNotifAttachText_large</item>
+        <item name="popUpNotifHeader">@style/popUpNotifHeader_large</item>
+        <item name="messageEditorText">@style/messageEditorText_large</item>
+        <item name="textButton">@style/textButton_large</item>
+        <item name="convItemDate">@style/convItemDate_large</item>
+        
+        <item name="appAlignedDialogTitle">@style/appAlignedDialogTitle_large</item>
+		<item name="appAlignedDialogMessage">@style/appAlignedDialogMessage_large</item>
+    </style>
+    
+</resources>

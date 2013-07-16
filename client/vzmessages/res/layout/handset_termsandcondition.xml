@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#d5d9de" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_margin="15dp"
+        android:background="@drawable/round_background_black"
+        android:orientation="vertical" >
+
+        <RelativeLayout android:id="@+id/toc_header"
+		android:layout_width="fill_parent" android:layout_height="40dp" 
+		android:background="@drawable/bg_header1">
+
+	    <ImageView
+            android:id="@+id/header"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:scaleType="fitStart"
+            android:paddingLeft="15dip"
+            android:layout_centerVertical="true"
+            android:layout_centerInParent="true"
+            android:src="@drawable/bg_header1_title"/>
+	    </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/link_preview_background" >
+
+            
+            <LinearLayout
+                android:id="@+id/buttonLayout"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:background="@drawable/link_preview_background"
+                android:orientation="vertical" >
+       <CheckBox
+				     android:id="@+id/vma_run_on_debug_mode"
+				     android:layout_width="wrap_content"
+				     android:layout_height="wrap_content"
+				     android:button="@drawable/checkbox"
+				     android:paddingLeft="23dip"
+				     android:checked="false"
+				     android:visibility="gone"
+				     android:text="Run On Debug Mode"
+				     android:textColor="@color/black" />
+                 
+                 <TextView
+                    android:id="@+id/notice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:text="@string/vma_notice"
+                    android:textColor="@drawable/text_color_dark_gray"
+                    android:background="@drawable/link_preview_background"
+                    android:textSize="11sp"
+                     android:layout_marginLeft="28.5dp"/>
+			
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:background="@drawable/link_preview_background" >
+
+                    <Button
+                        android:id="@+id/positive_button"
+                        style="@style/TextAppearance.Conv.Body"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="3dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/btn_bkgd_message_info"
+                        android:text="@string/tnc_accept" />
+                    <Button
+                        android:id="@+id/negative_button"
+                        style="@style/TextAppearance.Conv.Body"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="3dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/btn_bkgd_message_info"
+                        android:text="@string/tnc_decline" />
+                </LinearLayout>
+            </LinearLayout>
+            <ScrollView
+                android:id="@+id/infoLayout"
+                android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="10dp"
+                android:background="@color/white"
+                android:layout_above="@id/buttonLayout"
+                android:minWidth="@dimen/app_alligned_minwidth"
+                android:paddingBottom="4dp">
+					
+                <TextView
+                        android:id="@+id/dialog_message"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                       	android:paddingTop="3dp"
+                       	android:paddingRight="20dp"
+                        android:paddingLeft="20dp"
+                        android:paddingBottom="3dp"
+                        android:text="@string/menu_vma_terms_of_service"
+                        android:textColor="@drawable/text_color_dark_gray"
+                        android:textSize="17.784sp" />
+            </ScrollView>
+
+        </RelativeLayout>
+    </LinearLayout>
+
+</RelativeLayout>

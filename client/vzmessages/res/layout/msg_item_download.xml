@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:orientation="vertical" >
+
+	<include
+		layout="@layout/msg_item_text"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginBottom="@dimen/downloadInterMargin" />
+
+	<Button
+		android:id="@+id/downloadButton"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_gravity="center"
+		android:gravity="center"
+		android:text="@string/download" 
+		style="?textButton"/>
+
+	<com.verizon.mms.ui.widget.JellyBeanSpanFixTextView
+		android:id="@+id/downloadMessage"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_gravity="center"
+		android:gravity="center"
+		android:singleLine="true"
+		android:ellipsize="none"
+		android:text="@string/downloading"
+		style="?messageEditorText"
+		android:textAppearance="@style/TextAppearance.Conv.Body" />
+
+	<TextView
+	    android:id="@+id/show_getStarted"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_marginLeft="18.5dp"
+	    android:layout_marginRight="18.5dp"
+	    android:layout_marginTop="12.3dp"
+	    android:autoLink="all"
+	    android:gravity="center"
+	    android:text="@string/vma_show_getStarted"
+	    android:textColor="@color/tnc_highlight"
+	    android:textSize="17.784sp"
+	    android:visibility="gone" />
+</LinearLayout>

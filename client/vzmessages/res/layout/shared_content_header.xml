@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/headerlayout"
+	android:layout_width="fill_parent"
+	android:layout_height="@dimen/headerHeight"
+	android:paddingLeft="12dp"
+	android:paddingRight="10dp"
+	android:paddingTop="3dp"
+	android:paddingBottom="3dp"
+	android:orientation="horizontal"
+	android:background="@drawable/bg_header1" >
+
+	<RelativeLayout
+		android:layout_width="0dp"
+		android:layout_height="fill_parent"
+		android:layout_weight="1" >
+		
+		<com.verizon.mms.ui.FromTextView
+			android:id="@+id/sharedtitletext"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_alignParentTop="true"
+			android:ellipsize="end"
+			android:inputType="none"
+			android:singleLine="true"
+			android:textColor="#FFFFFF"
+			android:textSize="20dp" />
+
+		<TextView
+			android:id="@+id/titlesubtext"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_alignParentBottom="true"
+			android:text="@string/sharedcontent"
+			android:textColor="#FFFFFF"
+			android:textSize="14dp" />
+
+	</RelativeLayout>
+
+	<ProgressBar
+		android:id="@+id/progress_sync"
+		style="?android:attr/progressBarStyleSmall"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_gravity="center_vertical"
+		android:visibility="gone" />
+
+	<com.verizon.mms.ui.widget.ImageViewButton
+        android:id="@+id/imgConversation"
+        android:layout_width="31dp"
+        android:layout_height="fill_parent"
+        android:layout_marginRight="5dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/ico_bubble_mediashoebox"
+        android:visibility="gone" />
+</LinearLayout>

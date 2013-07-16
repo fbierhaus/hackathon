@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/msg_list_item"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="14dp"
+    android:paddingRight="@dimen/messageItemLeftRightBorder" >
+
+    <View
+        android:id="@+id/horizontal_divider"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_alignParentTop="true"
+        android:background="#E5E5E5"
+        android:paddingLeft="14dp"
+        android:paddingRight="14dp" />
+
+    <RelativeLayout
+        android:id="@+id/bubbleParent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp" >
+
+        <RelativeLayout
+            android:id="@+id/bubble"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/horizontal_divider"
+            >
+
+            <!-- Applies highlighted background for messages in search result -->
+
+            <RelativeLayout
+                android:id="@+id/highlightBackground"
+                android:layout_width="215dp"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:id="@+id/text"
+                    style="?messageEditorText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginLeft="6dp"
+                    android:layout_marginRight="3dp"
+                    android:layout_marginTop="2dp"
+                    android:text="Some msg body"
+                    android:textAppearance="@style/TextAppearance.Conv.Body" />
+
+                <TextView
+                    android:id="@+id/sender"
+                    style="?msgItemSender"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@+id/text"
+                    android:layout_marginTop="@dimen/senderTopBorderWithText"
+                    android:ellipsize="end"
+                    android:gravity="top"
+                    android:maxLines="1"
+                    android:paddingBottom="3dp"
+                    android:paddingLeft="@dimen/messageLeftRightBorder"
+                    android:paddingRight="@dimen/messageLeftRightBorder"
+                    android:singleLine="true"
+                    android:text="@string/tap_color"
+                    android:textColor="@drawable/text_color_light_gray" />
+            </RelativeLayout>
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/dragView"
+            android:layout_width="40dp"
+            android:layout_height="35dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
+            android:src="@drawable/ico_reorder_darkgray" />
+
+        <View
+            android:id="@+id/vertical_divider"
+            android:layout_width="1px"
+            android:layout_height="23dp"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/dragView"
+            android:background="#E5E5E5" />
+    </RelativeLayout>
+
+    <View
+        android:layout_below="@+id/bubbleParent"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="#00000000"
+        android:layout_marginTop="8dp"/>
+    
+    <RelativeLayout
+        android:id="@+id/colorchanger"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/colorseekbarLayoutHeight"
+        android:layout_below="@+id/bubbleParent"
+        android:layout_marginTop="18dp"
+        android:visibility="visible" >
+
+        <SeekBar
+            android:id="@+id/seekbar"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="7dp"
+            android:max="70"
+            android:paddingLeft="8dip"
+            android:paddingRight="8dip"
+            android:progress="40" />
+    </RelativeLayout>
+
+</RelativeLayout>

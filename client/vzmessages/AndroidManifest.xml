@@ -1,0 +1,571 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/*
+ * Copyright (C) 2007-2008 Esmertec AG.
+ * Copyright (C) 2007-2008 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+ /*
+  * Progaurd or not - off
+  * Prod or Test MMSC - prod
+  * Logging on or off - on
+  * MemD on or off - on
+  */
+
+
+    
+     <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.verizon.messaging.vzmsgs"
+    android:versionCode="4"
+    android:versionName="4.0.0-1212812-04-PROD" > 
+--><!-- Please don't change the format of the version name. [Version]-[Date]-[time]-[Build type]-[BUILD NUMBER] -->
+ <manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="30020" 
+     android:versionName="4.1-052120130001-prod-303" package="com.verizon.messaging.vzmsgs">
+
+    <uses-sdk android:minSdkVersion="8" android:targetSdkVersion="10"/>
+
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <uses-permission android:name="android.permission.CALL_PHONE"/>
+    <uses-permission android:name="android.permission.READ_CONTACTS"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_GPS"/>
+    <uses-permission android:name="android.permission.ACCESS_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_ASSISTED_GPS"/>
+    <uses-permission android:name="android.permission.ACCESS_CELL_ID"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_UPDATES"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.WRITE_CONTACTS"/>
+    <uses-permission android:name="android.permission.RECEIVE_SMS"/>
+    <uses-permission android:name="android.permission.RECEIVE_MMS"/>
+    <uses-permission android:name="android.permission.SEND_SMS"/>
+    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.READ_SMS"/>
+    <uses-permission android:name="android.permission.WRITE_SMS"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-permission android:name="android.permission.INSTALL_DRM"/>
+    <uses-permission android:name="com.android.launcher.permission.UNINSTALL_SHORTCUT"/>
+    <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_SETTINGS"/>
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
+    <uses-permission android:name="android.permission.SET_WALLPAPER"/>
+    <uses-permission android:name="android.permission.GET_TASKS"/>
+    <uses-permission android:name="android.permission.DISABLE_KEYGUARD"/>
+    <uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES"/>
+    <uses-permission android:name="android.permission.RESTART_PACKAGES"/>
+    <uses-permission android:name="android.permission.READ_LOGS"/>  
+    <uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE"/>
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+    <uses-permission android:name="com.vzw.APNPERMISSION"/>
+    <!-- rtl -->
+    <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
+    <uses-permission android:name="android.permission.MANAGE_ACCOUNTS"/>
+    <uses-permission android:name="android.permission.AUTHENTICATE_ACCOUNTS"/>
+    <uses-permission android:name="android.permission.READ_SYNC_SETTINGS"/>
+    <uses-permission android:name="android.permission.WRITE_SYNC_SETTINGS"/>
+    <!-- APN Settings Permission -->
+    <uses-permission android:name="android.permission.WRITE_APN_SETTINGS"/>
+
+    <!--
+    For Debugpanel
+    <uses-permission android:name="android.permission.PROCESS_OUTGOING_CALLS" />
+    -->
+
+    <permission android:name="com.verizon.messaging.vzmsgs.permission.C2D_MESSAGE" android:protectionLevel="signature"/>
+
+    <uses-permission android:name="com.verizon.messaging.vzmsgs.permission.C2D_MESSAGE"/>
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE"/> <!-- we must declare these features as not required to ensure that Google Play doesn't	     treat them as implicitly required based on our required permissions -->
+    <uses-feature android:name="android.hardware.telephony" android:required="false"/>
+    <uses-feature android:name="android.hardware.telephony.cdma" android:required="false"/>
+    <uses-feature android:name="android.hardware.telephony.gsm" android:required="false"/>
+    <uses-feature android:name="android.hardware.faketouch" android:required="false"/>
+    <uses-feature android:name="android.hardware.faketouch.multitouch.distinct" android:required="false"/>
+    <uses-feature android:name="android.hardware.faketouch.multitouch.jazzhand" android:required="false"/>
+    <uses-feature android:name="android.hardware.touchscreen" android:required="false"/>
+    <uses-feature android:name="android.hardware.touchscreen.multitouch" android:required="false"/>
+    <uses-feature android:name="android.hardware.touchscreen.multitouch.distinct" android:required="false"/>
+    <uses-feature android:name="android.hardware.touchscreen.multitouch.jazzhand" android:required="false"/>
+    <uses-feature android:name="android.hardware.location" android:required="false"/>
+    <uses-feature android:name="android.hardware.location.network" android:required="false"/>
+    <uses-feature android:name="android.hardware.location.gps" android:required="false"/>
+    <uses-feature android:name="android.hardware.wifi" android:required="false"/>
+    <uses-feature android:name="android.hardware.camera" android:required="false"/>
+    <uses-feature android:name="android.hardware.bluetooth" android:required="false"/>
+    <uses-feature android:name="android.hardware.usb.host" android:required="false"/>
+    <uses-feature android:name="android.hardware.usb.accessory" android:required="false"/>
+
+    <application android:debuggable="true" android:icon="@drawable/launcher_home_icon" android:label="@string/app_name" android:name="com.rocketmobile.asimov.Asimov">
+        <uses-library android:name="com.vzw.apnlib" android:required="false"/>
+
+        <receiver android:enabled="true" android:name="com.verizon.mms.MediaSyncReceiver">
+            <intent-filter>
+                <action android:name="com.verizon.mms.cache.intent.CACHE_SMS"/>
+                <action android:name="com.verizon.mms.cache.intent.REMOVE_SMS"/>
+                <action android:name="com.verizon.mms.cache.intent.CACHE_MMS"/>
+                <action android:name="com.verizon.mms.cache.intent.REMOVE_MMS"/>
+                <action android:name="com.verizon.mms.cache.intent.CACHE_THREAD"/>
+                <action android:name="com.verizon.mms.cache.intent.REMOVE_THREAD"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:name="com.verizon.mms.util.RestoreGetOrCreateThreadIDFailure"/>
+        <receiver android:name="com.verizon.mms.util.RecyclerScheduleReceiver"/>
+
+        <!-- Message Sync entries -->
+
+
+        <!-- Network services -->
+        <service android:name="com.verizon.network.SuggestionService">
+            <intent-filter>
+                <action android:name="com.verizon.network.SuggestionService"/>
+            </intent-filter>
+        </service>
+
+        <!-- VZ Report Service -->
+        <service android:name="com.verizon.report.ReportService">
+            <intent-filter>
+                <action android:name="com.verizon.report.ReportService"/>
+            </intent-filter>
+        </service>
+        <!-- Report Alarm -->
+        <receiver android:name="com.verizon.report.ReportAlarmReceiver"/>
+
+        <!-- Verizon-Cache -->
+        <provider android:authorities="verizon-cache" android:name="com.verizon.mms.MediaProvider"/>
+        <provider android:authorities="address-cache" android:name="com.verizon.mms.AddressProvider">
+        </provider>
+
+        <service android:name="com.verizon.mms.MediaSyncService" android:process=":remote">
+            <intent-filter>
+                <action android:name="com.verizon.mms.MediaSyncService"/>
+            </intent-filter>
+        </service>
+        <service android:exported="true" android:name="com.verizon.mms.transaction.TransactionService">
+            <intent-filter>
+                <action android:name="com.verizon.mms.transaction.SEND_MESSAGE"/>
+                <action android:name="com.verizon.mms.transaction.GETORCREATE_THREADID"/>
+            </intent-filter>
+        </service>
+        <service android:exported="true" android:name="com.verizon.mms.transaction.SmsReceiverService">
+            <intent-filter>
+                <action android:name="vzm.msg.sms.SENT"/>
+            </intent-filter>
+        </service>
+
+        <activity android:configChanges="orientation|keyboard|keyboardHidden" android:name="com.verizon.mms.ui.MultiRecipientsSelectionActivity" android:theme="@android:style/Theme.Black.NoTitleBar"/>
+        <activity android:configChanges="orientation|keyboard|keyboardHidden" android:name="com.verizon.mms.ui.RecentContactsListActivity" android:theme="@android:style/Theme.Black.NoTitleBar"/>
+        <activity android:configChanges="orientation|keyboard|keyboardHidden" android:name="com.verizon.mms.ui.ContactsListActivity" android:theme="@android:style/Theme.Black.NoTitleBar"/>
+        <activity android:configChanges="orientation|keyboardHidden" android:label="@string/app_label" android:launchMode="singleTop" android:name="com.verizon.mms.ui.activity.Provisioning" android:theme="@android:style/Theme.Black.NoTitleBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+        <activity android:configChanges="orientation|keyboardHidden" android:label="@string/app_name" android:launchMode="singleTop" android:name="com.rocketmobile.asimov.ConversationListActivity" android:theme="@android:style/Theme.Black.NoTitleBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+
+                <data android:mimeType="vnd.android.cursor.dir/mms"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+
+                <data android:mimeType="vnd.android-dir/mms-sms"/>
+            </intent-filter>
+        </activity>
+        <activity android:configChanges="orientation|keyboardHidden|locale" android:launchMode="singleTop" android:name="com.verizon.mms.ui.ComposeMessageActivity" android:theme="@android:style/Theme.Black.NoTitleBar" android:windowSoftInputMode="stateHidden">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+
+                <data android:mimeType="vnd.android-dir/mms-sms"/>
+            </intent-filter>
+            <intent-filter android:priority="100">
+                <action android:name="android.intent.action.VIEW"/>
+                <action android:name="android.intent.action.SENDTO"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+
+                <data android:scheme="sms"/>
+                <data android:scheme="smsto"/>
+            </intent-filter>
+            <intent-filter android:priority="100">
+                <action android:name="android.intent.action.VIEW"/>
+                <action android:name="android.intent.action.SENDTO"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+
+                <data android:scheme="mms"/>
+                <data android:scheme="mmsto"/>
+            </intent-filter>
+            <intent-filter android:priority="100">
+                <action android:name="android.intent.action.SEND"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+
+                <data android:mimeType="image/*"/>
+            </intent-filter>
+            <intent-filter android:priority="100">
+                <action android:name="android.intent.action.SEND"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+
+                <data android:mimeType="video/*"/>
+            </intent-filter>
+            <intent-filter android:priority="100">
+                <action android:name="android.intent.action.SEND"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+
+                <data android:mimeType="audio/*"/>
+            </intent-filter>
+            <intent-filter android:priority="100">
+                <action android:name="android.intent.action.SEND"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+
+                <data android:mimeType="text/x-vcard"/>
+            </intent-filter>
+            <intent-filter android:priority="100">
+                <action android:name="android.intent.action.SEND"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+
+                <data android:mimeType="text/x-vCard"/>
+            </intent-filter>
+            <intent-filter android:priority="100">
+                <action android:name="android.intent.action.SEND"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+
+                <data android:mimeType="text/plain"/>
+            </intent-filter>
+            <intent-filter android:priority="100">
+                <action android:name="android.intent.action.SEND_MULTIPLE"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+
+                <data android:mimeType="*/*"/>
+            </intent-filter>
+        </activity>
+
+        <activity-alias android:configChanges="orientation|keyboardHidden" android:name="com.verizon.mms.ui.ForwardMessageActivity" android:targetActivity="com.verizon.mms.ui.ComposeMessageActivity" android:windowSoftInputMode="stateHidden">
+        </activity-alias>
+
+        <activity android:allowTaskReparenting="false" android:configChanges="keyboardHidden|orientation"
+            android:windowSoftInputMode="stateHidden|adjustPan" 
+            android:excludeFromRecents="true" android:launchMode="singleInstance" 
+            android:name="com.verizon.mms.ui.PopUpNotificationActivity" 
+            android:taskAffinity=".MainScreenPopup" android:theme="@style/PopUpDialog">
+        </activity>
+        
+        <activity android:configChanges="keyboardHidden|orientation" android:label="Add Location Activity" android:name="com.verizon.mms.ui.AddLocationActivity" android:theme="@android:style/Theme.Black.NoTitleBar">
+        </activity>
+        <activity android:configChanges="keyboardHidden|orientation" android:label="Media Add Location Activity" android:name="com.verizon.mms.ui.MediaAddLocationActivity" android:theme="@android:style/Theme.Black.NoTitleBar">
+        </activity>
+        <activity android:label="Contact Info Activity" android:name="com.verizon.mms.ui.ContactInfoActivity" android:theme="@android:style/Theme.Black.NoTitleBar">
+        </activity>
+        <activity android:configChanges="orientation|keyboardHidden" android:name="com.verizon.mms.ui.SaveRestoreActivity" android:theme="@android:style/Theme.Black.NoTitleBar" android:windowSoftInputMode="adjustPan"/>
+        <activity android:alwaysRetainTaskState="true" android:configChanges="orientation|keyboardHidden" android:name="com.verizon.mms.ui.RestoreConversationListActivity" android:theme="@android:style/Theme.Black.NoTitleBar"/>
+        <activity android:alwaysRetainTaskState="true" android:configChanges="orientation" android:name="com.verizon.mms.ui.RestoreMessagesActivity" android:theme="@android:style/Theme.Black.NoTitleBar"/>
+        <activity android:configChanges="orientation" android:label="Media Shoebox Interceptor" android:name="com.verizon.mms.ui.MediaShoeboxInterceptorActivity" android:theme="@android:style/Theme.Light.NoTitleBar">
+        </activity>
+        <activity android:label="Shared Links" android:name="com.verizon.mms.ui.SharedLinksActivity" android:theme="@android:style/Theme.Black.NoTitleBar">
+        </activity>
+        <activity android:label="Shared Locations" android:name="com.verizon.mms.ui.SharedLocationActivity" android:theme="@android:style/Theme.Black.NoTitleBar">
+        </activity>
+        <activity android:configChanges="orientation" android:label="Shared Content" android:name="com.verizon.mms.ui.SharedContentActivity" android:theme="@android:style/Theme.Black.NoTitleBar">
+        </activity>
+        <activity android:configChanges="orientation" android:label="Shared Content" android:name="com.verizon.mms.ui.TabletSharedContentFragment" android:theme="@android:style/Theme.Black.NoTitleBar">
+        </activity>
+        <activity android:excludeFromRecents="true" android:label="@string/storage_limits_activity" android:name="com.verizon.mms.ui.WarnOfStorageLimitsActivity" android:theme="@android:style/Theme.Dialog">
+        </activity>
+        <activity android:label="@string/change_duration_activity" android:name="com.verizon.mms.ui.EditSlideDurationActivity" android:theme="@android:style/Theme.Dialog">
+        </activity>
+        <activity android:label="@string/edit_slideshow_activity" android:name="com.verizon.mms.ui.SlideshowEditActivity"/>
+        <activity android:label="@string/edit_slide_activity" android:name="com.verizon.mms.ui.SlideEditorActivity" android:windowSoftInputMode="adjustResize"/>
+        <activity android:configChanges="orientation" android:label="Gallery Activity" android:name="com.verizon.mms.ui.GalleryActivity"/>
+        <activity android:label="@string/slideshow_activity" android:name="com.verizon.mms.ui.SlideshowActivity" android:noHistory="true">
+        </activity>
+        <!-- Location Attachment Options Activities -->
+        <activity android:configChanges="orientation" android:name="com.verizon.mms.ui.PlacesTabActivity" android:theme="@android:style/Theme.Light.NoTitleBar"/>
+        <activity android:configChanges="orientation" android:name="com.verizon.mms.ui.FavoritesListActivity" android:theme="@android:style/Theme.Black.NoTitleBar"/>
+        <activity android:configChanges="orientation" android:name="com.verizon.mms.ui.RecentlyUsedListActivity" android:theme="@android:style/Theme.Black.NoTitleBar"/>
+        <activity android:configChanges="orientation" android:name="com.verizon.mms.ui.PlacesActivity" android:theme="@android:style/Theme.Black.NoTitleBar"/>
+        <activity android:excludeFromRecents="true" android:label="@string/class_0_message_activity" android:name="com.verizon.mms.ui.ClassZeroActivity" android:theme="@android:style/Theme.Translucent">
+        </activity>
+        <activity android:configChanges="orientation|keyboardHidden" android:label="@string/preferences_title" android:name="com.verizon.mms.ui.MessagingPreferenceActivity"/>
+        <activity android:configChanges="orientation" android:label="@string/advance_preferences_title" android:name="com.verizon.mms.ui.AdvancePreferenceActivity"/>
+        <activity android:label="@string/recipients_list" android:name="com.verizon.mms.ui.RecipientListActivity" android:theme="@android:style/Theme.Black.NoTitleBar"/>
+        <activity android:excludeFromRecents="true" android:name="com.verizon.mms.ui.GroupMessagePrompt" android:theme="@android:style/Theme.Dialog"/>
+        <activity android:configChanges="orientation|keyboardHidden" android:name="com.verizon.mms.ui.ReplyForwardActivity" android:theme="@style/ThemeDialog"/>
+        <activity android:configChanges="orientation|keyboardHidden" android:name="com.verizon.mms.ui.AppAlertDialog" android:theme="@style/ThemeDialog"/>
+        <activity android:configChanges="orientation" android:name="com.verizon.mms.ui.ManageDeviceList" android:theme="@android:style/Theme.Black.NoTitleBar"/>
+        <activity android:configChanges="orientation" android:name="com.verizon.mms.ui.VMAPreferenceActivity" android:theme="@android:style/Theme.Black.NoTitleBar"/>
+
+        <receiver android:name="com.verizon.mms.transaction.PushReceiver" android:permission="android.permission.BROADCAST_WAP_PUSH">
+            <intent-filter android:priority="100">
+                <action android:name="android.provider.Telephony.WAP_PUSH_RECEIVED"/>
+
+                <data android:mimeType="application/vnd.wap.mms-message"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:name="com.verizon.mms.transaction.MmsSystemEventReceiver">
+            <intent-filter android:priority="100">
+                <action android:name="android.intent.action.CONTENT_CHANGED"/>
+            </intent-filter>
+            <intent-filter android:priority="100">
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+            </intent-filter>
+        </receiver>
+
+        <!-- Require sender permissions to prevent SMS spoofing -->
+        <receiver android:name="com.verizon.mms.transaction.PrivilegedSmsReceiver" android:permission="android.permission.BROADCAST_SMS">
+            <intent-filter android:priority="100">
+                <action android:name="android.provider.Telephony.SMS_RECEIVED"/>
+            </intent-filter>
+        </receiver>
+
+        <!-- Catch-all receiver for broadcasts that don't have associated security -->
+        <receiver android:name="com.verizon.mms.transaction.SmsReceiver">
+            <intent-filter android:priority="100">
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.verizon.mms.transaction.MESSAGE_SENT"/>
+                <!-- TODO Do a better data match here. -->
+                <data android:scheme="content"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.SEND_MESSAGE"/>
+            </intent-filter>
+            <intent-filter>
+
+                <!-- <action android:name="com.android.mms.transaction.SEND_MESSAGE" /> -->
+                <action android:name="com.verizon.sms.transaction.SEND_MESSAGE"/>
+            </intent-filter>
+            <!-- VMA SMS Service -->
+            <intent-filter>
+                <action android:name="vzm.msg.sms.SENT"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:name="com.verizon.mms.transaction.MessageStatusReceiver">
+            <intent-filter>
+                <action android:name="com.verizon.mms.transaction.MessageStatusReceiver.MESSAGE_STATUS_RECEIVED"/>
+            </intent-filter>
+        </receiver>
+
+        <service android:name="com.verizon.mms.transaction.MessageStatusService"/>
+
+        <receiver android:name="com.verizon.mms.transaction.SmsRejectedReceiver">
+            <intent-filter>
+                <action android:name="android.provider.Telephony.SMS_REJECTED"/>
+            </intent-filter>
+        </receiver>
+
+        <activity android:name="com.verizon.mms.ui.ConfirmRateLimitActivity" android:theme="@android:style/Theme.Dialog">
+            <intent-filter>
+                <action android:name="com.verizon.mms.RATE_LIMIT_SURPASSED"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+        <activity android:configChanges="orientation|keyboardHidden" android:name="com.verizon.mms.ui.AudioRecorder">
+        </activity>
+        <activity android:configChanges="orientation|keyboardHidden" android:label="@string/search" android:name="com.verizon.mms.ui.SearchActivity" android:theme="@android:style/Theme.Black.NoTitleBar">
+        </activity>
+        
+        <activity android:name="com.verizon.mms.ui.ComposeMessageSearchActivity" android:configChanges="orientation|keyboardHidden" android:label="@string/search" android:theme="@android:style/Theme.Black.NoTitleBar" >
+	    </activity>
+        
+        <activity android:configChanges="orientation|keyboardHidden" android:name="com.verizon.mms.ui.SendCommentsToDeveloper" android:windowSoftInputMode="stateHidden|adjustResize"/>
+        <activity android:configChanges="orientation|keyboard|keyboardHidden" android:name="com.verizon.mms.ui.CustomizeConActivity" android:theme="@android:style/Theme.Black.NoTitleBar"/>
+        <activity android:configChanges="orientation|keyboard|keyboardHidden" android:name="com.verizon.mms.ui.CustomizeBackgroundActivity" android:theme="@android:style/Theme.Black.NoTitleBar"/>
+        <activity android:configChanges="orientation|keyboard|keyboardHidden" android:name="com.verizon.mms.ui.CustomizeBubblesActivity" android:theme="@android:style/Theme.Black.NoTitleBar"/>
+
+        <!-- Search Suggestions Provider -->
+        <provider android:authorities="com.verizon.mms.SuggestionsProvider" android:name="com.verizon.mms.SuggestionsProvider" android:readPermission="android.permission.READ_SMS">
+            <path-permission android:pathPrefix="/search_suggest_query" android:readPermission="android.permission.GLOBAL_SEARCH"/>
+            <path-permission android:pathPrefix="/search_suggest_shortcut" android:readPermission="android.permission.GLOBAL_SEARCH"/>
+        </provider>
+
+        <!-- Home Screen Widget -->
+        <activity android:configChanges="orientation|keyboardHidden" android:name="com.rocketmobile.widget.WidgetLaunchActivity" android:theme="@android:style/Theme.NoTitleBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+
+        <receiver android:name="com.rocketmobile.widget.HomeScreenWidget">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
+                <action android:name="android.appwidget.action.APPWIDGET_ENABLED"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.verizon.widget.MESSAGE_COUNT_CHANGED"/>
+            </intent-filter>
+
+            <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_info"/>
+        </receiver>
+
+        <service android:name="com.rocketmobile.widget.WidgetNotificationService"/>
+
+        <!-- /Widget -->
+
+
+        <!-- Providers for tablet -->
+
+        <provider android:authorities="vzm-sms" android:exported="false" android:name="com.verizon.mms.providers.SmsProvider" android:readPermission="android.permission.READ_SMS" android:writePermission="android.permission.WRITE_SMS"/>
+        <provider android:authorities="vzm-mms" android:exported="false" android:name="com.verizon.mms.providers.MmsProvider" android:readPermission="android.permission.READ_SMS" android:writePermission="android.permission.WRITE_SMS">
+            <grant-uri-permission android:pathPrefix="/part/"/>
+            <grant-uri-permission android:pathPrefix="/drm/"/>
+        </provider>
+        <provider android:authorities="vzm-mms-sms" android:exported="false" android:name="com.verizon.mms.providers.MmsSmsProvider" android:readPermission="android.permission.READ_SMS" android:writePermission="android.permission.WRITE_SMS"/>
+
+        <!-- Used for Sync Notification on Notification bar -->
+        <receiver android:name="com.verizon.mms.receiver.SyncNotification">
+            <intent-filter>
+                <action android:name="vzm.sync.STATUS"/>
+            </intent-filter>
+        </receiver>
+
+        <activity android:configChanges="orientation|keyboardHidden" android:name="com.verizon.mms.ui.activity.DebugPanelActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+
+        <receiver android:name="com.verizon.mms.ui.activity.DebugPanelReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.NEW_OUTGOING_CALL"/>
+            </intent-filter>
+        </receiver>
+
+        <!-- System event receiver -->
+        <receiver android:name="com.verizon.vzmsgs.receiver.SystemEventReceiver" android:enabled="true" >
+            <intent-filter>
+				<!--                  
+				<action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <action android:name="android.intent.action.BATTERY_LOW"/>
+                <action android:name="android.intent.action.BATTERY_OKAY"/>
+                <action android:name="android.intent.action.FACTORY_TEST"/>
+                <action android:name="android.intent.action.MEDIA_REMOVED"/>
+                <action android:name="android.intent.action.MEDIA_UNMOUNTED"/>
+                <action android:name="android.intent.action.PACKAGE_DATA_CLEARED"/>
+                <action android:name="android.intent.action.SCREEN_OFF"/>
+                <action android:name="android.intent.action.SCREEN_ON"/>
+                -->
+                <action android:name="android.intent.action.LOCALE_CHANGED"/>
+                <action android:name="android.intent.action.AIRPLANE_MODE"/>
+            </intent-filter>
+        </receiver>
+        
+        <receiver android:enabled="true" android:exported="false" android:name="com.verizon.vzmsgs.saverestore.SDCardStatusReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.MEDIA_UNMOUNTED"/>
+                <action android:name="android.intent.action.MEDIA_REMOVED"/>
+                <action android:name="android.intent.action.MEDIA_EJECT"/>
+                <action android:name="android.intent.action.MEDIA_BAD_REMOVAL"/>
+                <action android:name="android.intent.action.MEDIA_MOUNTED"/>
+
+                <data android:scheme="file"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:name="com.verizon.mms.ui.MMSReadReportReceiver">
+            <intent-filter>
+                <action android:name="com.verizon.mms.READ_REPORT"/>
+            </intent-filter>
+        </receiver>
+
+        <!-- VMA -->
+
+
+        <!-- Sync Service -->
+        <service android:name="com.vzw.vma.sync.service.VMASyncService">
+            <intent-filter>
+                <action android:name="vzm.sync.START"/>
+                <action android:name="vzm.msg.SEND"/>
+                <action android:name="vzm.sync.STOP"/>
+                <action android:name="vzm.mark.as.READ"/>
+                <action android:name="vzm.msg.DELETED"/>
+                <action android:name="vzm.xconv.DELETED"/>
+                <action android:name="vzm.sync.APP_ON_FOREGROUND"/>
+                <action android:name="vzm.sync.DELETE_OLD_MESSAGES"/>
+            </intent-filter>
+        </service>
+        <service android:name="com.vzw.vma.sync.service.ProvisioningService">
+            <intent-filter>
+                <action android:name="vzm.provisioning.START"/>
+            </intent-filter>
+        </service>
+
+        <!-- GCM -->
+        <service android:name="com.verizon.messaging.vzmsgs.GCMIntentService"/>
+
+        <receiver android:name="com.google.android.gcm.GCMBroadcastReceiver" android:permission="com.google.android.c2dm.permission.SEND">
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE"/>
+                <action android:name="com.google.android.c2dm.intent.REGISTRATION"/>
+
+                <category android:name="com.verizon.messaging.vzmsgs"/>
+            </intent-filter>
+        </receiver>
+        <!-- GCM -->
+
+
+        <!-- Application configuration -->
+        <!-- VZM Provider -->
+        <provider android:authorities="vma" android:exported="false" android:name="com.verizon.messaging.vzmsgs.provider.ApplicationProvider"/>
+        <!--
+        Please don't commit the below metadata local changes. it will break the production build
+        0 - QA debug
+        1 - Prod debug with IMAP
+        2 - Prod debug
+        3 - Prod Release        
+        -->
+        <meta-data android:name="com.vzmsgs.build" android:value="2"/>
+        <!-- Need to change this key in production build -->
+
+        <meta-data android:name="com.vzmsgs.privatekey" android:value="1234567890123456"/>
+        <meta-data android:name="vzw.app.apn.enabled" android:value="true"/>
+    </application>
+
+</manifest>

@@ -1,0 +1,478 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+	 /* * Copyright (C) 2008 Esmertec AG. * Copyright (C) 2008 The Android 
+	Open Source Project * * Licensed under the Apache License, Version 2.0 (the 
+	"License"); * you may not use this file except in compliance with the License. 
+	* You may obtain a copy of the License at * * http://www.apache.org/licenses/LICENSE-2.0 
+	* * Unless required by applicable law or agreed to in writing, software * 
+	distributed under the License is distributed on an "AS IS" BASIS, * WITHOUT 
+	WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. * See the 
+	License for the specific language governing permissions and * limitations 
+	under the License. */
+-->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/composeFragment"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:background="@drawable/conversation_background"
+	android:orientation="vertical" >
+
+	<LinearLayout
+		android:id="@+id/compose_info_header"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:addStatesFromChildren="true"
+		android:orientation="vertical"
+		android:gravity="top" >
+
+		<FrameLayout
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:addStatesFromChildren="true"
+			android:gravity="top" >
+	
+			<RelativeLayout
+				android:id="@+id/shrink_title_header_layout"
+				android:layout_width="fill_parent"
+				android:layout_height="@dimen/shrinkHeaderHeight"
+				android:background="@drawable/bg_header1" >
+	
+				<com.verizon.mms.ui.FromTextView
+					android:id="@+id/shrinktxtName"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_marginLeft="6.2dp"
+					android:layout_marginRight="6.2dp"
+					android:layout_alignParentLeft="true"
+					android:layout_centerVertical="true"
+					android:layout_toLeftOf="@+id/shrinktxtDestType"
+					android:ellipsize="end"
+					android:maxLines="1"
+					android:singleLine="true"
+					android:text="@string/new_message"
+					android:textColor="@android:color/white"
+					android:textSize="14dp" />
+				
+				<TextView
+				    android:id="@+id/shrinktxtDestType"
+				    android:layout_width="wrap_content"
+				    android:layout_height="wrap_content"
+				    android:layout_alignParentRight="true"
+				    android:layout_alignBaseline="@+id/shrinktxtName"
+				    android:layout_marginRight="6.2dp"
+				    android:ellipsize="end"
+				    android:maxLines="1"
+				    android:scaleType="centerInside"
+				    android:singleLine="true"
+				    android:textColor="@android:color/white"
+				    android:textSize="14dp" />
+				<com.verizon.mms.ui.widget.ImageViewButton
+					android:id="@+id/shrinkGallery"
+					android:layout_width="24dp"
+					android:layout_height="fill_parent"
+					android:layout_centerVertical="true"
+					android:layout_toLeftOf="@+id/shrinktxtDestType"
+					android:layout_marginRight="13dp"
+					android:scaleType="centerInside"
+					android:src="@drawable/ico_gallery" />
+	 
+			</RelativeLayout>
+	
+			<RelativeLayout
+				android:id="@+id/title_header_layout"
+				android:layout_width="fill_parent"
+				android:layout_height="@dimen/headerHeight"
+				android:background="@drawable/bg_header1" >
+	
+				<com.verizon.mms.ui.ContactImage
+					android:id="@+id/imgAvatar"
+					android:layout_width="@dimen/compMsgItemAvatarSize"
+					android:layout_height="@dimen/compMsgItemAvatarSize"
+					android:layout_alignParentLeft="true"
+					android:layout_centerVertical="true"
+					android:src="@drawable/avatar_blank"
+					android:visibility="gone" />
+	
+				<LinearLayout
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_alignWithParentIfMissing="true"
+					android:layout_centerVertical="true"
+					android:layout_marginLeft="11.93dp"
+					android:layout_toLeftOf="@+id/imgGallery"
+					android:layout_toRightOf="@id/imgAvatar"
+					android:orientation="horizontal" >
+	
+					<RelativeLayout
+						android:id="@+id/recipientInfo"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_marginRight="26dp"
+						android:layout_weight="0" >
+	
+						<com.verizon.mms.ui.FromTextView
+							android:id="@+id/txtName"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:layout_alignParentLeft="true"
+							android:layout_alignParentTop="true"
+							android:ellipsize="end"
+							android:maxLines="1"
+							android:singleLine="true"
+							android:text="@string/new_message"
+							android:textColor="@android:color/white"
+							android:textSize="20dp" />
+	
+						<TextView
+							android:id="@+id/txtDestType"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:layout_alignParentBottom="true"
+							android:layout_alignParentLeft="true"
+							android:layout_below="@id/txtName"
+							android:ellipsize="end"
+							android:maxLines="1"
+							android:textColor="@android:color/white"
+							android:textSize="14dp" />
+	
+					</RelativeLayout>
+	
+					<ImageView
+						android:id="@+id/imgNext"
+						android:layout_width="26dp"
+						android:layout_height="fill_parent"
+						android:layout_marginLeft="-26dp"
+						android:layout_weight="0"
+						android:scaleType="centerInside"
+						android:src="@drawable/arrow" />
+	
+					<FrameLayout
+						android:layout_width="0dp"
+						android:layout_height="fill_parent"
+						android:layout_weight="1" />
+	
+				</LinearLayout>
+	
+	
+				<com.verizon.mms.ui.widget.ImageViewButton
+					android:id="@+id/imgGallery"
+					android:layout_width="31dp"
+					android:layout_height="fill_parent"
+					android:layout_alignParentRight="true"
+					android:layout_centerInParent="true"
+					android:layout_marginRight="13dp"
+					android:scaleType="centerInside"
+					android:src="@drawable/ico_gallery" />
+				
+			</RelativeLayout>
+
+		</FrameLayout>
+
+		<LinearLayout
+			android:id="@+id/recipients_subject_linear"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="vertical"
+			android:visibility="gone" >
+
+			<ViewStub
+				android:id="@+id/recipient_editor_stub"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout="@layout/recipient_editor" />
+			
+			<!-- in order to show "Next" button for subject field ,
+			 we have to remove the "textShortMessage ":)", textMultiLine" from android:inputType -->
+			<com.verizon.mms.ui.EmojiEditText
+				android:id="@+id/subject"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:autoText="true"
+				android:capitalize="sentences"
+				android:imeOptions="actionNext"
+				android:hint="@string/subject_hint"
+				android:inputType="textAutoCorrect|textCapSentences"
+				android:maxLength="80"
+				android:maxLines="1"
+				android:singleLine="true"
+				android:visibility="gone" />
+
+		</LinearLayout>
+
+	</LinearLayout>
+
+	<com.verizon.mms.ui.GroupModeChooser
+		android:id="@+id/group_chooser"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content" />
+
+	<LinearLayout
+	    android:id="@+id/composeMessageList"
+	    android:layout_width="match_parent"
+	    android:layout_height="match_parent"
+	    android:baselineAligned="false"
+	    android:gravity="bottom"
+	    android:orientation="vertical" >
+
+		<com.verizon.mms.ui.MessageListView
+			android:id="@+id/history"
+			android:layout_width="match_parent"
+			android:layout_height="0dip"
+			android:layout_weight="1"
+			android:background="@drawable/conversation_background"
+			style="?android:attr/listViewWhiteStyle"
+			android:cacheColorHint="@color/transparent"
+			android:drawSelectorOnTop="true"
+			android:fadingEdge="none"
+			android:listSelector="@color/transparent"
+			android:paddingBottom="@dimen/interMessageMargin"
+			android:scrollbars="none"
+			android:stackFromBottom="true"
+			android:transcriptMode="alwaysScroll"
+			android:visibility="gone" />
+
+		<LinearLayout
+			android:id="@+id/attachLayout"
+			android:layout_width="fill_parent"
+			android:orientation="horizontal"
+			android:visibility="gone"
+			android:background="@drawable/bottom_bar"
+			android:layout_height="wrap_content" >
+
+			<TableRow
+				android:layout_width="fill_parent"
+				android:layout_height="wrap_content" >
+
+				<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:text="DummyTextToAlign"
+					android:visibility="invisible"
+					android:layout_weight="0.25" />
+
+				<ListView
+					android:id="@+id/attachment_listView"
+					android:layout_weight="0.50"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:cacheColorHint="@color/transparent"
+					android:divider="@color/transparent"
+					android:dividerHeight="4dip"
+					android:fadingEdge="none"
+					android:paddingTop="4dip"
+					android:listSelector="@color/transparent"
+					android:scrollbars="none"
+					android:stackFromBottom="true"
+					android:transcriptMode="alwaysScroll"
+					android:visibility="visible" />
+
+				<LinearLayout
+					android:id="@+id/mmsCountLayout"
+					android:visibility="gone"
+					android:layout_width="@dimen/mmsAttachmentCountWidth"
+					android:layout_height="wrap_content"
+					android:layout_weight="0.25"
+					android:layout_gravity="bottom"
+					android:orientation="vertical"
+					android:paddingLeft="5dip" >
+
+					<ImageView
+						android:id="@+id/mmsBadgeImage"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:src="@drawable/ico_tip2" />
+
+					<TextView
+						android:id="@+id/mmsCountText"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content" />
+
+				</LinearLayout>
+
+			</TableRow>
+
+		</LinearLayout>
+
+		<!-- FIX for keyboard overlapping the message edit text -->
+		<!-- because next visible item to frame layout does not adjust to keyboard -->
+
+		<LinearLayout
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:background="@drawable/bottom_bar_separator"
+			android:orientation="horizontal" >
+		</LinearLayout>
+
+		<RelativeLayout
+			android:id="@+id/bottom_panel"
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:background="@drawable/bottom_bar"
+			android:orientation="horizontal"
+			android:paddingBottom="8dp"
+			android:paddingTop="8dp" >
+
+			<com.verizon.mms.ui.widget.ImageViewButton
+				android:id="@+id/btnAttach"
+				android:layout_width="wrap_content"
+				android:layout_height="42.18dp"
+				android:layout_alignBottom="@+id/embedded_text_editor"
+				android:layout_alignParentLeft="true"
+				android:layout_marginLeft="8.13dp"
+				android:scaleType="fitXY"
+				android:src="@drawable/btn_attach" />
+
+			<com.verizon.mms.ui.widget.TextButton
+				android:id="@+id/btnSend"
+				android:layout_width="wrap_content"
+				android:layout_height="42.18dp"
+				android:background="@drawable/btn_send" 
+				android:layout_alignBottom="@+id/embedded_text_editor"
+				android:layout_alignParentRight="true"
+				android:layout_marginRight="8.13dp"
+				android:textColor="#000000"
+				android:text="@string/send"
+				android:textAppearance="@android:style/TextAppearance.Small"
+				android:textStyle="bold"
+				style="?sendButtonText"
+				/>
+
+			<com.verizon.mms.ui.EmojiEditText
+				android:id="@+id/embedded_text_editor"
+				android:layout_width="fill_parent"
+				android:layout_height="wrap_content"
+				android:layout_alignWithParentIfMissing="true"
+				android:layout_below="@+id/attachment_listView"
+				android:layout_marginLeft="7.3dip"
+				android:layout_marginRight="7.3dip"
+				android:layout_toLeftOf="@id/btnSend"
+				android:layout_toRightOf="@id/btnAttach"
+				android:autoText="true"
+				android:background="#ffffff"
+				android:capitalize="sentences"
+				android:hint="@string/type_to_compose_text_enter_to_send"
+				android:imeOptions="actionSend|flagNoEnterAction"
+				android:inputType="textAutoCorrect|textCapSentences|textMultiLine"
+				android:maxLength="10000"
+				android:focusable="true"
+				android:focusableInTouchMode="true"
+				android:maxLines="6"
+				android:minHeight="42.18dp"
+				android:nextFocusRight="@id/btnSend"
+				android:paddingLeft="4dp"
+				android:paddingRight="4dp"
+				android:scrollbars="vertical"
+				style="?messageEditorText" />
+
+			<TextView
+				android:id="@+id/text_counter"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_alignParentRight="true"
+				android:layout_alignParentTop="true"
+				android:layout_marginRight="3dip"
+				android:layout_marginTop="4dip"
+				android:background="#88000000"
+				android:paddingLeft="3dip"
+				android:paddingRight="3dip"
+				android:textColor="#ffffffff"
+				
+				android:textStyle="bold"
+				android:visibility="gone" />
+
+		</RelativeLayout>
+		
+		<LinearLayout
+		    android:id="@+id/emojiTabLayout"
+		    android:layout_width="fill_parent"
+		    android:layout_height="220dp"
+		    android:orientation="vertical"
+		    android:visibility="gone" >
+
+		    <RelativeLayout
+		        android:layout_width="match_parent"
+		        android:layout_height="50dp" 
+		        android:background="#000000">
+				
+		        <ImageView
+		            android:layout_width="50dp"
+		            android:layout_height="match_parent"
+		            android:src="@drawable/ico_del"
+		            android:layout_alignParentRight="true"
+		            android:layout_centerVertical="true"
+		            android:id="@+id/del"/>
+		        
+		        <com.verizon.mms.ui.widget.OnOffTabHost
+		            android:id="@+id/tabhost"
+		            android:layout_width="match_parent"
+		            android:layout_height="match_parent"
+		            android:background="#2B2B2B" 
+		            android:layout_toLeftOf="@+id/del"/>
+		    </RelativeLayout>
+
+		    <android.support.v4.view.ViewPager
+		        android:id="@+id/pager"
+		        android:layout_width="match_parent"
+		        android:layout_height="match_parent" 
+		        android:background="#363636"/>
+		</LinearLayout>
+
+		<RelativeLayout
+            android:id="@+id/searchViewPanel"
+            android:layout_width="fill_parent"
+            android:layout_height="48dp"
+            android:background="@drawable/search_gray_bar"
+            android:orientation="horizontal"
+            android:visibility="visible" 
+            android:paddingTop="3dp"
+            android:paddingBottom="3dp">
+
+            <ImageView
+                android:id="@+id/searchUp"
+                android:layout_width="46dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="2dp"
+                android:layout_centerVertical="true"
+                android:src="@drawable/search_up_arrow_inactive" />
+
+            <ImageView
+                android:id="@+id/searchDown"
+                android:layout_width="46dp"
+                android:layout_height="match_parent"
+                android:layout_toRightOf="@+id/searchUp"
+                android:layout_marginLeft="12dp"
+                android:layout_centerVertical="true"
+                android:src="@drawable/search_down_arrow_inactive" />
+
+            <TextView
+                android:id="@+id/searchResultTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_alignParentRight="true"
+                android:gravity="center_vertical"
+                android:layout_toRightOf="@+id/searchDown"
+                android:layout_marginRight="70dp"
+                android:paddingLeft="4dp"
+                android:paddingRight="4dp"
+                />
+
+            <com.verizon.mms.ui.widget.TextButton
+                android:id="@+id/btnDone"
+                style="?sendButtonText"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:minWidth="70dp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="2dp"
+                android:background="@drawable/btn_send"
+                android:text="@string/done"
+                android:textColor="#000000"
+                android:textStyle="bold" />
+        </RelativeLayout>
+
+	</LinearLayout>
+
+</LinearLayout>

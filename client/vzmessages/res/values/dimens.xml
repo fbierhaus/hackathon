@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+	<!-- relative sizes of tablet fragments per iPad design guide -->
+	<integer name="tabletListWeight">4</integer>
+	<integer name="tabletContentWeight">6</integer>
+	<dimen name="tabletDividerWidth">1dp</dimen>
+
+	<dimen name="convListItemHeight">60dp</dimen> 
+	<dimen name="convListItemRightPad">13.3dp</dimen>
+	<dimen name="convListItemAvatarTopBottomPad">12dp</dimen>
+	<dimen name="convListItemAvatarLeftPad">10.89dp</dimen>
+	<dimen name="convListItemAvatarRightPad">13.11dp</dimen>
+	<dimen name="convListItemAvatarSize">36dp</dimen>
+	<dimen name="quickContactListItemAvatarSize">36dp</dimen>
+	<dimen name="convListSubjectMarginBottom">10dp</dimen>
+	<dimen name="convListIconMarginBottom">10dip</dimen>
+	<dimen name="convListItemFromTopPad">3.75dp</dimen>
+	<dimen name="convListItemFromMinHeight">31dp</dimen>
+	<dimen name="convListItemDateMinWidth">64dp</dimen>
+	<dimen name="convListItemUnreadPad">4dp</dimen>
+	<dimen name="edittextPortMed">235dp</dimen>
+	<dimen name="convListMsgCountLeftMargin">28dp</dimen>
+	<dimen name="convListMsgCountTopMargin">36dp</dimen>
+	<dimen name="attachImageHeightPort">135dp</dimen>
+	<dimen name="attachImageHeightLand">100dp</dimen>
+	<dimen name="headerHeight">53dp</dimen>
+	<dimen name="shrinkHeaderHeight">28dp</dimen>
+	<dimen name="sharedContentRow">103dp</dimen>
+	<dimen name="compMsgItemAvatarSize">53dp</dimen>
+	<dimen name="deliveryReportWindowWidth">240dp</dimen>
+	<dimen name="mmsAttachmentCountWidth">133dp</dimen>
+
+	<dimen name="messageItemLeftRightBorder">8.8dp</dimen>
+	<dimen name="messageLeftRightBorder">9.62dp</dimen>
+	<dimen name="messageTopBorder">9.62dp</dimen>
+	<dimen name="messageBottomBorder">8.8dp</dimen>
+
+	<dimen name="sendingTopBorder">6.67dp</dimen>
+
+	<dimen name="downloadInterMargin">6dp</dimen>
+
+	<dimen name="senderTopBorder">8.8dp</dimen>
+	<dimen name="senderTopBorderWithText">-6dp</dimen>
+	<dimen name="statusBorder">6dp</dimen>
+	<dimen name="interMessageMargin">8.8dp</dimen>
+
+	<!-- minimum and maximum widths of message content for text-only messages -->
+	<dimen name="minTextMessageWidth">170.66dp</dimen>
+	<dimen name="maxTextMessageWidth">274.16dp</dimen>
+
+	<!-- width of bubble arrow and vertical bar -->
+	<dimen name="messageBubbleBorder">13dp</dimen>
+
+	<!-- padding to limit max message bubble size -->
+	<dimen name="maxMessageBorder">25dp</dimen>
+
+	<!-- min size of black border around images smaller than min image size -->
+	<dimen name="minImageBorder">18dp</dimen>
+
+	<!-- preview text width = maxTextMessageWidth - (2 * messageLeftRightBorder) -->
+	<dimen name="previewTextWidth">222.04dp</dimen>
+     <!-- Popup view width - height - padding values -->
+    <dimen name="popup_activity_width">293dp</dimen>
+    <dimen name="popup_activity_height">309dp</dimen>
+    <dimen name="popup_activity_header_height">35dp</dimen>
+    
+    <dimen name="popoup_gallery_item_width">263dp</dimen>
+    <dimen name="popup_gallery_height">264dp</dimen>
+    <dimen name="popup_gallery_header_height">48dp</dimen>
+    <dimen name="popup_gallery_button_height">36dp</dimen>
+    <dimen name="popup_gallery_edit_height">35dp</dimen>
+    
+    <dimen name="popup_gallery_padding">12.5dp</dimen> 
+    <dimen name="inner_popup_height">236dp</dimen>
+    <dimen name="inner_popup_height1">300dp</dimen>
+	<!-- Sets the places list divider height and margins -->
+	<dimen name="places_marginLeft">5dp</dimen>
+	<dimen name="places_listview_divider_height">1dp</dimen>
+	<dimen name="quickActionText">16dp</dimen>
+	<dimen name="popUpVerticalText">18dp</dimen>
+
+	<dimen name="allAttachmentBorder">5dp</dimen>
+	<dimen name="pt6.5">10dp</dimen>
+	<dimen name="pt7">10.38dp</dimen>
+	<dimen name="pt5.5">8.2dp</dimen>
+
+	<!-- link preview -->
+	<dimen name="linkPreviewImageSize">150dp</dimen>
+	<dimen name="linkPreviewLoadingSize">14dp</dimen>
+	<dimen name="linkPreviewFailedIconSize">18dp</dimen>
+	<dimen name="linkPreviewMinImageSizeConversation">128px</dimen>
+	<dimen name="linkPreviewMinImageSizeSharedLinks">48px</dimen>	
+		
+	<!-- Vcard picture size -->
+	<dimen name="vcard_pic_size">64dp</dimen>
+	<dimen name="vcard_text_width">170dp</dimen>
+
+	<!-- Attachment Layout -->
+	<dimen name="attachmentLayoutMaxHeight">190dp</dimen>		
+	
+	<!-- minimum width of Attach menu -->
+	<dimen name="menuWidth">200dp</dimen>
+	<!-- Height of Attach Menu icons -->
+	<dimen name="menuHeight">45dp</dimen>
+	<!-- Padding used for QuickActionMenu when in fullscreen mode -->
+	<dimen name="quickActionPadding">35dp</dimen>
+	
+	<!-- Contact hint list view padding -->
+	<dimen name="contact_hint_list_padding_top">48dp</dimen>
+    <dimen name="contact_hint_list_padding_left">8dp</dimen>
+    <dimen name="contact_hint_list_padding_right">53dp</dimen>
+    <dimen name="contact_hint_list_padding_left_tablet">14dp</dimen>
+    <dimen name="emoticonSize">20dp</dimen>
+    <dimen name="emoticonComposeSize">30dp</dimen>
+    
+    <!-- App aligned dialog -->
+    <dimen name="app_alligned_margin">13dp</dimen>
+    <dimen name="app_alligned_minwidth">305dp</dimen>
+    <dimen name="btn_container_height">61dp</dimen>
+    <dimen name="btn_settings_height">45dp</dimen>
+    <dimen name="wifi_dlg_height">160dp</dimen>
+    
+    <!--RTL popup dimensions -->
+    <dimen name="attendee_popup_width">200dp</dimen>
+    <dimen name="attendee_popup_height">80dp</dimen>
+    <dimen name="attendee_popup_offset">30dp</dimen>
+    <dimen name="attendee_popup_spacing">8dp</dimen>
+    <dimen name="attendee_popup_radius">5dp</dimen>
+    <dimen name="attendee_popup_text_size">14dp</dimen>
+    <dimen name="attendee_popup_stroke_width">1dp</dimen>
+    <dimen name="menu_icon_plus_btn_size">50dp</dimen>
+    <dimen name="menu_btn_align_pixel">0dip</dimen>
+    <dimen name="menu_collapse_width">75dip</dimen>
+    <dimen name="menu_collapse_height">18dip</dimen>
+    <dimen name="menu_collapse_layout_height">38dip</dimen>
+    <dimen name="bg_popup_big_width">280dip</dimen>
+    <dimen name="bg_popup_big_height">110dip</dimen>
+    <dimen name="locate_all_size">50dp</dimen>
+    <dimen name="share_size">50dp</dimen>
+    
+    <dimen name="single_list_dialog">15sp</dimen>
+    <!-- Customize conversations -->
+    <dimen name="dragWidth">75dp</dimen>
+    <dimen name="dragHeigth">80dp</dimen>
+    <dimen name="colorseekbarLayoutHeight">64dp</dimen>
+    
+    <!-- Location -->
+    <dimen name="locationSubTitle_normal">12dp</dimen>
+    <dimen name="locationTitle_normal">16dp</dimen>
+    <dimen name="locationSubTitle_large">15dp</dimen>
+    <dimen name="locationTitle_large">19dp</dimen>
+    
+    <!-- Emoji tabs -->
+    <dimen name="emoji_icon_width">40dp</dimen>
+</resources>

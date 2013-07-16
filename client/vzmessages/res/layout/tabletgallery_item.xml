@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+
+	<ImageView
+		android:id="@+id/play"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_centerInParent="true"
+		android:contentDescription="@string/play"
+		android:src="@drawable/btn_play_gallery" />
+
+	<RelativeLayout
+		android:id="@+id/bg_header"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:layout_alignParentBottom="true"
+		android:background="@drawable/translucent_gray"
+		android:paddingBottom="1dp" >
+
+		<TextView
+			android:id="@+id/image_name"
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:paddingLeft="10dp"
+			android:textColor="@android:color/white"
+			style="?popupMenuTitleText"
+			android:ellipsize="end"
+			android:maxLines="3" >
+		</TextView>
+
+		<TextView
+		    android:id="@+id/image_shared_time"
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content"
+		    android:layout_below="@id/image_name"
+		    android:ellipsize="middle"
+		    android:paddingLeft="10dp"
+		    android:singleLine="true"
+		    android:textColor="@android:color/white"
+		    style="?recipContItemName" >
+
+		</TextView>
+
+	</RelativeLayout>
+
+</merge>

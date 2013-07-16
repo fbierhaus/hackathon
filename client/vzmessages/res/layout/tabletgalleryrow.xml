@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent"
+	android:layout_height="250dp"
+	android:background="@color/black"
+	android:orientation="horizontal" >
+
+	<RelativeLayout
+		android:id="@+id/first_item"
+		android:layout_width="0dp"
+		android:layout_height="250dp"
+		android:layout_weight="1" >
+
+		<!-- item content gets added here -->
+
+		<include layout="@layout/tabletgallery_item" />
+
+	</RelativeLayout>
+
+	<RelativeLayout
+		android:id="@+id/second_item"
+		android:layout_width="0dp"
+		android:layout_height="250dp"
+		android:layout_weight="1" >
+
+		<include layout="@layout/tabletgallery_item" />
+
+	</RelativeLayout>
+
+	<RelativeLayout
+		android:id="@+id/third_item"
+		android:layout_width="0dp"
+		android:layout_height="250dp"
+		android:layout_weight="1" >
+
+		<include layout="@layout/tabletgallery_item" />
+
+	</RelativeLayout>
+
+</LinearLayout>

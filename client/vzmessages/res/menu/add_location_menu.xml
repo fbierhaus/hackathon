@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/drop_pin"
+          android:icon="@drawable/drop_pin_greyscale"
+          android:title="@string/drop_pin"/>
+    <item android:id="@+id/my_location"
+          android:icon="@drawable/my_location_greyscale"
+          android:title="@string/attach_add_location" />
+    <item android:id="@+id/refresh"
+        android:icon="@drawable/refresh_location_greyscale"
+        android:title="@string/refresh_location"/>
+    <item android:id="@+id/from_media"
+          android:icon="@drawable/loc_menu_place_media"
+          android:title="@string/attach_location_from_media" />
+</menu>

@@ -1,0 +1,127 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.vzw.messaging</groupId>
+		<artifactId>android-parent</artifactId>
+		<version>4.1</version>
+	</parent>
+
+	<groupId>com.strumsoft.android</groupId>
+	<artifactId>android-commons</artifactId>
+	<name>VZM Commons Lib</name>
+	<description>vzm  commons lib</description>
+	<version>${project.parent.version}</version>
+
+
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>add-source</goal>
+						</goals>
+						<configuration>
+							<sources>
+								<source>stub</source>
+							</sources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+	<dependencies>
+		<dependency>
+			<groupId>android</groupId>
+			<artifactId>android</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<!--Strumsoft Repository -->
+			<groupId>acra</groupId>
+			<artifactId>acra</artifactId>
+			<version>4.4.0</version>
+		</dependency>
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j-android</artifactId>
+			<version>1.2.16</version>
+		</dependency>
+	</dependencies>
+
+	<profiles>
+		<profile>
+			<id>default</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+				<property>
+					<name>default</name>
+					<value>true</value>
+				</property>
+			</activation>
+		</profile>
+		<profile>
+			<id>release</id>
+			<activation>
+				<property>
+					<name>release</name>
+					<value>true</value>
+				</property>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>com.google.code.maven-replacer-plugin</groupId>
+						<artifactId>replacer</artifactId>
+						<version>1.5.2</version>
+						<executions>
+							<execution>
+								<phase>initialize</phase>
+								<goals>
+									<goal>replace</goal>
+								</goals>
+							</execution>
+						</executions>
+						<configuration>
+							<file>${basedir}/src/main/java/com/strumsoft/android/commons/logger/Logger.java</file>
+							<replacements>
+								<replacement>
+									<token>IS_DEBUG_ENABLED = true;</token>
+									<value>IS_DEBUG_ENABLED = false;</value>
+								</replacement>
+								<replacement>
+									<token>IS_WARNING_ENABLED = true;</token>
+									<value>IS_WARNING_ENABLED = false;</value>
+								</replacement>
+								<replacement>
+									<token>IS_INFO_ENABLED = true;</token>
+									<value>IS_INFO_ENABLED = false;</value>
+								</replacement>
+								<replacement>
+									<token>IS_ERROR_ENABLED = true;</token>
+									<value>IS_ERROR_ENABLED = false;</value>
+								</replacement>
+							</replacements>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+
+
+</project>

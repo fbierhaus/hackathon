@@ -1,0 +1,116 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.vzw.messaging</groupId>
+		<artifactId>vzm-parent</artifactId>
+		<version>4.1</version>
+		<relativePath>../../vzm-parent/pom.xml</relativePath>
+	</parent>
+
+	<groupId>com.vzw.messaging.sdk</groupId>
+	<artifactId>vma-sync-lib</artifactId>
+	<version>${project.parent.version}</version>
+	<name>VMA Sync Library</name>
+	<description>VMA Sync Library</description>
+
+	<build>
+		<sourceDirectory>src</sourceDirectory>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+			</plugin>
+			<!--  
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>add-source</goal>
+						</goals>
+						<configuration>
+							<sources>
+								<source>imap</source>
+							</sources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			-->
+		</plugins>
+	</build>
+	<dependencies>
+		<dependency>
+			<groupId>android</groupId>
+			<artifactId>android</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.strumsoft.android</groupId>
+			<artifactId>android-commons</artifactId>
+			<version>${project.parent.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>activation</groupId>
+			<artifactId>activation</artifactId>
+			<version>1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>additionnal</groupId>
+			<artifactId>additionnal</artifactId>
+			<version>1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>apache-mime4j-core</groupId>
+			<artifactId>apache-mime4j-core</artifactId>
+			<version>0.7</version>
+		</dependency>
+		<dependency>
+			<groupId>apache-mime4j-dom</groupId>
+			<artifactId>apache-mime4j-dom</artifactId>
+			<version>0.7</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.0.1</version>
+		</dependency>
+		<dependency>
+			<groupId>htmlcleaner</groupId>
+			<artifactId>htmlcleaner</artifactId>
+			<version>2.2</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>jzlib</groupId>
+			<artifactId>jzlib</artifactId>
+			<version>1.0.7</version>
+		</dependency>
+		<dependency>
+			<groupId>mail</groupId>
+			<artifactId>mail</artifactId>
+			<version>4.0</version>
+		</dependency>
+		<dependency>
+			<groupId>mailapi</groupId>
+			<artifactId>mailapi</artifactId>
+			<version>4.0</version>
+		</dependency>
+	 
+		<dependency>
+			<groupId>imap-msa-custom</groupId>
+			<artifactId>imap-msa-custom</artifactId>
+			<version>4.1</version>
+		</dependency>
+		
+	</dependencies>
+
+</project>

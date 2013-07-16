@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+	<!-- size of bubble arrow and colored border, must match bubble drawables -->
+	<dimen name="bubbleSideMargin">19px</dimen>
+	
+</resources>

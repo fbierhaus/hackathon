@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/message_report"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/message_report_background" >
+
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/message_detail_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginBottom="26.1dp"
+        android:layout_marginLeft="14.06dp"
+        android:layout_marginRight="12.58dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/link_preview_background"
+        android:gravity="center" >
+
+        <TextView
+            android:id="@+id/message_info_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="18.5dp"
+            android:layout_marginTop="12.3dp"
+            android:text="@string/message_info"
+            android:textColor="@drawable/text_color_dark_gray"
+           style="?messageEditorText"
+            android:textStyle="bold" />
+
+        <ScrollView
+            android:id="@+id/message_info_scroll"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/message_button_container_layout"
+            android:layout_below="@id/message_info_text"
+            android:layout_centerHorizontal="true" >
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <LinearLayout
+                    android:id="@+id/message_info_container_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="21.9dp"
+                    android:layout_marginLeft="18.5dp"
+                    android:layout_marginRight="18.5dp"
+                    android:orientation="vertical" >
+
+                	<!-- Info text lines are inserted here -->
+
+                </LinearLayout>
+
+                <View
+                    android:id="@+id/message_info_divider"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginBottom="21.82dp"
+                    android:layout_marginTop="13.6dp"
+                    android:background="@drawable/message_info_divider" />
+
+                <LinearLayout
+                    android:id="@+id/message_details_layout"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3.09"
+                    android:background="@drawable/link_preview_background"
+                    android:isScrollContainer="true"
+                    android:orientation="vertical" >
+
+                    <LinearLayout
+                        android:id="@+id/delivery_status_container_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="bottom"
+                        android:orientation="vertical" >
+
+                        <TextView
+                                android:id="@+id/delivery_status_textview"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="18.5dp"
+                                android:layout_marginBottom="19.9dp"
+                                android:textColor="@drawable/text_color_dark_gray"
+                                style="?messageEditorText"
+                                android:textStyle="bold" />
+
+                        <!-- Delivery list items are inserted here -->
+
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+
+        <LinearLayout
+            android:id="@+id/message_button_container_layout"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="11.1dp"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:id="@+id/message_info_resendall_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="40.8dp"
+                android:orientation="vertical"
+                android:visibility="gone" >
+
+                <View
+                    android:id="@+id/message_info_resendall_divider"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@drawable/message_info_divider" />
+
+
+
+
+
+                <TextView
+                    android:id="@+id/message_resendall_textview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="2dp"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="center"
+                    android:text="@string/resend_to_all"
+                    android:textColor="@drawable/text_color_dark_gray" 
+                    style="?messageEditorText"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/message_buttons_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+
+                <Button
+                    android:id="@+id/message_close_button"
+                    style="?textButton"
+                    android:textAppearance="@style/TextAppearance.Conv.Body"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.5"
+                    android:background="@drawable/btn_bkgd_message_info"
+                     android:textColor="@drawable/text_color_black"
+                    android:text="@string/close" />
+
+                <Button
+                    android:id="@+id/message_resend_button"
+                    style="?textButton"
+                    android:textAppearance="@style/TextAppearance.Conv.Body"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.5"
+                    android:background="@drawable/btn_bkgd_message_info"
+                    android:textColor="@drawable/text_color_black"
+                    android:text="@string/resend"
+                    android:visibility="gone" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/progress"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="@color/message_report_background"
+            android:clickable="true"
+            android:visibility="gone" >
+
+            <ProgressBar
+                style="?android:attr/progressBarStyleLarge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+</LinearLayout>

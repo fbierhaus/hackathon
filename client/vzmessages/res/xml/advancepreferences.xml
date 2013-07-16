@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:key="pref_screen_settings" >
+
+	<PreferenceCategory
+        android:key="pref_key_application_settings"
+        android:title="@string/pref_application_settings" >
+    	
+    	<CheckBoxPreference
+            android:defaultValue="true"
+            android:key="pref_key_weblick_preview"
+            android:summary="@string/pref_summary_weblick_preview"
+            android:title="@string/pref_title_weblick_preview" />
+    	
+    	<CheckBoxPreference
+            android:defaultValue="false"
+            android:key="pref_key_auto_delete"
+            android:summary="@string/pref_summary_auto_delete"
+            android:title="@string/pref_title_auto_delete" />
+
+        <Preference
+            android:dependency="pref_key_auto_delete"
+            android:key="pref_key_all_conv_delete_limit"
+            android:persistent="false"
+            android:layout="?android:attr/preferenceLayoutChild"
+            android:summary="@string/pref_summary_delete_limit"
+            android:title="@string/pref_title_all_conv_delete" />
+              
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="pref_key_delivery_reports"
+            android:summary="@string/pref_summary_delivery_reports"
+            android:title="@string/pref_title_delivery_reports" />
+            
+       <CheckBoxPreference 
+       		android:defaultValue="true"
+       		android:key="pref_key_notifications_during_phone_call"			
+			android:title="@string/pref_title_notifications_during_phone_call"
+			android:summary="@string/pref_summary_notifications_during_phone_call" />
+			
+        </PreferenceCategory>   
+    <PreferenceCategory
+        android:key="pref_key_mms_settings"
+        android:title="@string/pref_mms_settings_title" >
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="pref_key_mms_auto_retrieval"
+            android:summary="@string/pref_summary_mms_auto_retrieval"
+            android:title="@string/pref_title_mms_auto_retrieval" />
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:dependency="pref_key_mms_auto_retrieval"
+            android:key="pref_key_mms_retrieval_during_roaming"
+            android:layout="?android:attr/preferenceLayoutChild"
+            android:summary="@string/pref_summary_mms_retrieval_during_roaming"
+            android:title="@string/pref_title_mms_retrieval_during_roaming" />
+       <!-- ReadReport 3.1 -->
+<!--         <CheckBoxPreference -->
+<!--             android:defaultValue="false" -->
+<!--             android:key="pref_key_mms_read_reports" -->
+<!--             android:summary="@string/pref_summary_mms_read_reports" -->
+<!--             android:title="@string/pref_title_mms_read_reports" /> -->
+                         
+<!--          <CheckBoxPreference -->
+<!--             android:defaultValue="false" -->
+<!--             android:key="pref_key_mms_auto_response_read_reports" -->
+<!--             android:summary="@string/pref_summary_readreport_always" -->
+<!--             android:title="@string/pref_title_readreport" /> -->
+ 
+    </PreferenceCategory>
+
+	<PreferenceCategory
+        android:key="pref_key_location_settings"
+        android:title="@string/pref_location_settings_title" >
+        <CheckBoxPreference
+            android:key="pref_key_wifi_probe"
+            android:summary="@string/pref_wifi_probe_enabled"
+            android:title="@string/wifi_proble_title" /> 
+            
+    </PreferenceCategory>        
+</PreferenceScreen>

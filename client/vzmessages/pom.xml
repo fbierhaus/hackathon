@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.strumsoft.android.vzw</groupId>
+	<artifactId>vma-client</artifactId>
+	<version>${project.parent.version}</version>
+	<packaging>apk</packaging>
+	<name>Verizon Messaging </name>
+	<parent>
+		<groupId>com.vzw.messaging</groupId>
+		<artifactId>android-parent</artifactId>
+		<version>4.1</version>
+	</parent>
+
+	<dependencies>
+		<dependency>
+			<groupId>android</groupId>
+			<artifactId>android</artifactId>
+			<version>2.2</version>
+			<scope>provided</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.google.android</groupId>
+			<artifactId>annotations</artifactId>
+			<version>4.1.1.4</version>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+			<version>1.4</version>
+		</dependency>
+		<dependency>
+			<groupId>android</groupId>
+			<artifactId>android-support-v4</artifactId>
+			<version>v4</version>
+		</dependency>
+		<dependency>
+			<groupId>com.vzw.navigation</groupId>
+			<artifactId>nbi</artifactId>
+			<version>3.2.2.29</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.vzw.vma.sdk</groupId>
+			<artifactId>vma-mms-cache</artifactId>
+			<version>${project.parent.version}</version>
+			<type>apklib</type>
+		</dependency>
+		<dependency>
+			<groupId>com.vzw.messaging.sdk</groupId>
+			<artifactId>vma-sync-lib</artifactId>
+			<version>${project.parent.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>anm-library</groupId>
+			<artifactId>anm-library</artifactId>
+			<version>1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>cmlibrary</groupId>
+			<artifactId>jmmslib</artifactId>
+			<version>1.0.0.3</version>
+		</dependency>
+		<dependency>
+			<groupId>cmlibrary</groupId>
+			<artifactId>spamrep</artifactId>
+			<version>1.0.0.3</version>
+		</dependency>
+		<dependency>
+			<groupId>libNS</groupId>
+			<artifactId>libNS</artifactId>
+			<version>1.0.0.3</version>
+			<type>so</type>
+			<scope>runtime</scope>
+		</dependency>
+	</dependencies>
+	<build>
+		<finalName>${project.artifactId}</finalName>
+		<sourceDirectory>src</sourceDirectory>
+		<plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>add-source</goal>
+						</goals>
+						<configuration>
+							<sources>
+								<source>stub</source>
+							</sources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<!-- the signed apk then needs to be zipaligned and we activate proguard 
+				and we run the manifest update -->
+			<plugin>
+				<groupId>com.jayway.maven.plugins.android.generation2</groupId>
+				<artifactId>android-maven-plugin</artifactId>
+				<version>3.5.0</version>
+				<inherited>true</inherited>
+				<extensions>true</extensions>
+				<configuration>
+					<sign>
+						<debug>false</debug>
+					</sign>
+					<zipalign>
+						<skip>false</skip>
+						<verbose>true</verbose>
+						<inputApk>${project.build.directory}/${project.artifactId}.apk</inputApk>
+						<outputApk>${project.build.directory}/vma-${buildTypeName}-${parent.version}-${buildnumber}.apk
+						</outputApk>
+					</zipalign>
+					<manifest>
+						<debuggable>true</debuggable>
+						<versionCodeAutoIncrement>true</versionCodeAutoIncrement>
+						<versionName>${project.version}-${maven.build.timestamp}-${buildTypeName}-${buildnumber}</versionName>
+					</manifest>
+					<proguard>
+						<skip>${skipproguard}</skip>
+					</proguard>
+				</configuration>
+				<executions>
+					<execution>
+						<id>manifestUpdate</id>
+						<phase>process-resources</phase>
+						<goals>
+							<goal>manifest-update</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>alignApk</id>
+						<phase>package</phase>
+						<goals>
+							<goal>zipalign</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
+
+
+	<profiles>
+		<profile>
+			<id>prod-debug</id>
+			<activation>
+				<property>
+					<name>prod-debug</name>
+					<value>true</value>
+				</property>
+			</activation>
+			<properties>
+				<!-- 0 QA -->
+				<!-- 1 PROD QA -->
+				<!-- 2 PROD RELEASE WITHOUT PROGUARD -->
+				<!-- 3 PROD RELEASE -->
+				<buildtype>1</buildtype>
+				<buildTypeName>prod_debug</buildTypeName>
+				<skipproguard>true</skipproguard>
+				<enablevzapn>true</enablevzapn>
+				<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+			</properties>
+		</profile>
+		<profile>
+			<id>prod</id>
+			<activation>
+				<property>
+					<name>prod</name>
+					<value>true</value>
+				</property>
+			</activation>
+			<properties>
+				<!-- 0 QA -->
+				<!-- 1 PROD QA -->
+				<!-- 2 PROD WITHOUT IMAP LOGS -->
+				<buildtype>2</buildtype>
+				<buildTypeName>prod_proguard</buildTypeName>
+				<skipproguard>false</skipproguard>
+				<enablevzapn>true</enablevzapn>
+				<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+			</properties>
+		</profile>
+		<profile>
+			<id>release</id>
+			<activation>
+				<property>
+					<name>release</name>
+					<value>true</value>
+				</property>
+			</activation>
+			<properties>
+				<buildtype>2</buildtype>
+				<buildTypeName>release_proguard</buildTypeName>
+				<skipproguard>false</skipproguard>
+				<enablevzapn>true</enablevzapn>
+				<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+			</properties>
+		</profile>
+
+		<profile>
+			<id>qa</id>
+			<activation>
+				<property>
+					<name>qa</name>
+					<value>true</value>
+				</property>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<!-- 0 QA -->
+				<!-- 1 PROD QA -->
+				<!-- 2 PROD RELEASE WITHOUT PROGUARD -->
+				<!-- 3 PROD RELEASE -->
+				<buildtype>0</buildtype>
+				<buildTypeName>qa</buildTypeName>
+				<skipproguard>true</skipproguard>
+				<enablevzapn>true</enablevzapn>
+				<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+			</properties>
+		</profile>
+		<profile>
+			<id>sign</id>
+			<properties>
+				<maven.build.timestamp.format>MM-dd-yyyy</maven.build.timestamp.format>
+				<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+			</properties>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-dependency-plugin</artifactId>
+						<version>2.6</version>
+						<executions>
+							<execution>
+								<id>unpack-keystore</id>
+								<phase>process-resources</phase>
+								<goals>
+									<goal>unpack</goal>
+								</goals>
+								<configuration>
+									<artifactItems>
+										<artifactItem>
+											<groupId>com.strumsoft.android</groupId>
+											<artifactId>keystore</artifactId>
+											<version>${project.parent.version}</version>
+											<type>jar</type>
+											<overWrite>true</overWrite>
+											<outputDirectory>${project.build.directory}/keystore</outputDirectory>
+											<includes>**/*.keystore</includes>
+											<excludes>**/*README*</excludes>
+										</artifactItem>
+									</artifactItems>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>com.google.code.maven-replacer-plugin</groupId>
+						<artifactId>replacer</artifactId>
+						<version>1.5.2</version>
+						<executions>
+							<execution>
+								<phase>process-resources</phase>
+								<goals>
+									<goal>replace</goal>
+								</goals>
+							</execution>
+						</executions>
+						<configuration>
+							<file>${basedir}/AndroidManifest.xml</file>
+							<replacements>
+								<replacement>
+									<token>android:value=\"2\"</token>
+									<value>android:value=\"${buildtype}\"</value>
+								</replacement>
+								<replacement>
+									<token>android:value=\"true\"</token>
+									<value>android:value=\"${enablevzapn}\"</value>
+								</replacement>
+							</replacements>
+						</configuration>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-jarsigner-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>signing</id>
+								<goals>
+									<goal>sign</goal>
+									<goal>verify</goal>
+								</goals>
+								<phase>package</phase>
+								<inherited>true</inherited>
+								<configuration>
+									<removeExistingSignatures>true</removeExistingSignatures>
+									<archiveDirectory />
+									<includes>
+										<include>${project.build.directory}/${project.artifactId}.apk</include>
+									</includes>
+									<!-- <keystore>${project.build.directory}/keystore/strumsoft-inc-key.keystore</keystore> 
+										<alias>vzw</alias> <storepass>!Strums@ft2k8!</storepass> <keypass>@8k2tf@smurt$@</keypass> -->
+									<keystore>${project.build.directory}/keystore/debug.keystore</keystore>
+									<alias>androiddebugkey</alias>
+									<storepass>android</storepass>
+									<keypass>android</keypass>
+
+									<verbose>true</verbose>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+					<!-- <plugin> <groupId>org.codehaus.mojo</groupId> <artifactId>build-helper-maven-plugin</artifactId> 
+						<configuration> <artifacts> <artifact> <file>${project.build.directory}/vma-${buildTypeName}-${parent.version}-${buildnumber}.apk</file> 
+						<type>apk</type> <classifier>signed-aligned</classifier> </artifact> <artifact> 
+						<file>${project.build.directory}/proguard/mapping.txt</file> <type>map</type> 
+						<classifier>release</classifier> </artifact> </artifacts> </configuration> 
+						<executions> <execution> <id>attach-signed-aligned</id> <phase>package</phase> 
+						<goals> <goal>attach-artifact</goal> </goals> </execution> </executions> 
+						</plugin> -->
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+	<properties>
+		<buildtype>0</buildtype>
+		<enablevzapn>true</enablevzapn>
+		<buildTypeName>qa</buildTypeName>
+		<skipproguard>true</skipproguard>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+</project>

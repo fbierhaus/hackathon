@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/conversation_background" >
+
+    <RelativeLayout
+        android:id="@+id/headerLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/headerHeight"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/bg_header1" >
+        
+        <ProgressBar android:id="@+id/sync_progressBar"
+			android:layout_width="25dip" android:layout_height="25dip"
+			android:layout_centerVertical="true"
+			android:layout_alignParentRight="true"
+			android:visibility="gone" android:layout_marginRight="20dp"
+			android:layout_alignWithParentIfMissing="true" />
+		    
+		
+        <com.verizon.mms.ui.ContactImage
+            android:id="@+id/restorecontact"
+            android:layout_width="@dimen/compMsgItemAvatarSize"
+		    android:layout_height="@dimen/compMsgItemAvatarSize"
+			android:layout_alignParentLeft="true"
+			android:layout_centerVertical="true"
+			android:src="@drawable/avatar_blank"
+			android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/headerView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:adjustViewBounds="true"
+            android:paddingLeft="15dip"
+            android:scaleType="fitStart"
+            android:src="@drawable/bg_header1_title" />
+
+        <com.verizon.mms.ui.FromTextView
+            android:id="@+id/contactname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/restorecontact"
+            android:ellipsize="end"
+            android:paddingLeft="7dip"
+            android:textColor="@color/white"
+            android:textSize="20dp"
+            android:visibility="gone" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/bottomButtonlayout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/grey"
+        android:gravity="center"
+        android:paddingTop="5dip" >
+
+        <Button
+            android:id="@+id/rSelectAllButton"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:onClick="onViewClick"
+            android:text="@string/select_all" 
+            style="?textButton"/>
+
+        <Button
+            android:id="@+id/rUnselectAllButton"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:onClick="onViewClick"
+            android:text="@string/unselect_all" 
+            style="?textButton"/>
+
+        <Button
+            android:id="@+id/restoreButton"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:enabled="false"
+            android:onClick="onViewClick"
+            android:text="@string/restore" 
+            style="?textButton"/>
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/messageRestoreList"
+        style="?android:attr/listViewWhiteStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/bottomButtonlayout"
+        android:layout_below="@id/headerLayout"
+        android:layout_marginBottom="@dimen/allAttachmentBorder"
+        android:background="@drawable/conversation_background"
+        android:cacheColorHint="@android:color/transparent"
+        android:divider="@android:color/transparent"
+        android:drawSelectorOnTop="false"
+        android:fadingEdgeLength="16dip"
+        android:scrollbarStyle="insideOverlay"
+        android:stackFromBottom="true" />
+
+</RelativeLayout>

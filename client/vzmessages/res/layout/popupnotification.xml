@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/popup_activity_width"
+    android:layout_height="@dimen/popup_activity_height"
+    android:background="@drawable/popupbg_five"  
+    android:id="@+id/id_main_view">
+
+    <!-- <RelativeLayout
+        android:layout_width="@dimen/popup_activity_width"
+        android:layout_height="@dimen/popup_activity_height"
+        android:background="@drawable/popupbg_five" > -->
+
+        <RelativeLayout
+            android:id="@+id/header"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/popup_activity_header_height" >
+
+            <TextView
+                android:id="@+id/titleText"
+                style="?popUpNotifHeader"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:adjustViewBounds="true"
+                android:paddingLeft="15dip"
+                android:text="header"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/popup_close_btn"
+                android:layout_width="35dp"
+                android:layout_height="30dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:scaleType="centerInside"
+                android:src="@drawable/cross_image" />
+        </RelativeLayout>
+
+        <com.verizon.mms.ui.widget.ScrollViewGallery
+            android:id="@+id/gallery"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/popup_gallery_height"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/header"
+            android:fadingEdge="none"/>
+        
+        <ImageView
+            android:id="@+id/prvMsg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/left_arrow" 
+            android:layout_marginLeft="5px"/>
+
+        <ImageView
+            android:id="@+id/nxtMsg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/right_arrow" 
+            android:layout_marginRight="5px"/>
+    <!-- </RelativeLayout> -->
+    
+    <!-- <ViewStub android:id="@+id/popupitem_stub" android:layout_width="@dimen/popoup_gallery_item_width" 
+        android:layout_height="@dimen/popup_gallery_height" android:layout="@layout/popup_pager_item"
+        android:inflatedId="@+id/pagerItem"/> -->
+</RelativeLayout>

@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/vzm_dialog"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/link_preview_background"
+    android:orientation="vertical" >
+
+    <!-- Header -->
+
+    <LinearLayout
+        android:id="@+id/vzm_dialog_header"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/link_preview_background" >
+
+        <TextView
+            android:id="@+id/vzm_dialog_header_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/message_info"
+            android:textColor="@drawable/text_color_dark_gray"
+            android:textSize="17.784dp"
+            android:textStyle="bold" />
+    </LinearLayout>
+    <!-- Divider Line -->
+
+    <View
+        android:id="@+id/headerseperator"
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="@drawable/message_info_divider" />
+
+    <!-- Dialog Body -->
+
+    <LinearLayout
+        android:id="@+id/vzm_dialog_body"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_below="@id/headerseperator" 
+          >
+        <ScrollView xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/scrollV"
+   				 android:layout_width="wrap_content"  android:layout_height="wrap_content"  >
+			 <LinearLayout
+	            android:id="@+id/vzm_t_c"
+	            android:layout_width="fill_parent"
+	            android:layout_height="wrap_content"
+	            android:orientation="vertical" 
+	            android:paddingBottom="40dp">
+        			<TextView
+			            android:id="@+id/vzm_dialog_text_1"
+			            android:layout_width="wrap_content"
+			            android:layout_height="wrap_content"
+			            android:layout_marginLeft="18.5dp"
+			            android:text="@string/size"
+			            android:textColor="@drawable/text_color_dark_gray"
+			            android:textSize="17.784dp" />
+			</LinearLayout>
+		</ScrollView>
+        <LinearLayout
+            android:id="@+id/vzm_dialog_login"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/rectangle"
+            android:orientation="vertical"
+            android:visibility="gone" >
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dip"
+                android:text="@string/username"
+                android:textColor="@drawable/text_color_dark_gray" />
+
+            <EditText
+                android:id="@+id/vzm_dialog_username"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dip"
+                android:inputType="phone|textNoSuggestions" />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dip"
+                android:text="@string/password"
+                android:textColor="@drawable/text_color_dark_gray" />
+
+            <EditText
+                android:id="@+id/vzm_dialog_password"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dip"
+                android:inputType="textPassword" />
+        </LinearLayout>
+
+        <!-- MDN and Device model Dialog -->
+
+        <LinearLayout
+            android:id="@+id/vzm_dialog_request_mdn_devicename"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/rectangle"
+            android:orientation="vertical"
+            android:visibility="gone" >
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dip"
+                android:text="@string/vma_enter_mdn"
+                android:textColor="@drawable/text_color_dark_gray" />
+
+            <EditText
+                android:id="@+id/vzm_dialog_entermdn"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dip"
+                android:inputType="phone|textNoSuggestions" />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dip"
+                android:text="@string/vma_enter_device_name"
+                android:textColor="@drawable/text_color_dark_gray" />
+
+            <EditText
+                android:id="@+id/vzm_dialog_devicename"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dip"
+                android:inputType="text" />
+        </LinearLayout>
+
+        <!-- Password Dialog -->
+
+        <LinearLayout
+            android:id="@+id/vzm_dialog_passwordBox"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/rectangle"
+            android:orientation="vertical"
+            android:visibility="gone" >
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dip"
+                android:text="@string/enter_pin"
+                android:textColor="@drawable/text_color_dark_gray" />
+
+            <EditText
+                android:id="@+id/vzm_pwd"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dip"
+                android:inputType="textPassword" />
+        </LinearLayout>
+    </LinearLayout>
+    <!-- Divider Line -->
+
+    <View
+        android:id="@+id/footerseperator"
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="@drawable/message_info_divider" />
+
+    <!-- Dialog Footer -->
+
+    <LinearLayout
+        android:id="@+id/vzm_dialog_footer"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/link_preview_background"
+        android:gravity="center" >
+
+        <Button
+            android:id="@+id/vzm_dialog_footer_positive_button"
+            android:textSize="16.67dp"
+            style="@style/TextAppearance.Conv.Body"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/btn_bkgd_message_info"
+            android:text="@string/ok" />
+
+        <Button
+            android:id="@+id/vzm_dialog_footer_negative_button"
+            android:textSize="16.67dp"
+            style="@style/TextAppearance.Conv.Body"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/btn_bkgd_message_info"
+            android:text="@string/cancel"
+            android:visibility="visible" />
+    </LinearLayout>
+
+</LinearLayout>

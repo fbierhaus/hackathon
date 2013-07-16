@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>	   
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    
+  	<string-array name="default_smiley_texts">
+		<item>:-)</item>
+		<item>:-(</item>
+		<item>;-)</item>
+		<item>:-P</item>
+		<item>:-O</item>
+		<item>:-*</item>
+		<item>:O</item>
+		<item>B-)</item>
+		<item>:-$</item>
+		<item>:-!</item>
+		<item>:-@</item>
+		<item>O:-)</item> 
+		<item>:-E</item>
+		<item>:\'(</item>
+		<item>:-#</item>
+		<item>:-D</item>
+		<item>:-S</item>
+		<item>>:)</item>
+		<item>:-|</item>
+		<item>(H)</item> 		
+	</string-array>
+	
+  <string-array name="default_smiley_names">	
+		<item>"Hạnh phúc"</item>
+		<item>"Không vui"</item>
+		<item>"Nháy mắt"</item>
+		<item>"Chọc tức"</item>
+		<item>"Ngạc nhiên"</item>
+		<item>"Hôn"</item>
+		<item>"Kêu la"</item>
+		<item>"Nguội"</item>
+		<item>"Xấu hổ"</item>
+		<item>"Vụng về"</item>
+		<item>"điên"</item>
+		<item>"Thiên thần"</item>
+		<item>"Giận dư"</item>
+		<item>"Khóc"</item>
+		<item>"Bí mật"</item>
+		<item>"Ngây ngất"</item>
+		<item>"Nhầm lẫn"</item>
+		<item>"Ma"</item>
+		<item>"Thất vọng"</item>
+		<item>"Cay"</item>
+  </string-array>
+	
+<string-array name="quick_text_items">	   
+<item>Cái gì đang xảy ra?</item>	   
+<item>Cần gặp nhau?</item>	   
+<item>Kiểm soát điều này!</item>	   
+<item>Anh/chị đang làm gì?</item>	   
+<item>Cần chút nữa gặp nhau</item>	   
+<item>Trên đường đến</item>	   
+<item>Anh/chị thuộc hạng nhất</item>	   
+<item>Gọi tôi</item>	   
+<item>Anh yêu em/ Em yêu anh!</item>	   
+<item>Nhớ anh/chị!</item>	   
+<item>Anh/chị ở đâu?</item>	   
+<item>Chào buổi sáng!</item>	   
+<item>Ngủ ngon</item>	   
+<item>Anh/chị mạnh giỏi?</item>	   
+<item>Cám ơn</item>	   
+</string-array>	   
+	   
+<string-array name="quick_text_positions">	   
+<item>1</item>	   
+<item>2</item>	   
+<item>3</item>	   
+<item>4</item>	   
+<item>5</item>	   
+<item>6</item>	   
+<item>7</item>	   
+<item>8</item>	   
+<item>9</item>	   
+<item>10</item>	   
+<item>11</item>	   
+<item>12</item>	   
+<item>13</item>	   
+<item>14</item>	   
+<item>15</item>	   
+</string-array>	 
+
+</resources>	 

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#FFFFFF" >
+    
+    <RelativeLayout android:id="@+id/header"
+        android:layout_height="@dimen/headerHeight"
+        android:layout_width="fill_parent"
+        android:background="@drawable/bottom_bar">
+
+		<ImageView
+            android:id="@+id/addressicon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+			android:layout_alignParentLeft="true"
+			android:layout_marginLeft="14dip"
+			android:contentDescription="@string/desc"
+			android:src="@drawable/address_book" />
+		
+        <TextView android:id="@+id/headertxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#FFFFFF"
+            android:text="@string/sharedcontacttitle"
+            android:layout_toRightOf="@id/addressicon"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="12dip"
+            android:textSize="20dp"/>
+        
+    </RelativeLayout>
+    
+    <ListView android:id="@+id/contactinfolist"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layoutAnimation="@anim/layout_gallery_animation_row"
+		style="?android:attr/listViewWhiteStyle"
+		android:cacheColorHint="@android:color/white"/>
+    
+
+</LinearLayout>

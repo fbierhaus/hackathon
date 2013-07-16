@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent" android:layout_height="@dimen/convListItemHeight"
+	android:id="@+id/addressbookLL"
+	android:orientation="horizontal"
+	android:background="@drawable/conversation_item_background_unread"
+	>
+
+	<ImageView android:id="@+id/photo" android:layout_width="@dimen/convListItemAvatarSize"
+		android:layout_height="@dimen/quickContactListItemAvatarSize"
+		android:scaleType="centerCrop"
+		android:layout_marginTop="10.66dp"
+		android:visibility="visible"
+		android:src="@drawable/avatar_blank"
+		android:layout_marginLeft="10dp"
+		/>
+	
+	<LinearLayout android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:orientation="vertical"
+		android:layout_gravity="center_vertical"
+		android:layout_marginLeft="10dp">
+		<com.verizon.mms.ui.widget.JellyBeanSpanFixTextView android:text="TextView" 
+		    style="?recipContItemName"
+			android:textColor="#333333"
+			android:ellipsize="end"
+			android:singleLine="true"
+			android:id="@+id/contactname" android:layout_width="wrap_content"
+			android:layout_height="wrap_content"/>
+		<com.verizon.mms.ui.widget.JellyBeanSpanFixTextView android:text="TextView" style="?recipContItemNumber"
+			android:ellipsize="end"
+			android:textColor="#515151"
+			android:singleLine="true"
+			android:layout_marginTop="1dip"
+			android:layout_marginBottom="5dip"
+			android:id="@+id/contactkey" android:layout_width="wrap_content"
+			android:layout_height="wrap_content"/>
+	</LinearLayout>
+</LinearLayout>

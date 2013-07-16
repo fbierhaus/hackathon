@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+ * Copyright (C) 2008 Esmertec AG.
+ * Copyright (C) 2008 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+  -->
+
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <string-array name="default_smiley_texts">
+		<item>:-)</item>
+		<item>:-(</item>
+		<item>;-)</item>
+		<item>:-P</item>
+		<item>:-O</item>
+		<item>:-*</item>
+		<item>:O</item>
+		<item>B-)</item>
+		<item>:-$</item>
+		<item>:-!</item>
+		<item>:-@</item>
+		<item>O:-)</item> 
+		<item>:-E</item>
+		<item>:\'(</item>
+		<item>:-#</item>
+		<item>:-D</item>
+		<item>:-S</item>
+		<item>>:)</item>
+		<item>:-|</item>
+		<item>(H)</item> 		
+	</string-array>
+	
+  	<string-array name="default_smiley_names">
+    	<item>"행복해"</item>
+    	<item>"슬퍼요"</item>
+    	<item>"윙크"</item>
+    	<item>"메롱"</item>
+    	<item>"헉!"</item>
+    	<item>"키스"</item>
+    	<item>"아악"</item>
+    	<item>"멋지다"</item>
+    	<item>"창피하다"</item>
+    	<item>"꼴 사나운"</item>
+    	<item>"성난"</item>
+    	<item>"천사"</item>
+	    <item>"맹렬한"</item>
+    	<item>"눈물을 흘리는"</item>
+    	<item>"비밀"</item>
+    	<item>"웃음"</item>
+    	<item>"혼란스러운"</item>
+    	<item>"악마"</item>
+    	<item>"실망한"</item>
+    	<item>"뜨거운"</item>
+  	</string-array>
+  
+</resources>

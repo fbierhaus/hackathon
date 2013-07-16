@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/popupbg" >
+
+    <ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:background="#d7d7d7"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:background="#d7d7d7"
+            android:minHeight="@dimen/app_alligned_minwidth"
+            android:orientation="vertical" >
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/headerHeight"
+                android:background="@drawable/bg_header1" >
+
+                <ImageView
+                    android:id="@+id/header"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:gravity="center"
+                    android:src="@drawable/auto_forward_header"/>
+				
+                <com.verizon.mms.ui.widget.ImageViewButton
+                    android:id="@+id/refreshView"
+                    android:layout_width="30dip"
+                    android:layout_height="30dip"
+                    android:src="@drawable/refresh"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:paddingRight="8dp"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp" >
+
+                <TextView
+                    android:id="@+id/titleText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginLeft="7dp"
+                    android:text="@string/vma_auto_forward"
+                    android:textAppearance="@style/TextAppearance.ConvList.Dialog"
+                    android:textColor="@color/black" />
+               
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/enterDesc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="7dp"
+                android:textAppearance="@style/TextAppearance.ConvList.Dialog"
+                android:textColor="@color/black" />
+
+            <LinearLayout
+                android:id="@+id/forwardedEmails"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:background="#ffffff"
+                android:orientation="vertical"
+                android:layout_gravity="center" />
+            
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="7dp"
+                android:id="@+id/dateDesc"
+                android:textAppearance="@style/TextAppearance.ConvList.Dialog"
+                android:textColor="@color/black" />
+
+            <DatePicker
+                android:id="@+id/datePicker"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="7dp" />
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/convListItemHeight"
+                android:layout_marginTop="10dp" >
+
+                <Button
+                    android:id="@+id/negative_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/convListItemHeight"
+                    android:layout_alignParentLeft="true"
+                    android:background="@drawable/btn_bkgd_message_info"
+                    android:layout_alignTop="@+id/positive_button"
+                    android:text="@string/cancel"
+                    android:textAppearance="@style/TextAppearance.ConvList.Dialog" 
+                    android:textColor="@color/black"/>
+                    
+                <Button
+                    android:id="@+id/positive_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/convListItemHeight"
+                    android:layout_alignParentRight="true"
+                    android:layout_toRightOf="@+id/negative_button"
+                    android:background="@drawable/btn_bkgd_message_info"
+                    android:paddingLeft="10dp"
+                    android:text="@string/save"
+                    android:textAppearance="@style/TextAppearance.ConvList.Dialog"
+                    android:textColor="@color/black" />
+            </RelativeLayout>
+        </LinearLayout>
+        </ScrollView>
+
+</RelativeLayout>

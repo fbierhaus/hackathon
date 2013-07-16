@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/msg_list_item"
+	android:layout_width="fill_parent"
+	android:layout_height="wrap_content"
+	android:paddingLeft="@dimen/messageItemLeftRightBorder"
+	android:paddingRight="@dimen/messageItemLeftRightBorder" >
+
+    <!-- Bug 1142 UI Issue with Motorola 8" tablets 
+    	 added a dummy view to fill the parent as the fill_parent of the root view (msg_list_item)
+    	 doesnt work on Motorola 8 Android 4.0.3 -->
+	<View
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content" />
+
+	<!-- Message timestamp -->
+
+	<TextView
+		android:id="@+id/timestamp"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="@dimen/interMessageMargin"
+		android:layout_alignParentTop="true"
+		android:layout_centerHorizontal="true"
+		android:background="@android:color/transparent"
+		android:singleLine="true"
+		android:ellipsize="none"
+		android:clickable="false"
+		android:longClickable="false"
+		android:textAppearance="@style/TextAppearance.Conv.Sender"
+		style="?msgItemTime" />
+
+	<!-- Group mode change indicator -->
+
+	<TextView
+		android:id="@+id/groupModeChange"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="@dimen/interMessageMargin"
+		android:layout_below="@id/timestamp"
+		android:layout_centerHorizontal="true"
+		android:background="@android:color/transparent"
+		android:singleLine="true"
+		android:ellipsize="none"
+		android:clickable="false"
+		android:longClickable="false"
+		android:textAppearance="@style/TextAppearance.Conv.Sender"
+		style="?msgItemTime" />
+
+	<!-- Message container and error indicator -->
+
+	<RelativeLayout
+		android:id="@+id/message"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_below="@id/groupModeChange"
+		android:layout_alignWithParentIfMissing="true"
+		android:layout_marginTop="@dimen/interMessageMargin" >
+
+		<!-- Message bubble -->
+
+		<RelativeLayout
+			android:id="@+id/bubble"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_toLeftOf="@+id/error"
+			>
+
+			<!-- Applies highlighted background for messages in search result -->
+
+			<RelativeLayout
+				android:id="@+id/highlightBackground"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content">
+	
+				<!-- Message content is added to frame programmatically -->
+	
+				<FrameLayout
+					android:id="@+id/content"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:background="@android:color/transparent"
+					android:paddingLeft="@dimen/messageLeftRightBorder"
+					android:paddingRight="@dimen/messageLeftRightBorder"
+					android:paddingBottom="@dimen/messageBottomBorder"
+					android:paddingTop="@dimen/messageTopBorder" >
+	
+				</FrameLayout>
+	
+				<!-- Sender name appears in incoming group messages -->
+	
+				<TextView
+					android:id="@+id/sender"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_below="@id/content"
+					android:layout_alignRight="@id/content"
+					android:layout_marginTop="@dimen/senderTopBorderWithText"
+					android:paddingLeft="@dimen/messageLeftRightBorder"
+					android:paddingRight="@dimen/messageLeftRightBorder"
+					android:paddingBottom="@dimen/messageBottomBorder"
+					android:gravity="top"
+					android:ellipsize="end"
+					android:maxLines="1"
+					android:singleLine="true"
+					style="?msgItemSender"
+					android:textAppearance="@style/TextAppearance.Conv.Sender"
+					/>
+	
+				<!-- Status may appear in outgoing messages -->
+	
+				<TextView
+					android:id="@+id/status"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_below="@id/content"
+					android:layout_alignRight="@id/content"
+					android:padding="@dimen/statusBorder"
+					android:ellipsize="end"
+					android:maxLines="1"
+					android:singleLine="true"
+					style="?msgItemSender"
+					android:background="@drawable/message_status_background"
+					android:textAppearance="@style/TextAppearance.Conv.Status"
+					/>
+				
+			</RelativeLayout>
+
+		</RelativeLayout>
+
+		<ImageView
+			android:id="@+id/error"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:paddingLeft="@dimen/messageItemLeftRightBorder"
+			android:paddingTop="10dp"
+			android:paddingBottom="10dp"
+			android:layout_alignParentRight="true"
+			android:layout_centerVertical="true"
+			android:src="@drawable/ico_error"
+			/>
+
+	</RelativeLayout>
+
+</RelativeLayout>
