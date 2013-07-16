@@ -2,7 +2,6 @@
 <resources>
 
     <string name="app_name">TV Night</string>
-    <string name="action_settings">Settings</string>
-    <string name="hello_world">Hello world!</string>
+    <string name="tv_header">TV Shows</string>
 
 </resources>
