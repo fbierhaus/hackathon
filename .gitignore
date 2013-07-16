@@ -9,6 +9,6 @@ server/build
 *.war
 *.ear
 .metadata/
-**/.classpath
-**/.project
+#**/.classpath
+#**/.project
 server/WebContent/WEB-INF/classes
