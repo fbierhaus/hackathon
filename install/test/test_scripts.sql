@@ -1,0 +1,41 @@
+select group_event_id as id, show_id as showId, channel_id as channelId, show_time as showTime, master_mdn as masterMdn, create_time as createTime
+from GROUP_EVENT
+where show_time between CURRENT_TIMESTAMP AND {fn TIMESTAMPADD(SQL_TSI_MINUTE, 15, CURRENT_TIMESTAMP)};
+
+select mdn from group_member
+where group_event_id = 1 and MEMBER_STATUS = 'ACCEPTED';
+
+
+select * from group_event;
+
+-- add an group event
+INSERT INTO GROUP_EVENT (
+	GROUP_EVENT_ID, 
+	SHOW_ID,
+	CHANNEL_ID,
+	SHOW_TIME,
+	MASTER_MDN
+) VALUES (
+	NEXT VALUE FOR GROUP_EVENT_PK_SEQ,
+	'show1',
+	'channel1',
+	{fn TIMESTAMPADD(SQL_TSI_MINUTE, 10, CURRENT_TIMESTAMP)},
+	'9250000001'
+);
+
+
+select * from group_member;
+
+-- add group members
+INSERT INTO GROUP_MEMBER (GROUP_EVENT_ID, MDN, MEMBER_STATUS)
+VALUES (1, '9250000001', 'MASTER');
+INSERT INTO GROUP_MEMBER (GROUP_EVENT_ID, MDN, MEMBER_STATUS)
+VALUES (1, '9250001001', 'INVITED');
+INSERT INTO GROUP_MEMBER (GROUP_EVENT_ID, MDN, MEMBER_STATUS)
+VALUES (1, '9250001002', 'ACCEPTED');
+INSERT INTO GROUP_MEMBER (GROUP_EVENT_ID, MDN, MEMBER_STATUS)
+VALUES (1, '9250001003', 'ACCEPTED');
+INSERT INTO GROUP_MEMBER (GROUP_EVENT_ID, MDN, MEMBER_STATUS)
+VALUES (1, '9250001004', 'DECLINED');
+	
+	
