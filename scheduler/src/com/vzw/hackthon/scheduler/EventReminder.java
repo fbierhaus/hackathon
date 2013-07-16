@@ -121,6 +121,8 @@ public class EventReminder implements Runnable {
 					
 					String msg = buildReminderString(ge);
 					
+					// send to the client
+					//MessagingAPIHandler.sendSMS(mdnList, msg);
 				}
 			}
 		}
