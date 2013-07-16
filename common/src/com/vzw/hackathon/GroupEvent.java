@@ -18,6 +18,7 @@ public class GroupEvent {
 	}
 
 
+
 	public int getId() {
 		return id;
 	}
@@ -87,6 +88,8 @@ public class GroupEvent {
 		this.showName = showName;
 	}
 
+	
+	
 	
 	
 }

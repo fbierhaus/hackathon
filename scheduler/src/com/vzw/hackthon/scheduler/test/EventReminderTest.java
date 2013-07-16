@@ -11,6 +11,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.vzw.hackathon.GroupEvent;
+import com.vzw.hackathon.HackathonUtil;
 import com.vzw.hackthon.scheduler.EventReminder;
 
 public class EventReminderTest {
@@ -39,6 +40,13 @@ public class EventReminderTest {
 		List<GroupEvent> geList = eventReminder.getGroupEventsForReminder();
 		
 		System.out.println("done " + geList);
+	}
+	
+	@Test
+	public void testBuildReminderString() {
+		GroupEvent ge = new HackathonUtil().loadGroupEventFromDb(1);
+		String s = eventReminder.buildReminderString(ge);
+		System.out.println(s);
 	}
 
 }

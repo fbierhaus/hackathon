@@ -27,7 +27,8 @@ public class EventReminder implements Runnable {
 	
 	
 	private static final String SEL_EVENTS_FOR_REMINDER = 
-			"select group_event_id as id, show_id as showId, channel_id as channelId, show_time as showTime, master_mdn as masterMdn, create_time as createTime"
+			"select group_event_id as id, show_id as showId, channel_id as channelId, show_time as showTime, "
+			+ " show_name as showName, master_mdn as masterMdn, create_time as createTime"
 			+ " from GROUP_EVENT"
 			+ " where show_time between CURRENT_TIMESTAMP AND {fn TIMESTAMPADD(SQL_TSI_MINUTE, ?, CURRENT_TIMESTAMP)}";
 	
@@ -131,7 +132,7 @@ public class EventReminder implements Runnable {
 	 * @return
 	 */
 	public String buildReminderString(GroupEvent ge) {
-		return MessageFormat.format("MNREMINDER::{0}::{1}::{2}", 
+		return MessageFormat.format("MNREMINDER##{0}##{1,time,yyyy-MM-dd HH:mm}##{2}", 
 				ge.getChannelId(), ge.getShowTime(), ge.getShowName());
 	}
 
