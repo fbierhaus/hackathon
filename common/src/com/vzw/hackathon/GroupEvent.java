@@ -88,5 +88,12 @@ public class GroupEvent {
 	}
 
 	
-	
+	public String toString(){
+		StringBuilder sb = new StringBuilder();
+		
+		sb.append("id:").append(getId()).append(",showId:").append(getShowId()).append(",channelId:").append(getChannelId()).append(",showTime:")
+		  .append(getShowTime()).append(",showName:").append(getShowName()).append(",createTime:").append(getCreateTime()).append(",masterMdn:").append(getMasterMdn());
+		
+		return sb.toString();
+	}
 }
