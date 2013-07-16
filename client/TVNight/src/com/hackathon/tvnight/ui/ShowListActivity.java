@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -100,6 +101,16 @@ public class ShowListActivity extends Activity {
 			ShowViewHolder myViewData = (ShowViewHolder) convertView.getTag();
 			
 			myViewData.title.setText(show.getName());
+			
+			convertView.setOnClickListener(new View.OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					Intent i = new Intent(ShowListActivity.this, ShowDescActivity.class);
+//					i.putExtra(name, value);
+					startActivity(i);
+				}
+			});
 			
 			return convertView;
 		}
