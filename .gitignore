@@ -1,6 +1,14 @@
+*~
 *.class
-
+#.project
+#.classpath
+.settings
+server/build
 # Package Files #
-*.jar
+#*.jar
 *.war
 *.ear
+.metadata/
+**/.classpath
+**/.project
+server/WebContent/WEB-INF/classes
