@@ -3,6 +3,8 @@ package com.hackathon.tvnight.model;
 public class TVShow {
 
 	private String name;
+	private String imageUrl;
+	private String episodeTitle;
 	
 	public TVShow(String name) {
 		this.name = name;
