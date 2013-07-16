@@ -1,5 +1,6 @@
 package com.vzw.hackthon.scheduler;
 
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executors;
@@ -117,10 +118,21 @@ public class EventReminder implements Runnable {
 				List<String> mdnList = getMemberMdnForReminder(ge.getId());
 				if (!CollectionUtils.isEmpty(mdnList)) {
 					
+					String msg = buildReminderString(ge);
 					
 				}
 			}
 		}
+	}
+	
+	/**
+	 * 
+	 * @param ge
+	 * @return
+	 */
+	public String buildReminderString(GroupEvent ge) {
+		return MessageFormat.format("MNREMINDER::{0}::{1}::{2}", 
+				ge.getChannelId(), ge.getShowTime(), ge.getShowName());
 	}
 
 	@Override
