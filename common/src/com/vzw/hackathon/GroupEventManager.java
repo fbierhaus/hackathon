@@ -6,8 +6,8 @@ import com.vzw.util.db.DBManager;
 import com.vzw.util.db.DBPool;
 import com.vzw.util.db.DBUtil;
 
-public class HackathonUtil {
-	private static final Logger	logger = Logger.getLogger(HackathonUtil.class);
+public class GroupEventManager {
+	private static final Logger	logger = Logger.getLogger(GroupEventManager.class);
 	private static final DBPool dbPool = DBManager.getDBPool();
 	
 	private static final String SEL_GROUP_EVENT = 
@@ -32,4 +32,22 @@ public class HackathonUtil {
 		return ge;
 	}
 
+	
+
+	/**
+	 * 
+	 */
+	public void schedulePlay() {
+		schedulePlay("");
+	}
+	
+	/**
+	 * schedule tuning a show
+	 * @param mdn
+	 * 
+	 */
+	public void schedulePlay(String mdn) {
+		
+	}
+		
 }

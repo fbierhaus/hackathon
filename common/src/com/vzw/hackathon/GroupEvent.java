@@ -88,21 +88,5 @@ public class GroupEvent {
 		this.showName = showName;
 	}
 
-	/**
-	 * 
-	 */
-	public void schedulePlay() {
-		schedulePlay(masterMdn);
-	}
-	
-	/**
-	 * schedule tuning a show
-	 * @param mdn
-	 * 
-	 */
-	public void schedulePlay(String mdn) {
-		
-	}
-	
 	
 }
