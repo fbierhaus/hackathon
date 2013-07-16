@@ -13,6 +13,11 @@
     <url-pattern>/events/*</url-pattern>
   </servlet-mapping>
   
+   <servlet-mapping>
+    <servlet-name>RestServlet</servlet-name>
+    <url-pattern>/groupEvents/*</url-pattern>
+  </servlet-mapping> 
+  
   <servlet-mapping>
     <servlet-name>RestServlet</servlet-name>
     <url-pattern>/groups/*</url-pattern>

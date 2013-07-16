@@ -1,7 +1,7 @@
 *~
 *.class
-#.project
-#.classpath
+.project
+.classpath
 .settings
 server/build
 # Package Files #
@@ -308,3 +308,5 @@ server/WebContent/WEB-INF/classes
 /client/vzmessages/gen/com/verizon/messaging/vzmsgs/Manifest.java
 /client/vzmessages/gen/com/verizon/messaging/vzmsgs/R.java
 /client/vzmessages/gen/com/verizon/vma/sync/lib/R.java
+Servers/
+RemoteSystemsTempFiles/

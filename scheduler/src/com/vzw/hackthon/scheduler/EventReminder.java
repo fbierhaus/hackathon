@@ -1,8 +1,7 @@
 package com.vzw.hackthon.scheduler;
 
-import java.sql.Connection;
+import java.text.MessageFormat;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -28,7 +27,8 @@ public class EventReminder implements Runnable {
 	
 	
 	private static final String SEL_EVENTS_FOR_REMINDER = 
-			"select group_event_id as id, show_id as showId, channel_id as channelId, show_time as showTime, master_mdn as masterMdn, create_time as createTime"
+			"select group_event_id as id, show_id as showId, channel_id as channelId, show_time as showTime, "
+			+ " show_name as showName, master_mdn as masterMdn, create_time as createTime"
 			+ " from GROUP_EVENT"
 			+ " where show_time between CURRENT_TIMESTAMP AND {fn TIMESTAMPADD(SQL_TSI_MINUTE, ?, CURRENT_TIMESTAMP)}";
 	
@@ -107,6 +107,36 @@ public class EventReminder implements Runnable {
 		return mdnList;	
 	}
 	
+	/**
+	 * 
+	 */
+	public void sendReminders() {
+		
+		List<GroupEvent> geList = getGroupEventsForReminder();
+		
+		if (!CollectionUtils.isEmpty(geList)) {
+			for (GroupEvent ge : geList) {
+				List<String> mdnList = getMemberMdnForReminder(ge.getId());
+				if (!CollectionUtils.isEmpty(mdnList)) {
+					
+					String msg = buildReminderString(ge);
+					
+					// send to the client
+					//MessagingAPIHandler.sendSMS(mdnList, msg);
+				}
+			}
+		}
+	}
+	
+	/**
+	 * 
+	 * @param ge
+	 * @return
+	 */
+	public String buildReminderString(GroupEvent ge) {
+		return MessageFormat.format("MNREMINDER##{0}##{1,time,yyyy-MM-dd HH:mm}##{2}", 
+				ge.getChannelId(), ge.getShowTime(), ge.getShowName());
+	}
 
 	@Override
 	public void run() {

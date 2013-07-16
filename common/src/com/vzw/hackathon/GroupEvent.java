@@ -8,6 +8,7 @@ public class GroupEvent {
 	private String showId = null;
 	private String channelId = null;
 	private Date showTime = null;
+	private String showName = null;
 	private Date createTime = null;
 	private String masterMdn = null;
 	
@@ -15,6 +16,7 @@ public class GroupEvent {
 	public GroupEvent() {
 		// TODO Auto-generated constructor stub
 	}
+
 
 
 	public int getId() {
@@ -76,6 +78,31 @@ public class GroupEvent {
 		this.masterMdn = masterMdn;
 	}
 
+
+	public String getShowName() {
+		return showName;
+	}
+
+
+	public void setShowName(String showName) {
+		this.showName = showName;
+	}
+
+	/**
+	 * 
+	 */
+	public void schedulePlay() {
+		schedulePlay(masterMdn);
+	}
+	
+	/**
+	 * schedule tuning a show
+	 * @param mdn
+	 * 
+	 */
+	public void schedulePlay(String mdn) {
+		
+	}
 	
 	
 }
