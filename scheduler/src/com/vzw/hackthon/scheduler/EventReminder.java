@@ -1,8 +1,6 @@
 package com.vzw.hackthon.scheduler;
 
-import java.sql.Connection;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -107,6 +105,23 @@ public class EventReminder implements Runnable {
 		return mdnList;	
 	}
 	
+	/**
+	 * 
+	 */
+	public void sendReminders() {
+		
+		List<GroupEvent> geList = getGroupEventsForReminder();
+		
+		if (!CollectionUtils.isEmpty(geList)) {
+			for (GroupEvent ge : geList) {
+				List<String> mdnList = getMemberMdnForReminder(ge.getId());
+				if (!CollectionUtils.isEmpty(mdnList)) {
+					
+					
+				}
+			}
+		}
+	}
 
 	@Override
 	public void run() {

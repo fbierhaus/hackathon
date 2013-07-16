@@ -13,3 +13,5 @@ server/build
 #**/.project
 server/WebContent/WEB-INF/classes
 db/
+Servers/
+RemoteSystemsTempFiles/
