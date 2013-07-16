@@ -8,6 +8,7 @@ public class GroupEvent {
 	private String showId = null;
 	private String channelId = null;
 	private Date showTime = null;
+	private String showName = null;
 	private Date createTime = null;
 	private String masterMdn = null;
 	
@@ -74,6 +75,16 @@ public class GroupEvent {
 
 	public void setMasterMdn(String masterMdn) {
 		this.masterMdn = masterMdn;
+	}
+
+
+	public String getShowName() {
+		return showName;
+	}
+
+
+	public void setShowName(String showName) {
+		this.showName = showName;
 	}
 
 	
