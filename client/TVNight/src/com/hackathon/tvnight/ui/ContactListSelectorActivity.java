@@ -78,7 +78,7 @@ public class ContactListSelectorActivity extends Activity implements OnClickList
 							String phoneNumber = phones
 									.getString(phones
 											.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER)).replace("(", "")
-											.replaceAll("-", "").replace(")", "");
+											.replaceAll("-", "").replace(")", "").replaceAll(" ", "");
 							int itype = phones
 									.getInt(phones
 											.getColumnIndex(ContactsContract.CommonDataKinds.Phone.TYPE));
