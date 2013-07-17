@@ -2,6 +2,17 @@ select group_event_id as id, show_id as showId, channel_id as channelId, show_ti
 from GROUP_EVENT
 where show_time between CURRENT_TIMESTAMP AND {fn TIMESTAMPADD(SQL_TSI_MINUTE, 15, CURRENT_TIMESTAMP)};
 
+
+
+select group_event_id as id, show_id as showId, channel_id as channelId, show_time as showTime, 
+show_name as showName, master_mdn as masterMdn, create_time as createTime
+from GROUP_EVENT
+where reminder_sent = 0 and
+show_time between CURRENT_TIMESTAMP AND {fn TIMESTAMPADD(SQL_TSI_MINUTE, 10, CURRENT_TIMESTAMP)};
+
+
+
+
 select mdn from group_member
 where group_event_id = 1 and MEMBER_STATUS = 'ACCEPTED';
 
@@ -77,6 +88,13 @@ where u.mdn = g.mdn and g.member_status = 'MASTER' or g.member_status = 'ACCEPTE
 order by g.GROUP_EVENT_ID, g.mdn;
 
 
+
+select mdn, channel_id as channelId, name from madhack.users
+where mdn = '9250000001';
+
+update group_event
+set show_time = TIMESTAMP('20130717135803');
+
 --------------------------------------------------------
 -- 2013-07-17
 
@@ -120,7 +138,6 @@ CREATE TABLE FLING (
 	CREATE_TIME TIMESTAMP DEFAULT CURRENT TIMESTAMP NOT NULL
 );
 
-CREATE SEQUENCE FLING_PK_SEQ START WITH 1 MAXVALUE 100000000;
 
 -------------------------------------------------
 -- hud 2013-07-17 2
@@ -155,7 +172,6 @@ VALUES ('9250000003', 'Marry Smith', '003##10001');
 
 INSERT INTO USERS (MDN, "NAME", CHANNEL_ID)
 VALUES ('9250000004', 'Alice Lee', '004##10001');
-
 
 
 
