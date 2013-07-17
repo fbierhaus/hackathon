@@ -42,11 +42,8 @@ public class GroupEvent extends RestController {
 			
 			
 			// save to db both groupevent and group_member
-			GroupEventManager gem = new GroupEventManager();
+			GroupEventManager gem = GroupEventManager.getInstance();
 			gem.createGroupEvent(ge);
-			
-			// call schedule GroupEventManager.schedulePlay(ge)
-			gem.schedulePlay(ge.getMasterMdn(),ge);
 			
 		} catch (Exception e){
 			logger.error("Error parsing JSON", e);
@@ -73,7 +70,7 @@ public class GroupEvent extends RestController {
 		logger.debug("++++++++++ RSVP mdn:" + mdn + " status: " + status );
 		
 		
-		GroupEventManager gem = new GroupEventManager();
+		GroupEventManager gem = GroupEventManager.getInstance();
 		
 		// update db to set status to accepted/delcined (mdn, groupeventid, status)
 		gem.updateMemberStatus(id, mdn, status);
@@ -85,7 +82,7 @@ public class GroupEvent extends RestController {
 	public com.vzw.hackathon.GroupEvent show() {
 		int id = Integer.parseInt(this.getId());
 		
-		GroupEventManager gem = new GroupEventManager();
+		GroupEventManager gem = GroupEventManager.getInstance();
 		com.vzw.hackathon.GroupEvent ge = gem.loadGroupEventFromDb(id);
 		
 		return ge;
