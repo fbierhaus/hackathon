@@ -1,7 +1,7 @@
 package com.vzw.hackathon.apihandler;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -19,7 +19,19 @@ public class VZWAPIHandler {
 
 	private static final Logger logger = Logger.getLogger(VZWAPIHandler.class);
 	
-	public static boolean sendSMS(String from, ArrayList<String> toList, String message) {
+	private static HttpClientUtil.Client	hClient = null;
+	
+	static {
+		HttpClientProperties props = HttpClientProperties.getInstance();
+		hClient = HttpClientUtil.initClient(props, "", "http://www.google.com");
+
+	}	
+	
+	public static boolean sendSMS(List<String> toList, String message) {
+		return sendSMS("650066007047", toList, message);
+	}
+	
+	public static boolean sendSMS(String from, List<String> toList, String message) {
 		
 		logger.info("sendSMS - from=" + from + ", toList=" + toList + ", message=" + message);
 		
@@ -32,15 +44,19 @@ public class VZWAPIHandler {
 		return success;
 	}
 	
+	public static boolean sendSMS(String to, String message) {
+		return sendSMS("650066007047", to, message);
+	}
+	
 	public static boolean sendSMS(String from, String to, String message) {
 		
 		logger.info("sendSMS - from=" + from + ", to=" + to + ", message=" + message);
 		
 		boolean success = false;
 
-		HttpClientProperties props = null;
-		HttpClientUtil.Client hClient = null;
-		props = HttpClientProperties.getInstance();
+		//HttpClientProperties props = null;
+		//HttpClientUtil.Client hClient = null;
+		//props = HttpClientProperties.getInstance();
 
 		String res;
         try {
@@ -48,7 +64,7 @@ public class VZWAPIHandler {
         	String url = "http://comcastmobilityteam.api.mashery.com/message/sms";
         	
 	        // initialize http client
-	        hClient = HttpClientUtil.initClient(props, "", url);
+	        //hClient = HttpClientUtil.initClient(props, "", url);
 
 	        HttpPost post = new HttpPost(url);
 	        

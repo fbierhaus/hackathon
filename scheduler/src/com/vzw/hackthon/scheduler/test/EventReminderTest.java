@@ -44,7 +44,7 @@ public class EventReminderTest {
 	
 	@Test
 	public void testBuildReminderString() {
-		GroupEvent ge = new GroupEventManager().loadGroupEventFromDb(1);
+		GroupEvent ge = GroupEventManager.getInstance().loadGroupEventFromDb(1);
 		String s = eventReminder.buildReminderString(ge);
 		System.out.println(s);
 	}

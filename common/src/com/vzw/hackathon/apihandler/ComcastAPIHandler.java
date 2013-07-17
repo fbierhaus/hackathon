@@ -19,6 +19,14 @@ public class ComcastAPIHandler {
 
 	private static final Logger logger = Logger.getLogger(ComcastAPIHandler.class);
 	
+	private static HttpClientUtil.Client	hClient = null;
+	
+	static {
+		HttpClientProperties props = HttpClientProperties.getInstance();
+		hClient = HttpClientUtil.initClient(props, "", "http://www.google.com");
+
+	}
+	
 	public static boolean tuneChannel(ArrayList<String> deviceIdList, String channelId) {
 		
 		logger.info("tuneChannel - deviceIdList=" + deviceIdList + ", channelId=" + channelId);
@@ -38,9 +46,9 @@ public class ComcastAPIHandler {
 		
 		boolean success = false;
 
-		HttpClientProperties props = null;
-		HttpClientUtil.Client hClient = null;
-		props = HttpClientProperties.getInstance();
+		//HttpClientProperties props = null;
+		//HttpClientUtil.Client hClient = null;
+		//props = HttpClientProperties.getInstance();
 
 		String res;
         try {
@@ -48,7 +56,7 @@ public class ComcastAPIHandler {
         	String url = "http://comcastmobilityteam.api.mashery.com/message/sms";
         	
 	        // initialize http client
-	        hClient = HttpClientUtil.initClient(props, "", url);
+	        //hClient = HttpClientUtil.initClient(props, "", url);
 
 	        HttpPost post = new HttpPost(url);
 	        
@@ -89,9 +97,9 @@ public class ComcastAPIHandler {
 		
 		String deviceId = null;
 
-		HttpClientProperties props = null;
-		HttpClientUtil.Client hClient = null;
-		props = HttpClientProperties.getInstance();
+		//HttpClientProperties props = null;
+		//HttpClientUtil.Client hClient = null;
+		//props = HttpClientProperties.getInstance();
 
 		String res;
         try {
@@ -99,7 +107,7 @@ public class ComcastAPIHandler {
         	String url = "http://comcastmobilityteam.api.mashery.com/message/sms";
         	
 	        // initialize http client
-	        hClient = HttpClientUtil.initClient(props, "", url);
+	        //hClient = HttpClientUtil.initClient(props, "", url);
 
 	        HttpPost post = new HttpPost(url);
 	        
@@ -140,9 +148,9 @@ public class ComcastAPIHandler {
 		
 		String JID = null;
 
-		HttpClientProperties props = null;
-		HttpClientUtil.Client hClient = null;
-		props = HttpClientProperties.getInstance();
+		//HttpClientProperties props = null;
+		//HttpClientUtil.Client hClient = null;
+		//props = HttpClientProperties.getInstance();
 
 		String res;
         try {
@@ -150,7 +158,7 @@ public class ComcastAPIHandler {
         	String url = "http://comcastmobilityteam.api.mashery.com/message/sms";
         	
 	        // initialize http client
-	        hClient = HttpClientUtil.initClient(props, "", url);
+	        //hClient = HttpClientUtil.initClient(props, "", url);
 
 	        HttpPost post = new HttpPost(url);
 	        
@@ -191,9 +199,9 @@ public class ComcastAPIHandler {
 		
 		String channelId = null;
 
-		HttpClientProperties props = null;
-		HttpClientUtil.Client hClient = null;
-		props = HttpClientProperties.getInstance();
+		//HttpClientProperties props = null;
+		//HttpClientUtil.Client hClient = null;
+		//props = HttpClientProperties.getInstance();
 
 		String res;
         try {
@@ -201,7 +209,7 @@ public class ComcastAPIHandler {
         	String url = "http://comcastmobilityteam.api.mashery.com/message/sms";
         	
 	        // initialize http client
-	        hClient = HttpClientUtil.initClient(props, "", url);
+	        //hClient = HttpClientUtil.initClient(props, "", url);
 
 	        HttpPost post = new HttpPost(url);
 	        
