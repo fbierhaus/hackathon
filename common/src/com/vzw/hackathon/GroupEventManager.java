@@ -8,6 +8,8 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+import javax.servlet.jsp.tagext.TryCatchFinally;
+
 import org.apache.commons.dbutils.handlers.ScalarHandler;
 import org.apache.log4j.Logger;
 
@@ -35,13 +37,23 @@ public class GroupEventManager {
 
 	private static final String SQL_ADD_GROUP_MEMBER =
 			"INSERT INTO GROUP_MEMBER ("
-			+ "	GROUP_EVENT_ID,	MDN, MEMBER_STATUS,	MEMBER_NAME) VALUES (?, ?, 'INVITED', ?)";
+			+ "	GROUP_EVENT_ID,	MDN, MEMBER_STATUS) VALUES (?, ?, 'INVITED')";
 	
 	
 	private static final String SQL_UPDATE_MEMBER_STATUS =
 			"update GROUP_MEMBER set MEMBER_STATUS = ?, DEVICE_ID = ? where GROUP_EVENT_ID = ? and MDN = ?";
 	
 	
+	private static final String SQL_UPDATE_MEMBER_LAST_CHANNEL_ID = 
+			"update GROUP_MEMBER set LAST_CHANNEL_ID = ? where GROUP_EVENT_ID = ? and MDN = ?";
+	
+	private static final String SQL_GET_CHANNEL = 
+			"select channel_id as \"id\", channel_name as \"name\", channel_desc as \"desc\" "
+			+ " from channels where channel_id = ?";
+	
+	private static final String SQL_GET_USER = 
+			"select mdn, channel_id as channelId, \"name\" from users"
+			+ " where mdn = ?";
 	
 	
 	private ScheduledExecutorService		scheduler = null;
@@ -117,7 +129,7 @@ public class GroupEventManager {
 			// insert members (including master mdn)
 			for (Member m : ge.getMemberList()) {
 				DBUtil.update(dbPool, SQL_ADD_GROUP_MEMBER, DBUtil.THROW_HANDLER, 
-						geId, m.getMdn(), m.getName());
+						geId, m.getMdn());
 			}
 			
 			id = geId;
@@ -160,7 +172,76 @@ public class GroupEventManager {
 			logger.error("Failed to update member status");
 		}
 	}
+	
+	/**
+	 * 
+	 * @param groupEventId
+	 * @param mdn
+	 * @param lastChannelId
+	 */
+	public void updateMemberLastChannelId(int groupEventId, String mdn, String lastChannelId) {
+		try {
+			DBUtil.update(dbPool, SQL_UPDATE_MEMBER_LAST_CHANNEL_ID, DBUtil.THROW_HANDLER,
+					lastChannelId, groupEventId, mdn);
+			
+			logger.debug("updated last channel id to " + lastChannelId);
+		}
+		catch (Exception e) {
+			logger.error("Failed to update last channel id");
+		}
+	}
 
+	
+	/**
+	 * 
+	 * @param channelId
+	 * @return
+	 */
+	public Channel getChannel(String channelId) {
+		Channel channel = null;
+		try {
+			channel = DBUtil.query(dbPool, SQL_GET_CHANNEL, 
+					new DBUtil.BeanHandlerEx<Channel>(Channel.class), DBUtil.THROW_HANDLER, channelId);
+			
+			if (channel == null) {
+				logger.debug("Unknown channel created: " + channelId);
+				channel = new Channel();
+				channel.setName("Unknown");
+				channel.setId(channelId);
+			}
+		}
+		catch (Exception e) {
+			logger.error("Failed to get channel by channel id: " + channelId);
+		}
+		
+		return channel;
+	}
+	
+	/**
+	 * 
+	 * @param mdn
+	 * @return
+	 */
+	public User getUser(String mdn) {
+		User user = null;
+		try {
+			user = DBUtil.query(dbPool, SQL_GET_USER, 
+					new DBUtil.BeanHandlerEx<User>(User.class), DBUtil.THROW_HANDLER, mdn);
+			
+			if (user == null) {
+				logger.debug("User not found in address book, create an  unknown user: mdn=" + mdn);
+				user = new User();
+				user.setMdn(mdn);
+				user.setName("Unnamed");
+				
+			}
+		}
+		catch (Exception e) {
+			logger.error("Failed to get user by mdn = " + mdn);
+		}
+		
+		return user;
+	}
 
 	
 	/**

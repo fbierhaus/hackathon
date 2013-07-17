@@ -3,15 +3,12 @@ package com.vzw.hackthon.scheduler;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.dbutils.handlers.ArrayListHandler;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 
@@ -20,10 +17,8 @@ import com.vzw.hackathon.GroupEventManager;
 import com.vzw.hackathon.Member;
 import com.vzw.hackathon.apihandler.ComcastAPIHandler;
 import com.vzw.hackathon.apihandler.SendVMAMessage;
-import com.vzw.hackathon.apihandler.VZWAPIHandler;
 import com.vzw.util.db.DBManager;
 import com.vzw.util.db.DBPool;
-import com.vzw.util.db.DBUtil;
 
 public class MemberWatcher implements Runnable {
 	private static final Logger		logger = Logger.getLogger(EventReminder.class);
@@ -34,7 +29,7 @@ public class MemberWatcher implements Runnable {
 	
 	
 	private static final String SQL_SEL_MEMBERS = 
-			"select group_event_id, mdn, device_id, member_name"
+			"select group_event_id, mdn, device_id, member_name, last_channel_id"
 			+ " from GROUP_MEMBER"
 			+ " where member_status = 'MASTER' or member_status = 'ACCEPTED"
 			+ " order by GROUP_EVENT_ID, mdn";
@@ -60,6 +55,7 @@ public class MemberWatcher implements Runnable {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		
+		GroupEventManager gem = GroupEventManager.getInstance();
 		try {
 			
 			conn = dbPool.getConnection();
@@ -81,7 +77,7 @@ public class MemberWatcher implements Runnable {
 						processWatch(ge);
 					}
 					
-					ge = GroupEventManager.getInstance().loadGroupEventFromDb(curGeId);
+					ge = gem.loadGroupEventFromDb(curGeId);
 					memberList = new ArrayList<Member>();
 					ge.setMemberList(memberList);
 					
@@ -92,6 +88,7 @@ public class MemberWatcher implements Runnable {
 				member.setDeviceId(rs.getString("device_id"));
 				member.setMdn(rs.getString("mdn"));
 				member.setName(rs.getString("member_name"));
+				member.setLastChannelId(rs.getString("last_channel_id"));
 				memberList.add(member);
 					
 			}

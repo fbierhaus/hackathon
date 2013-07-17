@@ -3,8 +3,8 @@ package com.vzw.hackathon;
 public class Member {
 	private String			mdn = null;
 	private MemberStatus	status = null;
-	private String			name = null;
-	private String			deviceId = null;
+	private String			lastChannelId = null;
+	
 	public String getMdn() {
 		return mdn;
 	}
@@ -17,18 +17,14 @@ public class Member {
 	public void setStatus(MemberStatus status) {
 		this.status = status;
 	}
-	public String getName() {
-		return name;
+
+	public String getLastChannelId() {
+		return lastChannelId;
 	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public String getDeviceId() {
-		return deviceId;
-	}
-	public void setDeviceId(String deviceId) {
-		this.deviceId = deviceId;
+	public void setLastChannelId(String lastChannelId) {
+		this.lastChannelId = lastChannelId;
 	}
 	
+
 	
 }
