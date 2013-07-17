@@ -59,7 +59,7 @@ public class GroupEventManager {
 	 * @param mdn
 	 * 
 	 */
-	public void schedulePlay(String mdn) {
+	public void schedulePlay(String mdn, GroupEvent ge) {
 		
 	}
 		
