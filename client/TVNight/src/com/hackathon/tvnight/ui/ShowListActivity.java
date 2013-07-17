@@ -24,6 +24,8 @@ import com.hackathon.tvnight.task.GetShowListTask;
 public class ShowListActivity extends Activity {
 	private final static int MSG_SHOW_LIST = 1;
 
+	public static final boolean TEST_INVITE_ACTIVITY = false;
+	
 	private ListView showList;
 	private TVShowAdapter showsAdapter;
 	private GetShowListTask getShowListTask = null;
@@ -55,10 +57,20 @@ public class ShowListActivity extends Activity {
 	}
 	
 	@Override
+	protected void onResume() {
+		if (getIntent().getBooleanExtra("fromnotif", false) || TEST_INVITE_ACTIVITY) {
+			Intent i = new Intent(this, ReminderActivity.class);
+			startActivity(i);
+		}
+		super.onResume();
+	}
+	
+	@Override
 	public void onDestroy() {
 		if (getShowListTask != null) {
 			getShowListTask.cancelOperation();
 		}
+		super.onDestroy();
 	}
 	
 	static class ShowViewHolder {
@@ -92,7 +104,7 @@ public class ShowListActivity extends Activity {
 
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
-			TVShow show = shows.get(position);
+			final TVShow show = shows.get(position);
 			if (convertView == null) {
 				convertView = getLayoutInflater().inflate(R.layout.show_item, null);
 				ShowViewHolder holder = new ShowViewHolder();
@@ -105,20 +117,31 @@ public class ShowListActivity extends Activity {
 			ShowViewHolder myViewData = (ShowViewHolder) convertView.getTag();
 			
 			String name = "Unknown";
+			final String finalName, finalDesc;
 			List<TextEntry> titleList = show.getTitle();
 			if (titleList.size() > 0) {
 				TextEntry entry = titleList.get(0);
 				name = entry.getDefault();
 			}				
 			myViewData.title.setText(name);
+			finalName = name;
+			
+			String desc = "Unknown";
+			List<TextEntry> descList = show.getDescription();
+			if (descList.size() > 0) {
+				TextEntry descEntry = descList.get(0);
+				desc = descEntry.getDefault();
+			}
+			finalDesc = desc;
 			
 			convertView.setOnClickListener(new View.OnClickListener() {
 				
 				@Override
 				public void onClick(View v) {
-//					Intent i = new Intent(ShowListActivity.this, ShowDescActivity.class);
-////					i.putExtra(name, value);
-//					startActivity(i);
+					Intent i = new Intent(ShowListActivity.this, ShowDescActivity.class);
+					i.putExtra("name", finalName);
+					i.putExtra("desc", finalDesc);
+					startActivity(i);
 				}
 			});
 			

@@ -8,12 +8,15 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.hackathon.tvnight.R;
 
 public class ShowDescActivity extends Activity implements OnClickListener {
 
 	private Button createWatchGroup;
+	private TextView showTitle;
+	private TextView showDesc;
 	private Button saveButt;
 	private ArrayList<String> selectedNums;
 	
@@ -21,6 +24,10 @@ public class ShowDescActivity extends Activity implements OnClickListener {
 	protected void onCreate(Bundle savedInstanceState) {
 		setContentView(R.layout.show_desc_layout);
 		createWatchGroup = (Button) findViewById(R.id.create_watch_group_butt);
+		showTitle = (TextView) findViewById(R.id.show_title);
+		showDesc = (TextView) findViewById(R.id.show_desc);
+		showTitle.setText(getIntent().getStringExtra("name"));
+		showDesc.setText(getIntent().getStringExtra("desc"));
 		saveButt = (Button) findViewById(R.id.save_butt);
 		saveButt.setOnClickListener(this);
 		createWatchGroup.setOnClickListener(this);
@@ -32,12 +39,12 @@ public class ShowDescActivity extends Activity implements OnClickListener {
 		if (requestCode == 0 && resultCode == Activity.RESULT_OK) {
 			selectedNums = data.getStringArrayListExtra("selected_nums");
 			createWatchGroup.setText("Edit Watch Group ("+selectedNums.size()+")");
-			saveButt.setVisibility(View.VISIBLE);
+			findViewById(R.id.save_layout).setVisibility(View.VISIBLE);
 		}
 		else {
 			selectedNums = null;
 			createWatchGroup.setText("Create a Watch Group");
-			saveButt.setVisibility(View.GONE);
+			findViewById(R.id.save_layout).setVisibility(View.GONE);
 		}
 		super.onActivityResult(requestCode, resultCode, data);
 	}

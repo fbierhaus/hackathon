@@ -38,6 +38,16 @@
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Black.NoTitleBar" >
         </activity>
+        <activity
+            android:name="com.hackathon.tvnight.ui.InviteProposeActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Black.NoTitleBar" >
+        </activity>
+        <activity
+            android:name="com.hackathon.tvnight.ui.ReminderActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Black.NoTitleBar" >
+        </activity>
         
         <receiver android:name="SMSReceiver">
             <intent-filter android:priority="999">
