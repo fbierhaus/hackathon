@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/"
+	xmlns:vmp="http://vmp.vzw.com/schema"
+	xmlns:mm7="http://www.3gpp.org/ftp/Specs/archive/23_series/23.140/schema/REL-6-MM7-1-4"
+	xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://vmp.vzw.com/wsdl"
+	name="vmpService" targetNamespace="http://vmp.vzw.com/wsdl">
+	<wsdl:types>
+		<xs:schema targetNamespace="http://vmp.vzw.com/schema">
+			<xs:include schemaLocation="vmp_schema_1-0-0.xsd" />
+		</xs:schema>
+		<xs:schema
+			targetNamespace="http://www.3gpp.org/ftp/Specs/archive/23_series/23.140/schema/REL-6-MM7-1-4">
+			<xs:include
+				schemaLocation="REL-6-MM7-1-4-vmp.xsd" />
+		</xs:schema>
+		<xs:schema
+            targetNamespace="http://schemas.xmlsoap.org/soap/envelope/">
+            <xs:include
+                schemaLocation="soap_1-1.xsd" />
+        </xs:schema>
+	</wsdl:types>
+	<wsdl:message name="transactionIDHeader">
+		<wsdl:part name="transactionIDHeader" element="mm7:TransactionID" />
+	</wsdl:message>
+	<wsdl:message name="deliveryStatusReq">
+		<wsdl:part name="deliveryStatusReq" element="vmp:DeliveryStatusReq" />
+	</wsdl:message>
+	<wsdl:message name="deliveryStatusRsp">
+		<wsdl:part name="deliveryStatusRsp" element="vmp:DeliveryStatusRsp" />
+	</wsdl:message>
+	<wsdl:message name="optinPinReq">
+		<wsdl:part name="optinPinReq" element="vmp:OptinPinReq" />
+	</wsdl:message>
+	<wsdl:message name="optinPinRsp">
+		<wsdl:part name="optinPinRsp" element="vmp:OptinPinRsp" />
+	</wsdl:message>
+	<wsdl:message name="validateOptinPinReq">
+		<wsdl:part name="validateOptinPinReq" element="vmp:ValidateOptinPinReq" />
+	</wsdl:message>
+	<wsdl:message name="validateOptinPinRsp">
+		<wsdl:part name="validateOptinPinRsp" element="vmp:ValidateOptinPinRsp" />
+	</wsdl:message>
+	<wsdl:message name="optinReq">
+		<wsdl:part name="optinReq" element="vmp:OptinReq" />
+	</wsdl:message>
+	<wsdl:message name="optinRsp">
+		<wsdl:part name="optinRsp" element="vmp:OptinRsp" />
+	</wsdl:message>
+    <wsdl:message name="optoutReq">
+        <wsdl:part name="optoutReq" element="vmp:OptoutReq" />
+    </wsdl:message>
+    <wsdl:message name="optoutRsp">
+        <wsdl:part name="optoutRsp" element="vmp:OptoutRsp" />
+    </wsdl:message>
+    <wsdl:message name="userInfoReq">
+        <wsdl:part name="userInfoReq" element="vmp:UserInfoReq" />
+    </wsdl:message>
+    <wsdl:message name="userInfoRsp">
+        <wsdl:part name="userInfoRsp" element="vmp:UserInfoRsp" />
+    </wsdl:message>
+	<wsdl:portType name="Query">
+		<wsdl:operation name="deliveryStatus">
+			<wsdl:input message="tns:deliveryStatusReq" />
+			<wsdl:output message="tns:deliveryStatusRsp" />
+		</wsdl:operation>
+		<wsdl:operation name="optinPin">
+			<wsdl:input message="tns:optinPinReq" />
+			<wsdl:output message="tns:optinPinRsp" />
+		</wsdl:operation>
+		<wsdl:operation name="validateOptinPin">
+			<wsdl:input message="tns:validateOptinPinReq" />
+			<wsdl:output message="tns:validateOptinPinRsp" />
+		</wsdl:operation>
+		<wsdl:operation name="optin">
+			<wsdl:input message="tns:optinReq" />
+			<wsdl:output message="tns:optinRsp" />
+		</wsdl:operation>
+        <wsdl:operation name="optout">
+            <wsdl:input message="tns:optoutReq" />
+            <wsdl:output message="tns:optoutRsp" />
+        </wsdl:operation>
+        <wsdl:operation name="userInfo">
+            <wsdl:input message="tns:userInfoReq" />
+            <wsdl:output message="tns:userInfoRsp" />
+        </wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="QueryBinding" type="tns:Query">
+		<soap:binding style="document"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="deliveryStatus">
+			<soap:operation soapAction="" />
+			<wsdl:input>
+				<soap:header message="tns:transactionIDHeader" part="transactionIDHeader"
+					use="literal" />
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:header message="tns:transactionIDHeader" part="transactionIDHeader"
+					use="literal" />
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="optinPin">
+			<soap:operation soapAction="" />
+			<wsdl:input>
+				<soap:header message="tns:transactionIDHeader" part="transactionIDHeader"
+					use="literal" />
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:header message="tns:transactionIDHeader" part="transactionIDHeader"
+					use="literal" />
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+        <wsdl:operation name="validateOptinPin">
+            <soap:operation soapAction="" />
+            <wsdl:input>
+                <soap:header message="tns:transactionIDHeader" part="transactionIDHeader"
+                    use="literal" />
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:header message="tns:transactionIDHeader" part="transactionIDHeader"
+                    use="literal" />
+                <soap:body use="literal" />
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="optin">
+            <soap:operation soapAction="" />
+            <wsdl:input>
+                <soap:header message="tns:transactionIDHeader" part="transactionIDHeader"
+                    use="literal" />
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:header message="tns:transactionIDHeader" part="transactionIDHeader"
+                    use="literal" />
+                <soap:body use="literal" />
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="optout">
+            <soap:operation soapAction="" />
+            <wsdl:input>
+                <soap:header message="tns:transactionIDHeader" part="transactionIDHeader"
+                    use="literal" />
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:header message="tns:transactionIDHeader" part="transactionIDHeader"
+                    use="literal" />
+                <soap:body use="literal" />
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="userInfo">
+            <soap:operation soapAction="" />
+            <wsdl:input>
+                <soap:header message="tns:transactionIDHeader" part="transactionIDHeader"
+                    use="literal" />
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:header message="tns:transactionIDHeader" part="transactionIDHeader"
+                    use="literal" />
+                <soap:body use="literal" />
+            </wsdl:output>
+        </wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="QueryService">
+		<wsdl:port name="QueryPort" binding="tns:QueryBinding">
+			<soap:address location="http://vmp.vzw.com/query/query" />
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

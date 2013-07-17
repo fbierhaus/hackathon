@@ -38,16 +38,22 @@ public class GroupEventManagerTest {
 
 	@Test
 	public final void testCreateGroupEvent() {
-		String js = "{'masterMdn':'9251000001','showId':'1234455555555','channelId': '101##11111', 'showTime':'2830303000000','memberList': [{ 'mdn': '9251000002'},{ 'mdn': '9251000003'}]}";
+		//String js = "{'masterMdn':'9251000001','showId':'1234455555555','channelId': '101##11111', 'showTime':'2830303000000','memberList': [{ 'mdn': '9251000002'},{ 'mdn': '9251000003'}]}";
 		//String js = "{'masterMdn':'9251000001','showId':'2234455555555','channelId': '102##11111', 'showTime':'2830303000000','memberList': [{ 'mdn': '9251000002'},{ 'mdn': '9251000003'}]}";
-		//String js = "{'masterMdn':'9252000001','showId':'3234455555555','channelId': '103##11111', 'showTime':'2830303000000','memberList': [{ 'mdn': '9252000002'},{ 'mdn': '9252000003'}]}";
+		String[] js = new String[] {
+				"{'masterMdn':'9251000001','showId':'1234455555555','channelId': '101##11111', 'showTime':'2830303000000','memberList': [{ 'mdn': '9251000002'},{ 'mdn': '9251000003'}]}",
+				"{'masterMdn':'9252000001','showId':'2234455555555','channelId': '102##11111', 'showTime':'2830303000000','memberList': [{ 'mdn': '9252000002'},{ 'mdn': '9252000003'}]}",
+				"{'masterMdn':'9253000001','showId':'3234455555555','channelId': '103##11111', 'showTime':'2830303000000','memberList': [{ 'mdn': '9253000002'},{ 'mdn': '9253000003'}]}",
+		};
 		
 		GroupEvent ge = null;
 		try {
-			ge = JSONUtil.toJava(js, GroupEvent.class, "memberList", Member.class);
-			System.out.println(ge);
-			
-			gem.createGroupEvent(ge);
+			for (String _js : js) {
+				ge = JSONUtil.toJava(_js, GroupEvent.class, "memberList", Member.class);
+				System.out.println(ge);
+				
+				gem.createGroupEvent(ge);
+			}
 		}
 		catch (Exception e) {
 			System.out.println(e.getMessage());
