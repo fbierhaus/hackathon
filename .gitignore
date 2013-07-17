@@ -13,6 +13,8 @@ server/build
 #**/.project
 server/WebContent/WEB-INF/classes
 db/
+derby.log
+
 /client/TVNight/bin
 /client/TVNight/gen
 

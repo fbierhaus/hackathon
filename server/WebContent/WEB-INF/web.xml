@@ -8,10 +8,6 @@
     <load-on-startup>5</load-on-startup>
   </servlet>
  
-  <servlet-mapping>
-    <servlet-name>RestServlet</servlet-name>
-    <url-pattern>/events/*</url-pattern>
-  </servlet-mapping>
   
    <servlet-mapping>
     <servlet-name>RestServlet</servlet-name>
