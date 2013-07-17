@@ -18,7 +18,7 @@ import com.vzw.util.db.DBUtil;
 
 public class GroupEventManager {
 	private static final Logger	logger = Logger.getLogger(GroupEventManager.class);
-	private static final DBPool dbPool = DBManager.getDBPool();
+	private  DBPool dbPool = null;
 	
 	private static final String SQL_SEL_GROUP_EVENT = 
 			"select group_event_id as id, show_id as showId, channel_id as channelId, show_time as showTime, "
@@ -60,7 +60,21 @@ public class GroupEventManager {
 		return instance;
 	}
 	private GroupEventManager() {
+		dbPool = DBManager.getDBPool();
 		scheduler = Executors.newScheduledThreadPool(20);
+		
+		Runtime.getRuntime().addShutdownHook(new Thread() {
+			public void run() {
+				GroupEventManager.getInstance().destroy();
+			}
+		});
+	}
+	
+	public void destroy() {
+		if (scheduler != null) {
+			scheduler.shutdown();
+			scheduler = null;
+		}
 	}
 	
 	/**
@@ -84,7 +98,8 @@ public class GroupEventManager {
 	 * 
 	 * @param ge
 	 */
-	public void createGroupEvent(GroupEvent ge) {
+	public int createGroupEvent(GroupEvent ge) {
+		int id = -1;
 		try {
 			// get group event id
 			int geId = DBUtil.query(
@@ -104,10 +119,13 @@ public class GroupEventManager {
 				DBUtil.update(dbPool, SQL_ADD_GROUP_MEMBER, DBUtil.THROW_HANDLER, 
 						geId, m.getMdn(), m.getName());
 			}
+			
+			id = geId;
 		}
 		catch (Exception e) {
 			logger.error("Failed to create group event.", e);
 		}
+		return id;
 	}
 
 	/**
@@ -122,7 +140,8 @@ public class GroupEventManager {
 			String deviceId = null;
 			switch (status) {
 				case ACCEPTED:
-					deviceId = ComcastAPIHandler.getDeviceId(mdn);
+					//deviceId = ComcastAPIHandler.getDeviceId(mdn);
+					deviceId = "foobar";
 					break;
 					
 				default:
@@ -160,17 +179,16 @@ public class GroupEventManager {
 				
 				if (delay < 0) {
 					// tune right away
-					ComcastAPIHandler.tuneChannel(deviceId, ge.getChannelId());
+					//ComcastAPIHandler.tuneChannel(deviceId, ge.getChannelId());
 				}
 				else {
 					//schedule it
 				}
-				
 				scheduler.schedule(new Runnable() {
 					
 					@Override
 					public void run() {
-						ComcastAPIHandler.tuneChannel(deviceId, ge.getChannelId());
+//						ComcastAPIHandler.tuneChannel(deviceId, ge.getChannelId());
 						
 					}
 				}, delay, TimeUnit.MILLISECONDS);

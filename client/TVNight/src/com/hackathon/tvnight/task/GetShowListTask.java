@@ -10,30 +10,40 @@ import android.os.Message;
 import com.hackathon.tvnight.api.GetShowList;
 import com.hackathon.tvnight.model.TVShow;
 
-public class GetShowListTask extends AsyncTask<Void, Void, Void> {
+public class GetShowListTask extends AsyncTask<Integer, Void, List<TVShow>> {
 	private Handler mHandler;
 	private int mMsgCode;
-	private List<TVShow> mShowList;
+	private String mKeyword;
+//	private List<TVShow> mShowList = null;
+	private int mIndex = 0;
 	private String searchTerm;
 	
 	/**
 	 * Specify the handler and code to notify the show list has been retrieved.
-	 * Call getShowList() to get the result.
+	 * Result returned in Message.obj as List<TVShow>
 	 * 
 	 * @param handler
 	 * @param msgCode
+	 * @param keyword	keyword to search or null for getting top watched
 	 */
-	public GetShowListTask(Handler handler, int msgCode, String searchTerm) {
+	public GetShowListTask(Handler handler, int msgCode, String keyword) {
 		super();
 		
 		this.searchTerm = searchTerm;
 		mHandler = handler;
 		mMsgCode = msgCode;
+		mKeyword = keyword; 
 	}
 	
-	public List<TVShow> getShowList() {
-		return mShowList;
-	}
+//	/**
+//	 * null if there is an error in request
+//	 * Empty if there is no more entry matching the search criteria.
+//	 *  
+//	 * @return
+//	 */
+//	public List<TVShow> getShowList() {
+//		return mShowList;
+//	}
 	
 	public void cancelOperation() {
 		if (getStatus() != Status.FINISHED) {
@@ -47,21 +57,31 @@ public class GetShowListTask extends AsyncTask<Void, Void, Void> {
 	}
 
 	@Override
-	protected Void doInBackground(Void... params) {
-//		for (int i=0; i<10; i++) {
-//			TVShow show = new TVShow("Show " + (i+1));
-//			mShowList.add(show);
-//		}
-		GetShowList task = new GetShowList();
-		mShowList = task.getList(searchTerm);
-		return null;
+	protected List<TVShow> doInBackground(Integer... params) {
+		// clear previous list		
+		List<TVShow> showList = null;
+
+		if (params.length > 0) {
+			int limit = params[0].intValue();
+			GetShowList task = new GetShowList();
+			showList = task.getList(mKeyword, mIndex, limit);
+			if (showList != null) {
+				mIndex += showList.size();
+			}
+		}
+		else {
+			// create an empty list
+			showList = new ArrayList<TVShow>();
+		}
+		return showList;
 	}
 
 	@Override
-	protected void onPostExecute(Void param) {
+	protected void onPostExecute(List<TVShow> param) {
 		// end of task, notify the handler 
 		Message msg = mHandler.obtainMessage(mMsgCode);
-		msg.sendToTarget();
+		msg.obj = param;
+		msg.sendToTarget();		
 	}
 	
 }

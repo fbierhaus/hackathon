@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Invitation {
+	private String mSender;
 	private ArrayList<String> mRecipientList = new ArrayList<String>();
 	private String mChannelId;
 	private String mShowId;
@@ -12,10 +13,12 @@ public class Invitation {
 	private long mId;
 
 	/**
+	 * @param sender		Phone's MDN
 	 * @param channelId		Use the "rovi" in the id list
 	 * @param showId		Use the "rex" in the id list
 	 */
-	public Invitation(String channelId, String showId) {
+	public Invitation(String sender, String channelId, String showId) {
+		mSender = sender;
 		mChannelId = channelId;
 		mShowId = showId;
 	}
@@ -36,5 +39,9 @@ public class Invitation {
 	
 	public String getShowId() {
 		return mShowId;
+	}
+	
+	public String getSender() {
+		return mSender;
 	}
 }

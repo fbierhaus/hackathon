@@ -4,7 +4,6 @@ import java.util.List;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -21,7 +20,6 @@ import android.widget.Toast;
 
 import com.hackathon.tvnight.R;
 import com.hackathon.tvnight.model.TVShow;
-import com.hackathon.tvnight.model.TextEntry;
 import com.hackathon.tvnight.task.GetShowListTask;
 
 public class ShowListActivity extends Activity implements OnClickListener {
@@ -31,21 +29,33 @@ public class ShowListActivity extends Activity implements OnClickListener {
 	
 	private ListView showList;
 	private TVShowAdapter showsAdapter;
+	
+	/**
+	 * Task to get show list. You can keep calling this task if the list has not ended yet.
+	 * It returns an empty list if no more show or null if failed.
+	 * Results returned in Message.obj 
+	 */
 	private GetShowListTask getShowListTask = null;
 	private EditText searchTerm;
 	private Button submit;
 	
 	private Handler handler = new Handler() {
+		@SuppressWarnings("unchecked")
 		@Override
 		public void handleMessage(Message msg) {
 			if (msg.what == MSG_SHOW_LIST) {
 
-				List<TVShow> shows = getShowListTask.getShowList();
-
 				findViewById(R.id.progress_spinner).setVisibility(View.GONE);
-				showsAdapter = new TVShowAdapter(shows);
-				showList.setAdapter(showsAdapter);
-				showList.setVisibility(View.VISIBLE);
+
+				List<TVShow> shows = (List<TVShow>)msg.obj;
+				if (shows == null) {
+					// error
+				}
+				else {
+					showsAdapter = new TVShowAdapter(shows);
+					showList.setAdapter(showsAdapter);
+					showList.setVisibility(View.VISIBLE);
+				}
 			}
 		}
 	};
@@ -54,14 +64,12 @@ public class ShowListActivity extends Activity implements OnClickListener {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.show_list_layout);
-				
-		showList = (ListView) findViewById(R.id.show_list);
 		searchTerm = (EditText) findViewById(R.id.search_term);
 		submit = (Button) findViewById(R.id.submit);
 		submit.setOnClickListener(this);
-		
-		getShowListTask = new GetShowListTask(handler, MSG_SHOW_LIST, null);
-		getShowListTask.execute();
+				
+		getShowListTask = new GetShowListTask(handler, MSG_SHOW_LIST, "super-man");
+		getShowListTask.execute(10);	// get 10 at a time
 	}
 	
 	@Override
@@ -124,23 +132,10 @@ public class ShowListActivity extends Activity implements OnClickListener {
 			
 			ShowViewHolder myViewData = (ShowViewHolder) convertView.getTag();
 			
-			String name = "Unknown";
-			final String finalName, finalDesc;
-			List<TextEntry> titleList = show.getTitle();
-			if (titleList.size() > 0) {
-				TextEntry entry = titleList.get(0);
-				name = entry.getDefault();
-			}				
-			myViewData.title.setText(name);
-			finalName = name;
+			final String finalName = show.getDefaultTitle();
+			myViewData.title.setText(finalName);
 			
-			String desc = "Unknown";
-			List<TextEntry> descList = show.getDescription();
-			if (descList.size() > 0) {
-				TextEntry descEntry = descList.get(0);
-				desc = descEntry.getDefault();
-			}
-			finalDesc = desc;
+			final String finalDesc = show.getDefaultDescription();
 			
 			convertView.setOnClickListener(new View.OnClickListener() {
 				
