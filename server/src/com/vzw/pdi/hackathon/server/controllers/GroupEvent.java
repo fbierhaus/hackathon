@@ -17,6 +17,11 @@ import com.vzw.util.JSONUtil;
 public class GroupEvent extends RestController {
 	Logger logger = LoggerFactory.getLogger(GroupEvent.class);
 	
+	/**
+	 * Request should look like:
+	 * curl -i --data "groupEvent={'showId':'1','masterMdn':'9255551234', 'memberList':[{'mdn':'9258881234','name':'foo'},{'mdn':'9259991234','name':'bar'}]}" http://localhost:8080/server/groupEvents
+	 * @return
+	 */
 	@POST
 	@DoNotRenderPage
 	public ServerResponse create(){
@@ -44,6 +49,7 @@ public class GroupEvent extends RestController {
 			
 		} catch (Exception e){
 			logger.error("Error parsing JSON", e);
+			return ServerResponse.ERROR;
 		}
 
 		
