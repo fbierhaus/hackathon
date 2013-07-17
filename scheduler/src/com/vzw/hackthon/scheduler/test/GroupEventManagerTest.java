@@ -37,12 +37,20 @@ public class GroupEventManagerTest {
 
 	@Test
 	public final void testCreateGroupEvent() {
-		String js = "{masterMdn:'9250000001',showId:'1234455555555',showTime:1830303000000,memberList: [{ mdn: '9250000002'},{ mdn: '9250000003'}]}";
-		GroupEvent ge = JSONUtil.toJava(js, GroupEvent.class, "memberList", Member.class);
+		String js = "{'masterMdn':'9250000001','showId':'1234455555555','channelId': '101##11111', 'showTime':'1830303000000','memberList': [{ 'mdn': '9250000002'},{ 'mdn': '9250000003'}]}";
 		
-		System.out.println(ge);
+		GroupEvent ge = null;
+		try {
+			ge = JSONUtil.toJava(js, GroupEvent.class, "memberList", Member.class);
+			System.out.println(ge);
+			
+			gem.createGroupEvent(ge);
+		}
+		catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
 		
-		gem.createGroupEvent(ge);
+
 	}
 
 	@Test
