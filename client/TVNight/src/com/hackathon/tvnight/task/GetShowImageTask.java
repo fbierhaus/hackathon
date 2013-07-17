@@ -46,29 +46,36 @@ public class GetShowImageTask extends AsyncTask<String[], Void, Void> {
 			String[] idList = params[0];
 			
 			for (String id : idList) {
-				list = (new GetShowImage()).getImageList(id);	// params[0] is roci id
+				if (isCancelled()) {
+					break;
+				}
+				else {
+					list = (new GetShowImage()).getImageList(id);	// params[0] is roci id
 
-				long starttime = System.currentTimeMillis();
-				
-				// end of task, notify the handler 
-				Message msg = mHandler.obtainMessage(mMsgCode);
-				Bundle data = new Bundle();
-				data.putString(TVShow.ID_KEY_ROVI, id);
-				msg.setData(data);
-				msg.obj = list;
-				msg.sendToTarget();
-				
-				long endtime = System.currentTimeMillis();
-				long elapsed = endtime - starttime;
-				
-				if (elapsed < 500) {
-					try {
-						Thread.sleep(500-elapsed);
-					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
+					if(isCancelled() == false) {
+						long starttime = System.currentTimeMillis();
+
+						// end of task, notify the handler
+						Message msg = mHandler.obtainMessage(mMsgCode);
+						Bundle data = new Bundle();
+						data.putString(TVShow.ID_KEY_ROVI, id);
+						msg.setData(data);
+						msg.obj = list;
+						msg.sendToTarget();
+
+						long endtime = System.currentTimeMillis();
+						long elapsed = endtime - starttime;
+
+						if (elapsed < 500) {
+							try {
+								Thread.sleep(500-elapsed);
+							} catch (InterruptedException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+						}
 					}
-				}				
+				}
 			}
 		}
 		return null;

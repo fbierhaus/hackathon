@@ -36,9 +36,11 @@ public class GroupEventManagerTest {
 		System.out.println(ge);
 	}
 
-	//@Test
+	@Test
 	public final void testCreateGroupEvent() {
-		String js = "{'masterMdn':'9251000001','showId':'2234455555555','channelId': '102##11111', 'showTime':'2830303000000','memberList': [{ 'mdn': '9251000002'},{ 'mdn': '9251000003'}]}";
+		String js = "{'masterMdn':'9251000001','showId':'1234455555555','channelId': '101##11111', 'showTime':'2830303000000','memberList': [{ 'mdn': '9251000002'},{ 'mdn': '9251000003'}]}";
+		//String js = "{'masterMdn':'9251000001','showId':'2234455555555','channelId': '102##11111', 'showTime':'2830303000000','memberList': [{ 'mdn': '9251000002'},{ 'mdn': '9251000003'}]}";
+		//String js = "{'masterMdn':'9252000001','showId':'3234455555555','channelId': '103##11111', 'showTime':'2830303000000','memberList': [{ 'mdn': '9252000002'},{ 'mdn': '9252000003'}]}";
 		
 		GroupEvent ge = null;
 		try {
@@ -54,12 +56,12 @@ public class GroupEventManagerTest {
 
 	}
 
-	@Test
+	//@Test
 	public final void testUpdateMemberStatus() {
 		gem.updateMemberStatus(101, "9250000002", MemberStatus.ACCEPTED);
 	}
 
-	@Test
+	//@Test
 	public final void testUpdateMemberLastChannelId() {
 		gem.updateMemberLastChannelId(101, "9250000003", "002##10001");
 	}
@@ -76,7 +78,7 @@ public class GroupEventManagerTest {
 		System.out.println(user);
 	}
 
-	@Test
+	//@Test
 	public final void testSchedulePlay() {
 		gem.schedulePlay("9250000001", 101);
 	}
