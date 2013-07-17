@@ -244,6 +244,57 @@ public class ComcastAPIHandler {
 		return channelId;
 	}
 	
+	public static boolean postMessage(String deviceId, String message) {
+		
+		logger.info("postMessage - deviceId=" + deviceId + ", message=" + message);
+		
+		boolean success = false;
+
+		//HttpClientProperties props = null;
+		//HttpClientUtil.Client hClient = null;
+		//props = HttpClientProperties.getInstance();
+
+		String res;
+        try {
+        	
+        	String url = "http://comcastmobilityteam.api.mashery.com/message/sms";
+        	
+	        // initialize http client
+	        //hClient = HttpClientUtil.initClient(props, "", url);
+
+	        HttpPost post = new HttpPost(url);
+	        
+	        post.addHeader("Authorization", "Basic Sk9FX0hhY2thdGhvbjU6RDNxfU0ycD0=");
+	        post.addHeader("X-Param-Keys", "com.bea.wlcp.wlng.plugin.sms.RequestDeliveryReportFlag");
+	        post.addHeader("X-Param-Values", "true");
+	        post.addHeader("Content-Type", "application/json");
+	        post.addHeader("X-Originating-Ip", "204.15.241.97");
+	    
+	        String request = "";
+	        
+	        StringEntity entity = new StringEntity(request,"UTF-8");
+	        
+	        post.setEntity(entity);
+	        res = hClient.execute(post, new ResponseHandler<String>() {
+
+	        	@Override
+	        	public String handleResponse(HttpResponse resp) throws ClientProtocolException, IOException {
+	        		// TODO Auto-generated method stub
+	        		HttpEntity entity = resp.getEntity();
+
+	        		return EntityUtils.toString(entity);
+	        	}
+	        });
+	        
+			System.out.println(res);
+			
+	        success = true;
+        } catch (Exception e) {
+	        logger.error("error", e);
+        }
+		return success;
+	}
+	
 	public static void main(String[] args) {
 	}
 
