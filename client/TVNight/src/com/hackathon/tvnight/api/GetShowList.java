@@ -29,7 +29,7 @@ public class GetShowList {
 			String query = ApiConstant.COMCAST_SERVER + ApiConstant.QUERY_SEARCH + "?";
 			if (keyword != null) {
 				// keyword search
-				query += "search=" + keyword +
+				query += "search=" + URLEncoder.encode(keyword, "UTF-8") +
 					"&" + "start=" + index +
 					"&" + "returned=" + limit +
 					"&" + "availability=%28%28tvlisting.location%3Amerlin%247444042768941558110%29OR%28vod.location%3Audb.persona%246099%29%29" +
