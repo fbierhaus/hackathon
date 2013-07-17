@@ -232,7 +232,7 @@ public class ContactListSelectorActivity extends Activity implements OnClickList
 			break;
 		case R.id.confirm_butt:
 			Intent dataIntent = new Intent();
-			if (selectedNums.size() > 0) {
+			if (selectedNums != null && selectedNums.size() > 0) {
 				dataIntent.putStringArrayListExtra("selected_nums", selectedNums);
 				setResult(Activity.RESULT_OK, dataIntent);
 			}

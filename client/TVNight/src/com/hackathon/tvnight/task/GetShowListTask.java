@@ -14,6 +14,7 @@ public class GetShowListTask extends AsyncTask<Void, Void, Void> {
 	private Handler mHandler;
 	private int mMsgCode;
 	private List<TVShow> mShowList;
+	private String searchTerm;
 	
 	/**
 	 * Specify the handler and code to notify the show list has been retrieved.
@@ -22,9 +23,10 @@ public class GetShowListTask extends AsyncTask<Void, Void, Void> {
 	 * @param handler
 	 * @param msgCode
 	 */
-	public GetShowListTask(Handler handler, int msgCode) {
+	public GetShowListTask(Handler handler, int msgCode, String searchTerm) {
 		super();
-
+		
+		this.searchTerm = searchTerm;
 		mHandler = handler;
 		mMsgCode = msgCode;
 	}
@@ -51,7 +53,7 @@ public class GetShowListTask extends AsyncTask<Void, Void, Void> {
 //			mShowList.add(show);
 //		}
 		GetShowList task = new GetShowList();
-		mShowList = task.getList();
+		mShowList = task.getList(searchTerm);
 		return null;
 	}
 

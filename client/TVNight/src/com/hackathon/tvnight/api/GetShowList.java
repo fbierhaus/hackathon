@@ -18,13 +18,17 @@ public class GetShowList {
 	public GetShowList() {		
 	}
 	
-	public List<TVShow> getList() {
+	public List<TVShow> getList(String searchTerm) {
 		try {
 			//		  URL url = new URL("http://www.vogella.com");
 //			String query = ApiConstant.MASHERY_KEY + "&" + "q=\"movie\"";	// &filters=<filters>&<query parameter1>&<query parameter2>&<query parameterN>";
 			
+			if (searchTerm == null) {
+				searchTerm = "zombie";
+			}
+			
 			String query = ApiConstant.SERVER +
-					"/CCcontent/search?search=" + "zombie" +
+					"/CCcontent/search?search=" + searchTerm +
 					"&" + "availability=%28%28tvlisting.location%3Amerlin%247444042768941558110%29OR%28vod.location%3Audb.persona%246099%29%29" +
 					"&" + ApiConstant.MASHERY_KEY;				
 			
