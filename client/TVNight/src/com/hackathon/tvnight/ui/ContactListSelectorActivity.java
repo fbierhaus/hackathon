@@ -7,6 +7,7 @@ import java.util.List;
 
 import android.app.Activity;
 import android.content.ContentUris;
+import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -21,6 +22,9 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -32,6 +36,7 @@ public class ContactListSelectorActivity extends Activity implements OnClickList
 	
 	private ListView contactsList;
 	private ContactAdapter contactsAdapter;
+	private ArrayList<String> selectedNums;
 	private Button confirm;
 	private Button cancel;
 
@@ -40,6 +45,10 @@ public class ContactListSelectorActivity extends Activity implements OnClickList
 		setContentView(R.layout.select_contacts_layout);
 		confirm = (Button) findViewById(R.id.confirm_butt);
 		cancel = (Button) findViewById(R.id.cancel_butt);
+		selectedNums = getIntent().getStringArrayListExtra("selected_nums");
+		if (selectedNums != null) {
+			((TextView) findViewById(R.id.create_watch_header)).setText("Edit Watch Group");
+		}
 		confirm.setOnClickListener(this);
 		cancel.setOnClickListener(this);
 		contactsList = (ListView) findViewById(R.id.contact_list);
@@ -68,13 +77,17 @@ public class ContactListSelectorActivity extends Activity implements OnClickList
 						if (phones != null && phones.moveToFirst()) {
 							String phoneNumber = phones
 									.getString(phones
-											.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
+											.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER)).replace("(", "")
+											.replaceAll("-", "").replace(")", "");
 							int itype = phones
 									.getInt(phones
 											.getColumnIndex(ContactsContract.CommonDataKinds.Phone.TYPE));
 							String type = (String) Phone.getTypeLabel(getResources(),
 									itype, "");
 							Bitmap b = BitmapFactory.decodeStream(openPhoto(Long.parseLong(contactId)));
+							if (selectedNums != null && selectedNums.contains(phoneNumber)) {
+								contact.setChecked(true);
+							}
 							contact.setIcon(b);
 							contact.setNumberType(type);
 							contact.setName(name);
@@ -126,6 +139,7 @@ public class ContactListSelectorActivity extends Activity implements OnClickList
 		private ImageView icon;
 		private TextView name;
 		private TextView numAndType;
+		private CheckBox selectedNum;
 	}
 
 	class ContactAdapter extends BaseAdapter {
@@ -154,7 +168,7 @@ public class ContactListSelectorActivity extends Activity implements OnClickList
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
 			
-			ContactItem contact = contacts.get(position);
+			final ContactItem contact = contacts.get(position);
 			
 			if (convertView == null) {
 				convertView = getLayoutInflater().inflate(R.layout.contact_item, null);
@@ -162,6 +176,7 @@ public class ContactListSelectorActivity extends Activity implements OnClickList
 				contactViewHolder.icon = (ImageView) convertView.findViewById(R.id.icon);
 				contactViewHolder.name = (TextView) convertView.findViewById(R.id.contact_name);
 				contactViewHolder.numAndType = (TextView) convertView.findViewById(R.id.contact_num_and_type);
+				contactViewHolder.selectedNum = (CheckBox) convertView.findViewById(R.id.send_inv);
 				convertView.setTag(contactViewHolder);
 			}
 			
@@ -176,6 +191,33 @@ public class ContactListSelectorActivity extends Activity implements OnClickList
 			}
 			holder.name.setText(contact.getName());
 			holder.numAndType.setText(contact.getNumberType()+": "+contact.getNumber());
+			holder.selectedNum.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+				
+				@Override
+				public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+					if (isChecked) {
+						if (selectedNums == null) {
+							selectedNums = new ArrayList<String>();
+						}
+						contact.setChecked(true);
+						if (!selectedNums.contains(contact.getNumber())) {
+							selectedNums.add(contact.getNumber());
+						}
+						notifyDataSetChanged();
+					}
+					else if (selectedNums != null) {
+						contact.setChecked(false);
+						selectedNums.remove(contact.getNumber());
+						notifyDataSetChanged();
+					}
+				}
+			});
+			if (contact.getChecked()) {
+				holder.selectedNum.setChecked(true);
+			}
+			else {
+				holder.selectedNum.setChecked(false);
+			}
 			
 			return convertView;
 		}
@@ -189,7 +231,15 @@ public class ContactListSelectorActivity extends Activity implements OnClickList
 			finish();
 			break;
 		case R.id.confirm_butt:
-			
+			Intent dataIntent = new Intent();
+			if (selectedNums.size() > 0) {
+				dataIntent.putStringArrayListExtra("selected_nums", selectedNums);
+				setResult(Activity.RESULT_OK, dataIntent);
+			}
+			else {
+				setResult(Activity.RESULT_CANCELED);
+			}
+			finish();
 			break;
 		}
 	}

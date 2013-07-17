@@ -8,11 +8,13 @@ public class ContactItem {
 	private String number;
 	private String numberType;
 	private Bitmap icon;
+	private boolean isChecked;
 	
 	public ContactItem() { }
 	
-	public ContactItem(String name, String number, String numberType, Bitmap icon) {
+	public ContactItem(String name, String number, String numberType, Bitmap icon, boolean isChecked) {
 		this.name = name;
+		this.isChecked = isChecked;
 		this.number = number;
 		this.numberType = numberType;
 		this.icon = icon;
@@ -48,6 +50,14 @@ public class ContactItem {
 
 	public void setIcon(Bitmap icon) {
 		this.icon = icon;
+	}
+	
+	public void setChecked(boolean isChecked) {
+		this.isChecked = isChecked;
+	}
+	
+	public boolean getChecked() {
+		return isChecked;
 	}
 	
 }

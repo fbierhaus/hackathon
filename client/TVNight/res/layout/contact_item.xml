@@ -5,8 +5,10 @@
     android:background="@drawable/bg_row_gradient_bar">
     
     <ImageView android:id="@+id/icon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:padding="7dp"
+        android:scaleType="fitXY"
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="10dp"
         android:layout_centerVertical="true"/>
@@ -37,7 +39,6 @@
         android:layout_centerVertical="true"
         android:layout_alignParentRight="true"
         android:layout_marginRight="12dp"
-        android:checked="false"
         android:button="@drawable/checkbox_selector"/>
 
 </RelativeLayout>

@@ -32,7 +32,7 @@ public class ShowListActivity extends Activity {
 			protected List<TVShow> doInBackground(Void... params) {
 				//TODO add http request here and return array of model object to show to UI
 				try {
-					Thread.sleep(5000);
+					Thread.sleep(2000);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
