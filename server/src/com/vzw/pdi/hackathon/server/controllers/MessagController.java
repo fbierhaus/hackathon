@@ -16,9 +16,9 @@ import com.vzw.pdi.hackathon.server.MessageManager;
  * @author fred
  *
  */
-public class Messag extends RestController {
+public class MessagController extends RestController {
 
-	Logger logger = LoggerFactory.getLogger(GroupEvent.class);
+	Logger logger = LoggerFactory.getLogger(MessagController.class);
 	
 	@POST
 	@DoNotRenderPage

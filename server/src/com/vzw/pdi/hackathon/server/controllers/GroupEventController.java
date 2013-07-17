@@ -12,13 +12,14 @@ import net.sf.serfj.annotations.PUT;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.vzw.hackathon.GroupEvent;
 import com.vzw.hackathon.GroupEventManager;
 import com.vzw.hackathon.Member;
 import com.vzw.hackathon.MemberStatus;
 import com.vzw.util.JSONUtil;
 
-public class GroupEvent extends RestController {
-	Logger logger = LoggerFactory.getLogger(GroupEvent.class);
+public class GroupEventController extends RestController {
+	Logger logger = LoggerFactory.getLogger(GroupEventController.class);
 	
 	/**
 	 * Request should look like:
@@ -38,14 +39,14 @@ public class GroupEvent extends RestController {
 			JSONObject jsonObject = JSONObject.fromObject( jsonString );  
 			logger.debug("+++++++++ JSONObject" + jsonObject.toString());
 			
-			com.vzw.hackathon.GroupEvent ge = (com.vzw.hackathon.GroupEvent) JSONUtil.toJava(jsonObject, com.vzw.hackathon.GroupEvent.class, "memberList", Member.class);
-			logger.debug("+++++++++++ deserialzed GroupEvent:" + ge);
+			GroupEvent ge = (GroupEvent) JSONUtil.toJava(jsonObject, GroupEvent.class, "memberList", Member.class);
+			logger.debug("+++++++++++ deserialzed GroupEventController:" + ge);
 			
 			
 			// save to db both groupevent and group_member
 			GroupEventManager gem = GroupEventManager.getInstance();
 			int id = gem.createGroupEvent(ge);
-			logger.debug("Created GroupEvent with id: " + id);
+			logger.debug("Created GroupEventController with id: " + id);
 			
 			// set for jsp
 			this.putParam("id", id);
@@ -86,7 +87,7 @@ public class GroupEvent extends RestController {
 		int id = Integer.parseInt(this.getId());
 		
 		GroupEventManager gem = GroupEventManager.getInstance();
-		com.vzw.hackathon.GroupEvent ge = gem.loadGroupEventFromDb(id);
+		GroupEvent ge = gem.loadGroupEventFromDb(id);
 		
 		return ge;
 	}
