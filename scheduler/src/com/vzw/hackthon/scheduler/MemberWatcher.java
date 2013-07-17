@@ -32,7 +32,7 @@ public class MemberWatcher implements Runnable {
 	private static final String SQL_SEL_MEMBERS = 
 			"select g.group_event_id, g.mdn, u.name, u.channel_id, g.member_status, g.last_channel_id"
 			+ " from GROUP_MEMBER g, USERS u"
-			+ " where u.mdn = g.mdn and g.member_status = 'MASTER' or g.member_status = 'ACCEPTED"
+			+ " where u.mdn = g.mdn and g.member_status = 'MASTER' or g.member_status = 'ACCEPTED'"
 			+ " order by g.GROUP_EVENT_ID, g.mdn";
 	
 		
@@ -40,11 +40,14 @@ public class MemberWatcher implements Runnable {
 	
 
 	
-	private MemberWatcher() {
+	public MemberWatcher() {
+	}
+	
+	public void start() {
 		
 		// check the database every 10 seconds
 		executor = Executors.newScheduledThreadPool(10);
-		executor.scheduleAtFixedRate(this, 10, CHECK_INTERVAL_SECONDS, TimeUnit.SECONDS);
+		executor.scheduleAtFixedRate(this, 1, CHECK_INTERVAL_SECONDS, TimeUnit.SECONDS);
 		
 		
 		Runtime.getRuntime().addShutdownHook(new Thread() {
@@ -62,6 +65,9 @@ public class MemberWatcher implements Runnable {
 	
 	
 	private void watchMembers() {
+		
+		logger.info("Start watching");
+		
 		// get all the events first
 		Connection conn = null;
 		PreparedStatement ps = null;
@@ -115,17 +121,27 @@ public class MemberWatcher implements Runnable {
 	}
 	
 	private void processWatch(GroupEvent ge) {
+		logger.info("Got ge: " + ge);
+		
+		
 		GroupEventManager gem = GroupEventManager.getInstance();
 		String[] tos = ge.getMemberMdns();
 		String toStr = StringUtils.join(tos, ",");
 		for (Member m : ge.getMemberList()) {
 			Channel channel = gem.getChannel(m.getChannelId());
+			
+			logger.info("member: " + m);
+			
 			if (!StringUtils.equals(m.getChannelId(), m.getLastChannelId())) {
+				String msg = m.getName() + " changed channel to " + channel.getName();
+				logger.info("channel changed, to=" + toStr + ", msg = " + msg);
+				
 				// need to send the group message of this change
-				SendVMAMessage.sendMMS(m.getMdn(), toStr, m.getName() + " changed channel to " + channel.getName());
+				SendVMAMessage.sendMMS(m.getMdn(), toStr, msg);
 				
 				// update last channel id
 				gem.updateMemberLastChannelId(ge.getId(), m.getMdn(), m.getChannelId());
+				logger.info("updated lastChannelId to " + m.getChannelId());
 			}
 		}
 	}

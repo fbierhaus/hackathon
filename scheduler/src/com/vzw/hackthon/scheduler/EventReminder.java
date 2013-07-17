@@ -24,7 +24,7 @@ public class EventReminder implements Runnable {
 	private static final DBPool 	dbPool = DBManager.getDBPool();
 	
 	private static final int CHECK_INTERVAL_SECONDS		= 5;
-	private static final int REMINDER_MINUTES			= 2;		// when to send reminder
+	private static final int REMINDER_SECONDS			= 600;		// when to send reminder 90
 	
 	
 	private static final String SQL_SEL_EVENTS_FOR_REMINDER = 
@@ -32,11 +32,11 @@ public class EventReminder implements Runnable {
 			+ " show_name as showName, master_mdn as masterMdn, create_time as createTime"
 			+ " from GROUP_EVENT"
 			+ " where reminder_sent = 0 and"
-			+ " show_time between CURRENT_TIMESTAMP AND {fn TIMESTAMPADD(SQL_TSI_MINUTE, ?, CURRENT_TIMESTAMP)}";
+			+ " show_time between CURRENT_TIMESTAMP AND {fn TIMESTAMPADD(SQL_TSI_SECOND, ?, CURRENT_TIMESTAMP)}";
 	
 	
 	private static final String SQL_SEL_MEMBER_FOR_REMINDER = 
-			"select mdn from group_member where group_event_id = > and MEMBER_STATUS = 'ACCEPTED' or MEMBER_STATUS = 'MASTER'";
+			"select mdn from group_member where group_event_id = ? and MEMBER_STATUS = 'ACCEPTED' or MEMBER_STATUS = 'MASTER'";
 	
 	private static final String SQL_FLAG_REMINDER_SENT =
 			"update group_event set reminder_sent = 1 where group_event_id = ?";
@@ -49,7 +49,7 @@ public class EventReminder implements Runnable {
 	public void start() {
 		// check the database every 10 seconds
 		executor = Executors.newScheduledThreadPool(10);
-		executor.scheduleAtFixedRate(this, 10, CHECK_INTERVAL_SECONDS, TimeUnit.SECONDS);
+		executor.scheduleAtFixedRate(this, 1, CHECK_INTERVAL_SECONDS, TimeUnit.SECONDS);
 		
 		Runtime.getRuntime().addShutdownHook(new Thread() {
 			public void run() {
@@ -73,7 +73,7 @@ public class EventReminder implements Runnable {
 			
 			// go over the events the show time of which is not REMINDER_MINUTES more minutes than now.
 			geList = DBUtil.query(dbPool, SQL_SEL_EVENTS_FOR_REMINDER, 
-					new DBUtil.BeanListHandlerEx<GroupEvent>(GroupEvent.class), DBUtil.THROW_HANDLER, -REMINDER_MINUTES);
+					new DBUtil.BeanListHandlerEx<GroupEvent>(GroupEvent.class), DBUtil.THROW_HANDLER, REMINDER_SECONDS);
 			
 		}
 		catch (Exception e) {

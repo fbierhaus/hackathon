@@ -24,7 +24,9 @@ public class GetShowImage {
 		ArrayList<ShowImage> list = null;
 		
 		try {
-			String query = ApiConstant.ROVI_SERVER + String.format(ApiConstant.ROVI_IMAGE, id) + "&apikey=" + ApiConstant.ROVI_KEY;
+			String query = ApiConstant.ROVI_SERVER + String.format(ApiConstant.ROVI_IMAGE, id);
+			query += "&imagesize=80-120x80-120";	// "&formatid=51"; // "&imagesize=100x100";
+			query += "&apikey=" + ApiConstant.ROVI_KEY;
 			String md5 = ApiConstant.ROVI_KEY + ApiConstant.ROVI_SECRET + (System.currentTimeMillis()/1000);
 			md5 = Util.md5(md5);
 			query += "&sig=" + md5;
