@@ -124,14 +124,19 @@ public class EventReminder implements Runnable {
 	 */
 	public void sendReminders() {
 		
+		logger.info("Start sending reminders");
+		
 		List<GroupEvent> geList = getGroupEventsForReminder();
 		
 		if (!CollectionUtils.isEmpty(geList)) {
 			for (GroupEvent ge : geList) {
+				logger.info("Prepare reminder for group event: " + ge);
 				List<String> mdnList = getMemberMdnForReminder(ge.getId());
 				if (!CollectionUtils.isEmpty(mdnList)) {
 					
 					String msg = buildReminderString(ge);
+					
+					logger.info("Prepared reminder message: " + msg + ", mdnList=" + mdnList);
 					
 					// send to the client
 					//MessagingAPIHandler.sendSMS(mdnList, msg);
@@ -140,6 +145,9 @@ public class EventReminder implements Runnable {
 					flagReminderSent(ge.getId());
 				}
 			}
+		}
+		else {
+			logger.info("No event to remind");
 		}
 	}
 	
