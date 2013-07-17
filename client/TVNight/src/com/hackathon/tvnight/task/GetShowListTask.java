@@ -7,12 +7,13 @@ import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Message;
 
+import com.hackathon.tvnight.api.GetShowList;
 import com.hackathon.tvnight.model.TVShow;
 
 public class GetShowListTask extends AsyncTask<Void, Void, Void> {
 	private Handler mHandler;
 	private int mMsgCode;
-	private ArrayList<TVShow> mShowList = new ArrayList<TVShow>();
+	private List<TVShow> mShowList;
 	
 	/**
 	 * Specify the handler and code to notify the show list has been retrieved.
@@ -45,10 +46,12 @@ public class GetShowListTask extends AsyncTask<Void, Void, Void> {
 
 	@Override
 	protected Void doInBackground(Void... params) {
-		for (int i=0; i<10; i++) {
-			TVShow show = new TVShow("Show " + (i+1));
-			mShowList.add(show);
-		}		
+//		for (int i=0; i<10; i++) {
+//			TVShow show = new TVShow("Show " + (i+1));
+//			mShowList.add(show);
+//		}
+		GetShowList task = new GetShowList();
+		mShowList = task.getList();
 		return null;
 	}
 
