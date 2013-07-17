@@ -57,4 +57,15 @@ public class Channel {
 		
 		return channel;
 	}
+	@Override
+	public String toString() {
+		return "Channel [id=" + id + ", name=" + name + ", desc=" + desc
+				+ ", channelNumber=" + channelNumber + ", roviId=" + roviId
+				+ "]";
+	}
+	
+	
+	
+	
+	
 }
