@@ -72,23 +72,28 @@ public class GroupEventController extends RestController {
 	/**
 	 * curl -X PUT -i  "http://localhost:8080/server/groupEvents/1/rsvp?status=ACCEPTED&mdn=9255551234"
 	 */
-	@PUT
+	@GET
 	@DoNotRenderPage
 	public void rsvp(){
 		logger.debug("++++++++++ Starting RSVP");
 
-		int id = Integer.parseInt(this.getId());
-		String statusString = this.getStringParam("status");
-		String mdn = this.getStringParam("mdn");
-		MemberStatus status =  MemberStatus.valueOf(statusString);
+		try{
+			int id = Integer.parseInt(this.getId());
+			String statusString = this.getStringParam("status");
+			String mdn = this.getStringParam("mdn");
+			MemberStatus status =  MemberStatus.valueOf(statusString);
 
-		logger.debug("++++++++++ RSVP mdn:" + mdn + " status: " + status );
-		
-		
-		GroupEventManager gem = GroupEventManager.getInstance();
-		
-		// update db to set status to accepted/delcined (mdn, groupeventid, status)
-		gem.updateMemberStatus(id, mdn, status);
+			logger.debug("++++++++++ RSVP mdn:" + mdn + " status: " + status );
+			
+			
+			GroupEventManager gem = GroupEventManager.getInstance();
+			
+			// update db to set status to accepted/delcined (mdn, groupeventid, status)
+			gem.updateMemberStatus(id, mdn, status);
+			
+		} catch (Exception e){
+			logger.error("Error rsvp: ", e);
+		}
 	}
 	
 	
