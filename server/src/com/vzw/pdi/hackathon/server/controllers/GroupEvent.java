@@ -5,12 +5,14 @@ import net.sf.serfj.RestController;
 import net.sf.serfj.annotations.DoNotRenderPage;
 import net.sf.serfj.annotations.GET;
 import net.sf.serfj.annotations.POST;
+import net.sf.serfj.annotations.PUT;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.vzw.hackathon.GroupEventManager;
 import com.vzw.hackathon.Member;
+import com.vzw.hackathon.MemberStatus;
 import com.vzw.pdi.hackathon.server.ServerResponse;
 import com.vzw.util.JSONUtil;
 
@@ -35,17 +37,13 @@ public class GroupEvent extends RestController {
 			JSONObject jsonObject = JSONObject.fromObject( jsonString );  
 			logger.debug("+++++++++ JSONObject" + jsonObject.toString());
 			
-//			com.vzw.hackathon.GroupEvent ge = (com.vzw.hackathon.GroupEvent) JSONObject.toBean( jsonObject, com.vzw.hackathon.GroupEvent.class );
 			com.vzw.hackathon.GroupEvent ge = (com.vzw.hackathon.GroupEvent) JSONUtil.toJava(jsonObject, com.vzw.hackathon.GroupEvent.class, "memberList", Member.class);
 			logger.debug("+++++++++++ deserialzed GroupEvent:" + ge);
 			
 			
 			// save to db both groupevent and group_member
-			GroupEventManager gem = new GroupEventManager();
+			GroupEventManager gem = GroupEventManager.getInstance();
 			gem.createGroupEvent(ge);
-			
-			// call schedule GroupEventManager.schedulePlay(ge)
-			gem.schedulePlay(ge.getMasterMdn(),ge);
 			
 		} catch (Exception e){
 			logger.error("Error parsing JSON", e);
@@ -56,16 +54,36 @@ public class GroupEvent extends RestController {
 		return ServerResponse.OK;
 	}
 	
+	/**
+	 * curl -X PUT -i  "http://localhost:8080/server/groupEvents/1/rsvp?status=ACCEPTED&mdn=9255551234"
+	 */
+	@PUT
+	@DoNotRenderPage
+	public void rsvp(){
+		logger.debug("++++++++++ Starting RSVP");
+
+		int id = Integer.parseInt(this.getId());
+		String statusString = this.getStringParam("status");
+		String mdn = this.getStringParam("mdn");
+		MemberStatus status =  MemberStatus.valueOf(statusString);
+
+		logger.debug("++++++++++ RSVP mdn:" + mdn + " status: " + status );
+		
+		
+		GroupEventManager gem = GroupEventManager.getInstance();
+		
+		// update db to set status to accepted/delcined (mdn, groupeventid, status)
+		gem.updateMemberStatus(id, mdn, status);
+	}
 	
-	// accept
-	// need groupEventId to lookup in db, mdn
-	// update db to set status to accepted/delcined (mdn, groupeventid, status)
-	// GEM.schedulePlay(ge, mdn)
+	
 	
 	@GET
 	public com.vzw.hackathon.GroupEvent show() {
-		com.vzw.hackathon.GroupEvent ge = new com.vzw.hackathon.GroupEvent();
-		ge.setId(1);
+		int id = Integer.parseInt(this.getId());
+		
+		GroupEventManager gem = GroupEventManager.getInstance();
+		com.vzw.hackathon.GroupEvent ge = gem.loadGroupEventFromDb(id);
 		
 		return ge;
 	}

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#DADADA"
+    android:orientation="vertical" >
+
+    <include
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/headerlayout"
+        android:layout_alignParentTop="true"/>
+
+    <TextView
+        android:id="@+id/tv_reminder_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/header_layout"
+        android:background="#5A5A5A"
+        android:gravity="left|center_vertical"
+        android:paddingBottom="7dp"
+        android:paddingLeft="7dp"
+        android:paddingTop="7dp"
+        android:text="TV Reminder"
+        android:textColor="#FFFFFF" />
+
+    <ImageView
+        android:id="@+id/seperator"
+        android:layout_below="@id/tv_reminder_header"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#787878" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_below="@id/seperator"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin" >
+
+        <TextView
+            android:id="@+id/tv_title_and_season"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginTop="15dp"
+            android:textSize="18sp"
+            android:text="Falling Skies, Season 3"
+            android:textStyle="bold"
+            android:textColor="#333333"/>
+        <TextView android:id="@+id/episode_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:layout_marginBottom="7dp"
+            android:text="At All Costs"
+            android:textColor="#333333"
+            android:layout_gravity="left"/>
+        <TextView android:id="@+id/show_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text "
+            android:layout_gravity="left"/>
+        
+         <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="7dp"
+                android:layout_marginTop="7dp"
+                android:src="@drawable/gray_divider_line2px" />
+         
+         <TextView android:id="@+id/show_stats"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:text="42:07 / HD / TV-14 / CC"/>
+         
+          <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/gray_divider_line2px" />
+          
+          <TextView android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="Show Starts In:"
+              android:textSize="16sp"
+              android:layout_gravity="center_horizontal"
+              android:textColor="#333333"
+              android:layout_marginTop="30dp"/>
+          
+          <TextView android:id="@+id/timer_view"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:textSize="30sp"
+              android:textStyle="bold"
+              android:layout_gravity="center_horizontal"
+              android:text="00:00:00"
+              android:textColor="#333333"/>
+    </LinearLayout>
+
+</RelativeLayout>
