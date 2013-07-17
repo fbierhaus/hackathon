@@ -30,9 +30,9 @@ public class MemberWatcher implements Runnable {
 	
 	
 	private static final String SQL_SEL_MEMBERS = 
-			"select g.group_event_id, g.mdn, u.name, u.channel_id, g.member_status, g.last_channel_id"
-			+ " from GROUP_MEMBER g, USERS u"
-			+ " where u.mdn = g.mdn and g.member_status = 'MASTER' or g.member_status = 'ACCEPTED'"
+			"select g.group_event_id, g.mdn, g.member_status, g.last_channel_id, u.name, u.channel_id"
+			+ " from GROUP_MEMBER g left outer join users u on g.mdn = u.mdn"
+			+ " where g.member_status = 'MASTER' or g.member_status = 'ACCEPTED'"
 			+ " order by g.GROUP_EVENT_ID, g.mdn";
 	
 		
@@ -109,8 +109,19 @@ public class MemberWatcher implements Runnable {
 				member.setName(rs.getString("name"));
 				member.setLastChannelId(rs.getString("last_channel_id"));
 				memberList.add(member);
+				
+				lastGeId = curGeId;
 					
 			}
+			
+			
+
+			// new group event
+			if (ge != null) {
+				processWatch(ge);
+			}
+
+		
 		}
 		catch (Exception e) {
 			logger.error("Failed to watch members", e);

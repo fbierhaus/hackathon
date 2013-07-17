@@ -31,15 +31,15 @@ public class EventReminder implements Runnable {
 			"select group_event_id as id, show_id as showId, channel_id as channelId, show_time as showTime, "
 			+ " show_name as showName, master_mdn as masterMdn, create_time as createTime"
 			+ " from GROUP_EVENT"
-			+ " where reminder_sent = 0 and"
-			+ " show_time between CURRENT_TIMESTAMP AND {fn TIMESTAMPADD(SQL_TSI_SECOND, ?, CURRENT_TIMESTAMP)}";
+			+ " where show_time between CURRENT_TIMESTAMP AND {fn TIMESTAMPADD(SQL_TSI_SECOND, ?, CURRENT_TIMESTAMP)}";
 	
 	
 	private static final String SQL_SEL_MEMBER_FOR_REMINDER = 
-			"select mdn from group_member where group_event_id = ? and MEMBER_STATUS = 'ACCEPTED' or MEMBER_STATUS = 'MASTER'";
+			"select mdn from group_member where group_event_id = ? and "
+			+ " REMINDER_SENT = 0 and MEMBER_STATUS = 'ACCEPTED' or MEMBER_STATUS = 'MASTER'";
 	
 	private static final String SQL_FLAG_REMINDER_SENT =
-			"update group_event set reminder_sent = 1 where group_event_id = ?";
+			"update group_member set reminder_sent = 1 where group_event_id = ? and mdn = ?";
 	
 	private ScheduledExecutorService		executor = null;
 	
@@ -142,7 +142,9 @@ public class EventReminder implements Runnable {
 					//MessagingAPIHandler.sendSMS(mdnList, msg);
 					VZWAPIHandler.sendSMS(mdnList, msg);
 					
-					flagReminderSent(ge.getId());
+					for (String mdn : mdnList) {
+						flagReminderSent(ge.getId(), mdn);
+					}
 				}
 			}
 		}
@@ -151,9 +153,9 @@ public class EventReminder implements Runnable {
 		}
 	}
 	
-	private void flagReminderSent(int geId) {
+	private void flagReminderSent(int geId, String mdn) {
 		try {
-			DBUtil.update(dbPool, SQL_FLAG_REMINDER_SENT, DBUtil.THROW_HANDLER, geId);
+			DBUtil.update(dbPool, SQL_FLAG_REMINDER_SENT, DBUtil.THROW_HANDLER, geId, mdn);
 		}
 		catch (Exception e) {
 			logger.error("Unable flag reminder sent for geId=" + geId, e);
