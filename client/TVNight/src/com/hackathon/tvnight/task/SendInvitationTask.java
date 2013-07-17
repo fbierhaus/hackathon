@@ -1,28 +1,30 @@
 package com.hackathon.tvnight.task;
 
+import com.hackathon.tvnight.api.SendInvitation;
+
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Message;
 
 /**
  * Result is retured in the Message sent to the Handler supplied by the caller.
- * Message.obj1 contains the unique invitation id, or 0 if the invitation failed to send.
+ * Message.obj contains the unique invitation id in Long, or Long of 0 if the invitation failed to send.
  * 
  * @author mcdull
  *
  */
-public class SendInvitationTask extends AsyncTask<Invitation, Void, Integer> {
+public class SendInvitationTask extends AsyncTask<Invitation, Void, Long> {
 	private Handler mHandler;
 	private int mMsgCode;	
 	
-	private int mInvitationId = 0;
+	private long mInvitationId = 0;
 	
 	public SendInvitationTask(Handler handler, int msgCode) {
 		mHandler = handler;
 		mMsgCode = msgCode;
 	}
 	
-	public int getInvitationId() {
+	public long getInvitationId() {
 		return mInvitationId;
 	}
 	
@@ -38,21 +40,17 @@ public class SendInvitationTask extends AsyncTask<Invitation, Void, Integer> {
 	}
 
 	@Override
-	protected Integer doInBackground(Invitation... params) {
+	protected Long doInBackground(Invitation... params) {
+		Long invitationId = null;
 		Invitation invite = params[0];
 
-		try {
-			Thread.sleep(5000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		return null;
+		long id = (new SendInvitation(invite).send());
+		invitationId = Long.valueOf(id);					
+		return invitationId;
 	}
 
 	@Override
-	protected void onPostExecute(Integer param) {
+	protected void onPostExecute(Long param) {
 		if (param == null) {
 			mInvitationId = 0;
 		}
@@ -62,7 +60,7 @@ public class SendInvitationTask extends AsyncTask<Invitation, Void, Integer> {
 
 		// end of task, notify the handler 
 		Message msg = mHandler.obtainMessage(mMsgCode);
-		msg.arg1 = mInvitationId;
+		msg.obj = Long.valueOf(mInvitationId);
 		msg.sendToTarget();
 	}
 }

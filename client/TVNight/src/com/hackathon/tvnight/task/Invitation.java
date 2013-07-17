@@ -7,6 +7,9 @@ public class Invitation {
 	private ArrayList<String> mRecipientList = new ArrayList<String>();
 	private String mChannelId;
 	private String mShowId;
+	
+	// below only when after it's created
+	private long mId;
 
 	/**
 	 * @param channelId		Use the "rovi" in the id list
