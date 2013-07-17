@@ -9,6 +9,7 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.dbutils.handlers.ScalarHandler;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 
 import com.vzw.hackathon.apihandler.ComcastAPIHandler;
@@ -38,7 +39,7 @@ public class GroupEventManager {
 
 	private static final String SQL_ADD_GROUP_MEMBER =
 			"INSERT INTO GROUP_MEMBER ("
-			+ "	GROUP_EVENT_ID,	MDN, MEMBER_STATUS) VALUES (?, ?, 'INVITED')";
+			+ "	GROUP_EVENT_ID,	MDN, MEMBER_STATUS) VALUES (?, ?, ?)";
 	
 	
 	private static final String SQL_UPDATE_MEMBER_STATUS =
@@ -132,8 +133,12 @@ public class GroupEventManager {
 			// insert members (including master mdn)
 			for (Member m : ge.getMemberList()) {
 				DBUtil.update(dbPool, SQL_ADD_GROUP_MEMBER, DBUtil.THROW_HANDLER, 
-						geId, m.getMdn());
+						geId, m.getMdn(), MemberStatus.INVITED.name());
 			}
+			
+			DBUtil.update(dbPool, SQL_ADD_GROUP_MEMBER, DBUtil.THROW_HANDLER, 
+					geId, ge.getMasterMdn(), MemberStatus.MASTER.name());
+	
 			
 			id = geId;
 		}
