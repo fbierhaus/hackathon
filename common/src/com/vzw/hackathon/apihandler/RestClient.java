@@ -21,8 +21,6 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.params.BasicHttpParams;
-import org.apache.http.params.HttpParams;
 import org.apache.http.util.EntityUtils;
 import org.apache.log4j.Logger;
 
@@ -112,6 +110,43 @@ public class RestClient {
 	    }
 	}
 	
+	
+	public static void postMessage(String sender, String recipient, String message, String serverBaseURL){
+        try {
+        	
+        	String url = serverBaseURL + "/server/messages";
+        	
+	        HttpPost post = new HttpPost(url);
+	        
+			List<NameValuePair> formParams = new ArrayList<NameValuePair>(3);
+			formParams.add(new BasicNameValuePair("mdn", recipient));
+			formParams.add(new BasicNameValuePair("from", sender));
+			formParams.add(new BasicNameValuePair("message", message));
+
+			UrlEncodedFormEntity entity = new UrlEncodedFormEntity(formParams, "UTF-8");
+			post.setEntity(entity);
+			
+	        String res = hClient.execute(post, new ResponseHandler<String>() {
+
+	        	@Override
+	        	public String handleResponse(HttpResponse resp) throws ClientProtocolException, IOException {
+	        		// TODO Auto-generated method stub
+	        		HttpEntity entity = resp.getEntity();
+
+	        		return EntityUtils.toString(entity);
+	        	}
+	        });
+	        
+	        
+	    } catch (Exception e) {
+	        logger.error("error", e);
+	    }
+		
+	}
+	
+	
+	
+	
 	protected static int extractId(String response){
 		JSONObject jsonObject = JSONObject.fromObject( response );
 		ServerResponse sr = (ServerResponse) JSONUtil.toJava(jsonObject, ServerResponse.class);
@@ -120,7 +155,8 @@ public class RestClient {
 	
 	public static void main(String[] args) {
 //		new RestClient().testGroupEvent();
-		new RestClient().testRsvp();
+//		new RestClient().testRsvp();
+		new RestClient().testPostMessage();
 	}
 	
 	protected void testGroupEvent(){
@@ -147,5 +183,14 @@ public class RestClient {
 	protected void testRsvp(){
 		String serverBaseUrl = "http://localhost:8080/";
 		RestClient.rsvp(3, "9259991234", MemberStatus.DECLINED, serverBaseUrl);
+	}
+	
+	protected void testPostMessage(){
+		String sender = "9255551234";
+		String from = "9259991234";
+		String message = "Hello World!";
+		String serverBaseUrl = "http://localhost:8080/";
+
+		RestClient.postMessage(sender, from, message, serverBaseUrl);
 	}
 }
