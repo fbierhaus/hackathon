@@ -1,5 +1,7 @@
 package com.vzw.pdi.hackathon.server.controllers;
 
+import java.io.IOException;
+
 import net.sf.json.JSONObject;
 import net.sf.serfj.RestController;
 import net.sf.serfj.annotations.DoNotRenderPage;
@@ -13,7 +15,6 @@ import org.slf4j.LoggerFactory;
 import com.vzw.hackathon.GroupEventManager;
 import com.vzw.hackathon.Member;
 import com.vzw.hackathon.MemberStatus;
-import com.vzw.pdi.hackathon.server.ServerResponse;
 import com.vzw.util.JSONUtil;
 
 public class GroupEvent extends RestController {
@@ -23,10 +24,10 @@ public class GroupEvent extends RestController {
 	 * Request should look like:
 	 * curl -i --data "groupEvent={'showId':'1','masterMdn':'9255551234', 'memberList':[{'mdn':'9258881234','name':'foo'},{'mdn':'9259991234','name':'bar'}]}" http://localhost:8080/server/groupEvents
 	 * @return
+	 * @throws IOException 
 	 */
 	@POST
-	@DoNotRenderPage
-	public ServerResponse create(){
+	public void create() throws IOException{
 		logger.debug("++++++++++ Starting create");
 		
 		try{
@@ -43,16 +44,18 @@ public class GroupEvent extends RestController {
 			
 			// save to db both groupevent and group_member
 			GroupEventManager gem = GroupEventManager.getInstance();
-			gem.createGroupEvent(ge);
+			int id = gem.createGroupEvent(ge);
+			logger.debug("Created GroupEvent with id: " + id);
 			
+			// set for jsp
+			this.putParam("id", id);
 		} catch (Exception e){
 			logger.error("Error parsing JSON", e);
-			return ServerResponse.ERROR;
+			this.renderPage("error.jsp");
 		}
-
-		
-		return ServerResponse.OK;
 	}
+	
+	
 	
 	/**
 	 * curl -X PUT -i  "http://localhost:8080/server/groupEvents/1/rsvp?status=ACCEPTED&mdn=9255551234"
