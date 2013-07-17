@@ -62,7 +62,7 @@ public class MemberWatcher implements Runnable {
 		
 		try {
 			
-			
+			conn = dbPool.getConnection();
 			ps = conn.prepareStatement(SQL_SEL_MEMBERS);
 			rs = ps.executeQuery();
 			

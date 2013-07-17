@@ -62,6 +62,19 @@ public class GroupEventManager {
 	private GroupEventManager() {
 		dbPool = DBManager.getDBPool();
 		scheduler = Executors.newScheduledThreadPool(20);
+		
+		Runtime.getRuntime().addShutdownHook(new Thread() {
+			public void run() {
+				GroupEventManager.getInstance().destroy();
+			}
+		});
+	}
+	
+	public void destroy() {
+		if (scheduler != null) {
+			scheduler.shutdown();
+			scheduler = null;
+		}
 	}
 	
 	/**
