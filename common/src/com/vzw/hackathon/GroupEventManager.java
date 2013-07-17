@@ -18,7 +18,7 @@ import com.vzw.util.db.DBUtil;
 
 public class GroupEventManager {
 	private static final Logger	logger = Logger.getLogger(GroupEventManager.class);
-	private static final DBPool dbPool = DBManager.getDBPool();
+	private  DBPool dbPool = null;
 	
 	private static final String SQL_SEL_GROUP_EVENT = 
 			"select group_event_id as id, show_id as showId, channel_id as channelId, show_time as showTime, "
@@ -60,6 +60,7 @@ public class GroupEventManager {
 		return instance;
 	}
 	private GroupEventManager() {
+		dbPool = DBManager.getDBPool();
 		scheduler = Executors.newScheduledThreadPool(20);
 	}
 	
