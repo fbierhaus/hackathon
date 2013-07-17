@@ -11,12 +11,16 @@ import java.util.concurrent.TimeUnit;
 import org.apache.commons.dbutils.handlers.ScalarHandler;
 import org.apache.log4j.Logger;
 
+import com.vzw.hackathon.apihandler.ComcastAPIHandler;
 import com.vzw.util.db.DBManager;
 import com.vzw.util.db.DBPool;
 import com.vzw.util.db.DBUtil;
 
 public class GroupEventManager {
 	private static final Logger	logger = Logger.getLogger(GroupEventManager.class);
+	private static boolean TEST = true;
+	
+	
 	private  DBPool dbPool = null;
 	
 	private static final String SQL_SEL_GROUP_EVENT = 
@@ -38,7 +42,7 @@ public class GroupEventManager {
 	
 	
 	private static final String SQL_UPDATE_MEMBER_STATUS =
-			"update GROUP_MEMBER set MEMBER_STATUS = ?, DEVICE_ID = ? where GROUP_EVENT_ID = ? and MDN = ?";
+			"update GROUP_MEMBER set MEMBER_STATUS = ? where GROUP_EVENT_ID = ? and MDN = ?";
 	
 	
 	private static final String SQL_UPDATE_MEMBER_LAST_CHANNEL_ID = 
@@ -146,23 +150,12 @@ public class GroupEventManager {
 	public void updateMemberStatus(int groupEventId, String mdn, MemberStatus status) {
 		try {
 			
-			String deviceId = null;
-			switch (status) {
-				case ACCEPTED:
-					//deviceId = ComcastAPIHandler.getDeviceId(mdn);
-					deviceId = "foobar";
-					break;
-					
-				default:
-					break;
-			}
-			
 			DBUtil.update(dbPool, SQL_UPDATE_MEMBER_STATUS, DBUtil.THROW_HANDLER, 
-					status.name(), deviceId, groupEventId, mdn);
+					status.name(), groupEventId, mdn);
 			
-			if (deviceId != null) {
+			if (status == MemberStatus.ACCEPTED) {
 				// schedule a play
-				schedulePlay(mdn, deviceId, groupEventId);
+				schedulePlay(mdn, groupEventId);
 			}
 		}
 		catch (Exception e) {
@@ -248,7 +241,7 @@ public class GroupEventManager {
 	 * @param mdn
 	 * 
 	 */
-	public void schedulePlay(String mdn, final String deviceId, int groupEventId) {
+	public void schedulePlay(final String mdn, int groupEventId) {
 		final GroupEvent ge = loadGroupEventFromDb(groupEventId);
 		if (ge != null) {
 			String key = ge.getId() + mdn;
@@ -259,20 +252,23 @@ public class GroupEventManager {
 				
 				if (delay < 0) {
 					// tune right away
-					//ComcastAPIHandler.tuneChannel(deviceId, ge.getChannelId());
+					if (!TEST) {
+						ComcastAPIHandler.tuneChannel(mdn, ge.getChannelId());
+					}
 				}
 				else {
 					//schedule it
-				}
-				scheduler.schedule(new Runnable() {
-					
-					@Override
-					public void run() {
-//						ComcastAPIHandler.tuneChannel(deviceId, ge.getChannelId());
+					scheduler.schedule(new Runnable() {
 						
-					}
-				}, delay, TimeUnit.MILLISECONDS);
-				
+						@Override
+						public void run() {
+							if (!TEST) {
+								ComcastAPIHandler.tuneChannel(mdn, ge.getChannelId());
+							}
+							
+						}
+					}, delay, TimeUnit.MILLISECONDS);
+				}				
 				scheduledEvent.add(key);
 			}
 		}

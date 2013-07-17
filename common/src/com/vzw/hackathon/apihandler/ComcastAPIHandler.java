@@ -13,6 +13,7 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.util.EntityUtils;
 import org.apache.log4j.Logger;
 
+import com.vzw.hackathon.Channel;
 import com.vzw.util.HttpClientProperties;
 import com.vzw.util.HttpClientUtil;
 
@@ -50,6 +51,10 @@ public class ComcastAPIHandler {
 	public static boolean tuneChannel(String mdn, String channelId) {
 		
 		logger.info("tuneChannel - mdn=" + mdn + ", channelId=" + channelId);
+		
+		//to extract channelNumber and roviId from channelId
+		Channel channel = Channel.fromChannelId(channelId);
+		// channel.getRoviId(), channel.getChannelNumber();
 		
 		boolean success = false;
 

@@ -158,8 +158,8 @@ public class EventReminder implements Runnable {
 	 * @return
 	 */
 	public String buildReminderString(GroupEvent ge) {
-		return MessageFormat.format("MNREMINDER##{0}##{1,time,yyyy-MM-dd HH:mm}##{2}", 
-				ge.getChannelId(), ge.getShowTime(), ge.getShowName());
+		return MessageFormat.format("MNREMINDER##{0}##{1,time,yyyy-MM-dd HH:mm}", 
+				ge.getShowId(), ge.getShowTime());
 	}
 
 	@Override
