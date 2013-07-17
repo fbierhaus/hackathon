@@ -110,6 +110,23 @@ public class GroupEvent {
 	public void setMemberList(List<Member> memberList) {
 		this.memberList = memberList;
 	}
+	
+	
+	
+	public String[] getMemberMdns() {
+		String[] ret = null;
+		
+		if (memberList != null) {
+			ret = new String[memberList.size()];
+			int i = 0;
+			for (Member m : memberList) {
+				ret[i] = m.getMdn();
+				++ i;
+			}
+		}
+		
+		return ret;
+	}
 
 	
 	public String toString(){
