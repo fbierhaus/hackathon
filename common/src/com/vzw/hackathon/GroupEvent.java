@@ -3,7 +3,11 @@ package com.vzw.hackathon;
 import java.util.Date;
 import java.util.List;
 
+import com.vzw.util.ThreadSafeSimpleDateFormat;
+
 public class GroupEvent {
+	
+	private static final ThreadSafeSimpleDateFormat sdf = new ThreadSafeSimpleDateFormat("yyyy-MM-dd HH:mm");
 	
 	private int id = -1;
 	private String showId = null;
@@ -59,6 +63,10 @@ public class GroupEvent {
 
 	public void setShowTime(Date showTime) {
 		this.showTime = showTime;
+	}
+	
+	public void setShowTime(String showTimeStr) throws Exception {
+		this.showTime = sdf.parse(showTimeStr);
 	}
 
 
