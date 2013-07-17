@@ -7,6 +7,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -16,45 +18,47 @@ import android.widget.TextView;
 
 import com.hackathon.tvnight.R;
 import com.hackathon.tvnight.model.TVShow;
+import com.hackathon.tvnight.model.TextEntry;
+import com.hackathon.tvnight.task.GetShowListTask;
 
 public class ShowListActivity extends Activity {
+	private final static int MSG_SHOW_LIST = 1;
 
 	private ListView showList;
 	private TVShowAdapter showsAdapter;
+	private GetShowListTask getShowListTask = null;
+	
+	private Handler handler = new Handler() {
+		@Override
+		public void handleMessage(Message msg) {
+			if (msg.what == MSG_SHOW_LIST) {
+
+				List<TVShow> shows = getShowListTask.getShowList();
+
+				findViewById(R.id.progress_spinner).setVisibility(View.GONE);
+				showsAdapter = new TVShowAdapter(shows);
+				showList.setAdapter(showsAdapter);
+				showList.setVisibility(View.VISIBLE);
+			}
+		}
+	};
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.show_list_layout);
+				
 		showList = (ListView) findViewById(R.id.show_list);
-		new AsyncTask<Void, Void, List<TVShow>>() {
-			@Override
-			protected List<TVShow> doInBackground(Void... params) {
-				//TODO add http request here and return array of model object to show to UI
-				try {
-					Thread.sleep(2000);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-				//hardcoding for now
-				ArrayList<TVShow> shows = new ArrayList<TVShow>();
-				shows.add(new TVShow("Mad Men"));
-				shows.add(new TVShow("Suits"));
-				shows.add(new TVShow("LOST"));
-				shows.add(new TVShow("True Blood"));
-				shows.add(new TVShow("Dexter"));
-				shows.add(new TVShow("How I Met Your Mother"));
-				return shows;
-			}
-			
-			protected void onPostExecute(List<TVShow> result) {
-				findViewById(R.id.progress_spinner).setVisibility(View.GONE);
-				showsAdapter = new TVShowAdapter(result);
-				showList.setAdapter(showsAdapter);
-				showList.setVisibility(View.VISIBLE);
-			};
-			
-		}.execute();
+		
+		getShowListTask = new GetShowListTask(handler, MSG_SHOW_LIST);
+		getShowListTask.execute();
+	}
+	
+	@Override
+	public void onDestroy() {
+		if (getShowListTask != null) {
+			getShowListTask.cancelOperation();
+		}
 	}
 	
 	static class ShowViewHolder {
@@ -100,15 +104,21 @@ public class ShowListActivity extends Activity {
 			
 			ShowViewHolder myViewData = (ShowViewHolder) convertView.getTag();
 			
-			myViewData.title.setText(show.getName());
+			String name = "Unknown";
+			List<TextEntry> titleList = show.getTitle();
+			if (titleList.size() > 0) {
+				TextEntry entry = titleList.get(0);
+				name = entry.getDefault();
+			}				
+			myViewData.title.setText(name);
 			
 			convertView.setOnClickListener(new View.OnClickListener() {
 				
 				@Override
 				public void onClick(View v) {
-					Intent i = new Intent(ShowListActivity.this, ShowDescActivity.class);
-//					i.putExtra(name, value);
-					startActivity(i);
+//					Intent i = new Intent(ShowListActivity.this, ShowDescActivity.class);
+////					i.putExtra(name, value);
+//					startActivity(i);
 				}
 			});
 			
