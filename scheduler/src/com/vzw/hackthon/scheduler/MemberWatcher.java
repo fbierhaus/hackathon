@@ -12,10 +12,11 @@ import java.util.concurrent.TimeUnit;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 
+import com.vzw.hackathon.Channel;
 import com.vzw.hackathon.GroupEvent;
 import com.vzw.hackathon.GroupEventManager;
 import com.vzw.hackathon.Member;
-import com.vzw.hackathon.apihandler.ComcastAPIHandler;
+import com.vzw.hackathon.MemberStatus;
 import com.vzw.hackathon.apihandler.SendVMAMessage;
 import com.vzw.util.db.DBManager;
 import com.vzw.util.db.DBPool;
@@ -29,10 +30,10 @@ public class MemberWatcher implements Runnable {
 	
 	
 	private static final String SQL_SEL_MEMBERS = 
-			"select group_event_id, mdn, device_id, member_name, last_channel_id"
-			+ " from GROUP_MEMBER"
-			+ " where member_status = 'MASTER' or member_status = 'ACCEPTED"
-			+ " order by GROUP_EVENT_ID, mdn";
+			"select g.group_event_id, g.mdn, u.name, u.channel_id, g.member_status, g.last_channel_id"
+			+ " from GROUP_MEMBER g, USERS u"
+			+ " where u.mdn = g.mdn and g.member_status = 'MASTER' or g.member_status = 'ACCEPTED"
+			+ " order by g.GROUP_EVENT_ID, g.mdn";
 	
 		
 	private ScheduledExecutorService		executor = null;
@@ -45,6 +46,17 @@ public class MemberWatcher implements Runnable {
 		executor = Executors.newScheduledThreadPool(10);
 		executor.scheduleAtFixedRate(this, 10, CHECK_INTERVAL_SECONDS, TimeUnit.SECONDS);
 		
+		
+		Runtime.getRuntime().addShutdownHook(new Thread() {
+
+			@Override
+			public void run() {
+				if (executor != null) {
+					executor.shutdown();
+				}
+			}
+			
+		});
 	}
 
 	
@@ -85,9 +97,10 @@ public class MemberWatcher implements Runnable {
 				}
 				
 				Member member = new Member();
-				member.setDeviceId(rs.getString("device_id"));
+				member.setStatus(MemberStatus.valueOf(rs.getString("member_status")));
+				member.setChannelId(rs.getString("channel_id"));
 				member.setMdn(rs.getString("mdn"));
-				member.setName(rs.getString("member_name"));
+				member.setName(rs.getString("name"));
 				member.setLastChannelId(rs.getString("last_channel_id"));
 				memberList.add(member);
 					
@@ -102,13 +115,17 @@ public class MemberWatcher implements Runnable {
 	}
 	
 	private void processWatch(GroupEvent ge) {
+		GroupEventManager gem = GroupEventManager.getInstance();
 		String[] tos = ge.getMemberMdns();
 		String toStr = StringUtils.join(tos, ",");
 		for (Member m : ge.getMemberList()) {
-			String channelId = ComcastAPIHandler.getChannelId(m.getDeviceId());
-			if (!StringUtils.equals(channelId, ge.getChannelId())) {
+			Channel channel = gem.getChannel(m.getChannelId());
+			if (!StringUtils.equals(m.getChannelId(), m.getLastChannelId())) {
 				// need to send the group message of this change
-				SendVMAMessage.sendMMS(m.getMdn(), toStr, m.getName() + " changed channel to " + channelId);
+				SendVMAMessage.sendMMS(m.getMdn(), toStr, m.getName() + " changed channel to " + channel.getName());
+				
+				// update last channel id
+				gem.updateMemberLastChannelId(ge.getId(), m.getMdn(), m.getChannelId());
 			}
 		}
 	}

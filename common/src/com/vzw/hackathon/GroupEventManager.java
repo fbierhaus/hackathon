@@ -8,12 +8,9 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-import javax.servlet.jsp.tagext.TryCatchFinally;
-
 import org.apache.commons.dbutils.handlers.ScalarHandler;
 import org.apache.log4j.Logger;
 
-import com.vzw.hackathon.apihandler.ComcastAPIHandler;
 import com.vzw.util.db.DBManager;
 import com.vzw.util.db.DBPool;
 import com.vzw.util.db.DBUtil;
@@ -242,6 +239,8 @@ public class GroupEventManager {
 		
 		return user;
 	}
+	
+	
 
 	
 	/**

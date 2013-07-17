@@ -71,6 +71,11 @@ add column REMINDER_SENT integer default 0;
 
 
 
+
+select g.group_event_id, g.mdn, u.name, g.last_channel_id from GROUP_MEMBER g, USERS u
+where u.mdn = g.mdn and g.member_status = 'MASTER' or g.member_status = 'ACCEPTED'
+order by g.GROUP_EVENT_ID, g.mdn;
+
 --------------------------------------------------------
 -- 2013-07-17
 
