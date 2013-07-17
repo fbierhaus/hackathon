@@ -7,11 +7,8 @@ import android.os.Handler;
 import android.os.Message;
 
 /**
- * Result is retured in the Message sent to the Handler supplied by the caller.
+ * Result is returned in the Message sent to the Handler supplied by the caller.
  * Message.obj contains the unique invitation id in Long, or Long of 0 if the invitation failed to send.
- * 
- * @author mcdull
- *
  */
 public class SendInvitationTask extends AsyncTask<Invitation, Void, Long> {
 	private Handler mHandler;

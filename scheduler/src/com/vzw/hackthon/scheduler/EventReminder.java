@@ -51,6 +51,14 @@ public class EventReminder implements Runnable {
 		executor = Executors.newScheduledThreadPool(10);
 		executor.scheduleAtFixedRate(this, 10, CHECK_INTERVAL_SECONDS, TimeUnit.SECONDS);
 		
+		Runtime.getRuntime().addShutdownHook(new Thread() {
+			public void run() {
+				if (executor != null) {
+					executor.shutdown();
+				}
+			}
+		});
+		
 	}
 
 	/**

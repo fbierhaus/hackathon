@@ -1,12 +1,14 @@
 package com.hackathon.tvnight.ui;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.hackathon.tvnight.R;
+import com.hackathon.tvnight.sms.SMSReceiver;
 
 public class InviteProposeActivity extends Activity {
 	
@@ -30,6 +32,12 @@ public class InviteProposeActivity extends Activity {
 		whosWatching = (TextView) findViewById(R.id.watch_list);
 		acceptInvite = (Button) findViewById(R.id.accept_inv);
 		declineInvite = (Button) findViewById(R.id.decline_inv);
+		
+		// just testing
+		Intent intent = getIntent();
+		String id = intent.getStringExtra(SMSReceiver.EXTRA_SHOW_ID);
+		showName.setText(id);
+		
 		super.onCreate(savedInstanceState);
 	}
 	

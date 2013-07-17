@@ -1,6 +1,10 @@
 package com.hackathon.tvnight.model;
 
-public class TextEntry {
+public class TextEntry {	
+	
+	////////////////////////////////////////////
+	// beans
+
 	private String _default;
 	
 	public String getDefault() {

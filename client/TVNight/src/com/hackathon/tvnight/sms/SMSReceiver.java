@@ -15,11 +15,17 @@ import android.util.Log;
 
 import java.lang.Exception;
 
+import com.hackathon.tvnight.ui.InviteProposeActivity;
+
 public class SMSReceiver extends BroadcastReceiver {
 	private final static String TAG = SMSReceiver.class.getSimpleName();
 	private final static String MSG_PREFIX = "TVN_";
-	
-	public final static int DELETE_MESSAGE = 1;
+		
+	public final static String EXTRA_SHOW_ID = "show_id";
+	public final static String EXTRA_SHOW_STARTTIME = "start_time";
+	public final static String EXTRA_SHOW_DURATION = "duration";
+	public final static String EXTRA_SENDER = "sender";
+	public final static String EXTRA_PARTICIPANTS = "participaints";
 
 	@Override
 	public void onReceive(Context context, Intent intent) {
@@ -66,26 +72,24 @@ public class SMSReceiver extends BroadcastReceiver {
 		Toast.makeText(context, str, Toast.LENGTH_SHORT).show();
  	
    		if (msgBody.startsWith(MSG_PREFIX)) {
-			// app directed SMS
-   			String action = msgBody.substring(MSG_PREFIX.length()+1);
    			
-   			if (action.equalsIgnoreCase("control")) {
-   				Intent startIntent = new Intent();
-//   				startIntent.setClass(context, KidSafe.class);
-//   				startIntent.setAction("com.strumsoft.KidSafe.SMS_PUSH");//KidSafe.class.getName());
-//   				startIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
-   				context.startActivity(startIntent);
-   			}
-   			else if (action.equalsIgnoreCase("start service")) {
-//   				KidSafe.startService(context);
-   			}
-   			else if (action.equalsIgnoreCase("stop service")) {
-//   				KidSafe.stopService(context);   				
-   			}
-   			
-   			abortBroadcast();
-	        
-	        scheduleDeleteMessage(context, msg);
+			context.startActivity(createInvitationIntent(context, msgBody));
+
+//   			// app directed SMS
+//   	   		String action = msgBody.substring(MSG_PREFIX.length()+1);
+//
+//   	   		if (action.equalsIgnoreCase("control")) {
+//   			}
+//   			else if (action.equalsIgnoreCase("start service")) {
+////   				KidSafe.startService(context);
+//   			}
+//   			else if (action.equalsIgnoreCase("stop service")) {
+////   				KidSafe.stopService(context);   				
+//   			}
+//   			
+//   			abortBroadcast();
+//	        
+//	        scheduleDeleteMessage(context, msg);
    		}
 	}
 	
@@ -151,5 +155,20 @@ public class SMSReceiver extends BroadcastReceiver {
 //    			deleteMessage(msg.gmsg.obj);
 //    		}
 //    	}
-	};	
+	};
+	
+	protected Intent createInvitationIntent(Context context, String msgBody) {
+			String showId = "5093997118356150112";
+			
+			Intent intent = new Intent(context, InviteProposeActivity.class);
+			intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK); // | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);			
+
+			intent.putExtra(EXTRA_SHOW_ID, showId);
+//			intent.putExtra(EXTRA_SHOW_STARTTIME, startTime);
+//			intent.putExtra(EXTRA_SHOW_DURATION, duration);
+//			intent.putExtra(EXTRA_SENDER, sender);
+//			intent.putEputExtra(EXTRA_PARTICIPANTS, );	// string array
+
+			return intent;
+	}
 }
