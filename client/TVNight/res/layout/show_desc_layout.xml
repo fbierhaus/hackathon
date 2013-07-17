@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#DADADA">
+
+    <include
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        layout="@layout/headerlayout" />
+
+    <LinearLayout android:id="@+id/save_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:padding="12dp"
+        android:background="#5A5A5A"
+        android:layout_alignParentBottom="true">
+    
+    <Button android:id="@+id/save_butt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+		android:text="Save"
+        android:background="@drawable/btn_white_gradient"/>
+    </LinearLayout>
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/header_layout"
+        android:layout_above="@id/save_layout"
+        android:orientation="vertical"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin">
+
+        <ImageView
+            android:id="@+id/show_ico"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        
+        <TextView android:id="@+id/show_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#000000"
+            android:textStyle="bold"
+            android:textSize="18sp"/>
+        
+        <Spinner android:id="@+id/season_select"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        
+        <Spinner android:id="@+id/episode_select"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        
+        <TextView android:id="@+id/show_desc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        
+        <Button android:id="@+id/create_watch_group_butt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Create a Watch Group"
+            android:background="@drawable/btn_white_gradient"
+            android:gravity="center"/>
+    </LinearLayout>
+
+</RelativeLayout>

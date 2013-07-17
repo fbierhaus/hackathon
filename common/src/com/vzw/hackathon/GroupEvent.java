@@ -1,20 +1,29 @@
 package com.vzw.hackathon;
 
 import java.util.Date;
+import java.util.List;
+
+import com.vzw.util.ThreadSafeSimpleDateFormat;
 
 public class GroupEvent {
+	
+	private static final ThreadSafeSimpleDateFormat sdf = new ThreadSafeSimpleDateFormat("yyyy-MM-dd HH:mm");
 	
 	private int id = -1;
 	private String showId = null;
 	private String channelId = null;
 	private Date showTime = null;
+	private String showName = null;
 	private Date createTime = null;
 	private String masterMdn = null;
+	
+	private List<Member> memberList = null;
 	
 
 	public GroupEvent() {
 		// TODO Auto-generated constructor stub
 	}
+
 
 
 	public int getId() {
@@ -55,6 +64,10 @@ public class GroupEvent {
 	public void setShowTime(Date showTime) {
 		this.showTime = showTime;
 	}
+	
+	public void setShowTime(String showTimeStr) throws Exception {
+		this.showTime = sdf.parse(showTimeStr);
+	}
 
 
 	public Date getCreateTime() {
@@ -76,6 +89,35 @@ public class GroupEvent {
 		this.masterMdn = masterMdn;
 	}
 
+
+	public String getShowName() {
+		return showName;
+	}
+
+
+	public void setShowName(String showName) {
+		this.showName = showName;
+	}
+
+
+
+	public List<Member> getMemberList() {
+		return memberList;
+	}
+
+
+
+	public void setMemberList(List<Member> memberList) {
+		this.memberList = memberList;
+	}
+
 	
-	
+	public String toString(){
+		StringBuilder sb = new StringBuilder();
+		
+		sb.append("id:").append(getId()).append(",showId:").append(getShowId()).append(",channelId:").append(getChannelId()).append(",showTime:")
+		  .append(getShowTime()).append(",showName:").append(getShowName()).append(",createTime:").append(getCreateTime()).append(",masterMdn:").append(getMasterMdn());
+		
+		return sb.toString();
+	}
 }

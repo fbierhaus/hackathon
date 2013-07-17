@@ -14,6 +14,9 @@ public class TVShow {
 	int startyear;
 	List<TextEntry> title;
 	
+	private String imageUrl;
+	private String episodeTitle;
+	
 	public List<TextEntry> getDescription() {
 		return description;
 	}
