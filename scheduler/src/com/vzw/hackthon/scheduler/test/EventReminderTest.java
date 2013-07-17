@@ -11,7 +11,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.vzw.hackathon.GroupEvent;
-import com.vzw.hackathon.HackathonUtil;
+import com.vzw.hackathon.GroupEventManager;
 import com.vzw.hackthon.scheduler.EventReminder;
 
 public class EventReminderTest {
@@ -44,7 +44,7 @@ public class EventReminderTest {
 	
 	@Test
 	public void testBuildReminderString() {
-		GroupEvent ge = new HackathonUtil().loadGroupEventFromDb(1);
+		GroupEvent ge = new GroupEventManager().loadGroupEventFromDb(1);
 		String s = eventReminder.buildReminderString(ge);
 		System.out.println(s);
 	}

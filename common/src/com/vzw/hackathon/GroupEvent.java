@@ -1,6 +1,7 @@
 package com.vzw.hackathon;
 
 import java.util.Date;
+import java.util.List;
 
 public class GroupEvent {
 	
@@ -11,6 +12,8 @@ public class GroupEvent {
 	private String showName = null;
 	private Date createTime = null;
 	private String masterMdn = null;
+	
+	private List<Member> memberList = null;
 	
 
 	public GroupEvent() {
@@ -88,21 +91,25 @@ public class GroupEvent {
 		this.showName = showName;
 	}
 
-	/**
-	 * 
-	 */
-	public void schedulePlay() {
-		schedulePlay(masterMdn);
+
+
+	public List<Member> getMemberList() {
+		return memberList;
 	}
+
+
+
+	public void setMemberList(List<Member> memberList) {
+		this.memberList = memberList;
+	}
+
 	
-	/**
-	 * schedule tuning a show
-	 * @param mdn
-	 * 
-	 */
-	public void schedulePlay(String mdn) {
+	public String toString(){
+		StringBuilder sb = new StringBuilder();
 		
+		sb.append("id:").append(getId()).append(",showId:").append(getShowId()).append(",channelId:").append(getChannelId()).append(",showTime:")
+		  .append(getShowTime()).append(",showName:").append(getShowName()).append(",createTime:").append(getCreateTime()).append(",masterMdn:").append(getMasterMdn());
+		
+		return sb.toString();
 	}
-	
-	
 }

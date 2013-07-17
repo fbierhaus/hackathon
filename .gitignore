@@ -12,6 +12,7 @@ server/build
 #**/.classpath
 #**/.project
 server/WebContent/WEB-INF/classes
+db/
 /client/TVNight/bin
 /client/TVNight/gen
 
