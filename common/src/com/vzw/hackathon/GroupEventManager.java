@@ -53,7 +53,7 @@ public class GroupEventManager {
 			+ " from channels where channel_id = ?";
 	
 	private static final String SQL_GET_USER = 
-			"select mdn, channel_id as channelId, \"name\" from users"
+			"select mdn, channel_id as channelId, name from users"
 			+ " where mdn = ?";
 	
 	
@@ -94,6 +94,8 @@ public class GroupEventManager {
 	 * 
 	 * @param id
 	 * @return
+	 * 
+	 * This method does not load members
 	 */
 	public GroupEvent loadGroupEventFromDb(int id) {
 		GroupEvent ge = null;
@@ -227,7 +229,7 @@ public class GroupEventManager {
 			}
 		}
 		catch (Exception e) {
-			logger.error("Failed to get user by mdn = " + mdn);
+			logger.error("Failed to get user by mdn = " + mdn, e);
 		}
 		
 		return user;

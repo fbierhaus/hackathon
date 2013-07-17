@@ -128,13 +128,16 @@ public class GroupEvent {
 		return ret;
 	}
 
-	
-	public String toString(){
-		StringBuilder sb = new StringBuilder();
-		
-		sb.append("id:").append(getId()).append(",showId:").append(getShowId()).append(",channelId:").append(getChannelId()).append(",showTime:")
-		  .append(getShowTime()).append(",showName:").append(getShowName()).append(",createTime:").append(getCreateTime()).append(",masterMdn:").append(getMasterMdn());
-		
-		return sb.toString();
+
+
+	@Override
+	public String toString() {
+		return "GroupEvent [id=" + id + ", showId=" + showId + ", channelId="
+				+ channelId + ", showTime=" + showTime + ", showName="
+				+ showName + ", createTime=" + createTime + ", masterMdn="
+				+ masterMdn + ", memberList=" + memberList + "]";
 	}
+
+	
+
 }
