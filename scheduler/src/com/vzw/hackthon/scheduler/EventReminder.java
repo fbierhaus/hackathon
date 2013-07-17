@@ -12,6 +12,7 @@ import org.apache.commons.dbutils.handlers.ArrayListHandler;
 import org.apache.log4j.Logger;
 
 import com.vzw.hackathon.GroupEvent;
+import com.vzw.hackathon.apihandler.VZWAPIHandler;
 import com.vzw.util.db.DBManager;
 import com.vzw.util.db.DBPool;
 import com.vzw.util.db.DBUtil;
@@ -123,6 +124,7 @@ public class EventReminder implements Runnable {
 					
 					// send to the client
 					//MessagingAPIHandler.sendSMS(mdnList, msg);
+					VZWAPIHandler.sendSMS(from, toList, message)
 				}
 			}
 		}
