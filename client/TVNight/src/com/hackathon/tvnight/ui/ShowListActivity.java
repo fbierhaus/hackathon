@@ -1,6 +1,7 @@
 package com.hackathon.tvnight.ui;
 
 import java.util.List;
+import java.util.Random;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -53,6 +54,15 @@ public class ShowListActivity extends Activity implements OnClickListener {
 				}
 				else {
 					showsAdapter = new TVShowAdapter(shows);
+					for (TVShow show : shows) {
+						if (new Random().nextInt(3) == 1) {
+							show.setSimulatePaid(true);
+						}
+						else {
+							show.setSimulatePaid(false);
+						}
+						
+					}
 					showList.setAdapter(showsAdapter);
 					showList.setVisibility(View.VISIBLE);
 				}
@@ -64,21 +74,18 @@ public class ShowListActivity extends Activity implements OnClickListener {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.show_list_layout);
+		showList = (ListView) findViewById(R.id.show_list);
 		searchTerm = (EditText) findViewById(R.id.search_term);
 		submit = (Button) findViewById(R.id.submit);
 		submit.setOnClickListener(this);
 				
-		getShowListTask = new GetShowListTask(handler, MSG_SHOW_LIST, "super-man");
-		getShowListTask.execute(10);	// get 10 at a time
-	}
-	
-	@Override
-	protected void onResume() {
 		if (getIntent().getBooleanExtra("fromnotif", false) || TEST_INVITE_ACTIVITY) {
 			Intent i = new Intent(this, ReminderActivity.class);
 			startActivity(i);
 		}
-		super.onResume();
+		
+		getShowListTask = new GetShowListTask(handler, MSG_SHOW_LIST, "super-man");
+		getShowListTask.execute(10);	// get 10 at a time
 	}
 	
 	@Override
@@ -132,18 +139,23 @@ public class ShowListActivity extends Activity implements OnClickListener {
 			
 			ShowViewHolder myViewData = (ShowViewHolder) convertView.getTag();
 			
-			final String finalName = show.getDefaultTitle();
-			myViewData.title.setText(finalName);
+			myViewData.title.setText(show.getDefaultTitle());
 			
-			final String finalDesc = show.getDefaultDescription();
-			
+			if (show.getSimulatePaid()) {
+				myViewData.episodeTitle.setText("First Episode -- $$$");
+			}
+			else {
+				myViewData.episodeTitle.setText("First Episode");
+			}
+						
 			convertView.setOnClickListener(new View.OnClickListener() {
 				
 				@Override
 				public void onClick(View v) {
 					Intent i = new Intent(ShowListActivity.this, ShowDescActivity.class);
-					i.putExtra("name", finalName);
-					i.putExtra("desc", finalDesc);
+					i.putExtra("name", show.getDefaultTitle());
+					i.putExtra("desc", show.getDefaultDescription());
+					i.putExtra("simpaid", show.getSimulatePaid());
 					startActivity(i);
 				}
 			});
@@ -167,8 +179,12 @@ public class ShowListActivity extends Activity implements OnClickListener {
 		findViewById(R.id.progress_spinner).setVisibility(View.VISIBLE);
 		showList.setVisibility(View.GONE);
 		
+		if (getShowListTask != null) {
+			getShowListTask.cancelOperation();
+		}
+		
 		getShowListTask = new GetShowListTask(handler, MSG_SHOW_LIST, search);
-		getShowListTask.execute();
+		getShowListTask.execute(10);
 	}
 
 }

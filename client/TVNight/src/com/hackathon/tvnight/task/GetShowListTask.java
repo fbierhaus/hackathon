@@ -16,7 +16,6 @@ public class GetShowListTask extends AsyncTask<Integer, Void, List<TVShow>> {
 	private String mKeyword;
 //	private List<TVShow> mShowList = null;
 	private int mIndex = 0;
-	private String searchTerm;
 	
 	/**
 	 * Specify the handler and code to notify the show list has been retrieved.
@@ -29,7 +28,6 @@ public class GetShowListTask extends AsyncTask<Integer, Void, List<TVShow>> {
 	public GetShowListTask(Handler handler, int msgCode, String keyword) {
 		super();
 		
-		this.searchTerm = searchTerm;
 		mHandler = handler;
 		mMsgCode = msgCode;
 		mKeyword = keyword; 

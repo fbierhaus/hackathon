@@ -5,6 +5,9 @@ import java.util.List;
 import java.util.Map;
 
 public class TVShow {
+	
+	private boolean simulatePaid;
+	
 	public final static String ID_KEY_MERLIN = "merlin";
 	public final static String ID_KEY_REX = "rex";
 	public final static String ID_KEY_ROVI = "rovi";
@@ -182,4 +185,13 @@ public class TVShow {
 	public void setSubresults(SubResults subresults) {
 		this.subresults = subresults;
 	}
+	
+	public void setSimulatePaid(boolean simulatePaid) {
+		this.simulatePaid = simulatePaid;
+	}
+	
+	public boolean getSimulatePaid() {
+		return simulatePaid;
+	}
+	
 }
