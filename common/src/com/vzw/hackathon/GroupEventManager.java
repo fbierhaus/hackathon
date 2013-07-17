@@ -85,7 +85,8 @@ public class GroupEventManager {
 	 * 
 	 * @param ge
 	 */
-	public void createGroupEvent(GroupEvent ge) {
+	public int createGroupEvent(GroupEvent ge) {
+		int id = -1;
 		try {
 			// get group event id
 			int geId = DBUtil.query(
@@ -105,10 +106,13 @@ public class GroupEventManager {
 				DBUtil.update(dbPool, SQL_ADD_GROUP_MEMBER, DBUtil.THROW_HANDLER, 
 						geId, m.getMdn(), m.getName());
 			}
+			
+			id = geId;
 		}
 		catch (Exception e) {
 			logger.error("Failed to create group event.", e);
 		}
+		return id;
 	}
 
 	/**
@@ -123,7 +127,8 @@ public class GroupEventManager {
 			String deviceId = null;
 			switch (status) {
 				case ACCEPTED:
-					deviceId = ComcastAPIHandler.getDeviceId(mdn);
+					//deviceId = ComcastAPIHandler.getDeviceId(mdn);
+					deviceId = "foobar";
 					break;
 					
 				default:
@@ -161,17 +166,16 @@ public class GroupEventManager {
 				
 				if (delay < 0) {
 					// tune right away
-					ComcastAPIHandler.tuneChannel(deviceId, ge.getChannelId());
+					//ComcastAPIHandler.tuneChannel(deviceId, ge.getChannelId());
 				}
 				else {
 					//schedule it
 				}
-				
 				scheduler.schedule(new Runnable() {
 					
 					@Override
 					public void run() {
-						ComcastAPIHandler.tuneChannel(deviceId, ge.getChannelId());
+//						ComcastAPIHandler.tuneChannel(deviceId, ge.getChannelId());
 						
 					}
 				}, delay, TimeUnit.MILLISECONDS);
