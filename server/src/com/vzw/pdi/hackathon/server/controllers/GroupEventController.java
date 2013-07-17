@@ -23,7 +23,18 @@ public class GroupEventController extends RestController {
 	
 	/**
 	 * Request should look like:
-	 * curl -i --data "groupEvent={'showId':'1','masterMdn':'9255551234', 'memberList':[{'mdn':'9258881234','name':'foo'},{'mdn':'9259991234','name':'bar'}]}" http://localhost:8080/server/groupEvents
+	 * ## curl -i --data "groupEvent={'showId':'1','masterMdn':'9255551234', 'memberList':[{'mdn':'9258881234','name':'foo'},{'mdn':'9259991234','name':'bar'}]}" http://localhost:8080/server/groupEvents
+	 * curl -i --data "groupEvent={masterMdn:'9250000001',showId:'1234455555555',showTime:1830303000000,memberList: [{ mdn: '9250000002'},{ mdn: '9250000003'}]}" http://localhost:8080/server/groupEvents
+	 * 
+	 * {
+			masterMdn:	'9250000001',
+			showId:		'1234455555555',
+			showTime:	1830303000000,
+			memberList: [
+				{ mdn: '9250000002'},
+				{ mdn: '9250000003'}
+			]
+		}
 	 * @return
 	 * @throws IOException 
 	 */
