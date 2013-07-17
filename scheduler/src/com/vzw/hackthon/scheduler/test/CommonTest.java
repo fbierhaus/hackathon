@@ -6,6 +6,9 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.MessageFormat;
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -80,7 +83,7 @@ public class CommonTest {
 		System.out.println(props.getString("test.property1"));
 	}
 	
-	@Test
+	//@Test
 	public void testHttpClient() throws Exception {
 		HttpGet hg = new HttpGet("http://www.yahoo.com");
 		
@@ -98,6 +101,16 @@ public class CommonTest {
 		
 		System.out.println(res);
 		
+	}
+	
+	@Test
+	public void testTimestamp() {
+		long t = new Date().getTime();
+		System.out.println("t=" + t);
+		
+		long t1 = TimeUnit.MILLISECONDS.convert(9, TimeUnit.MINUTES) + t;
+		System.out.println(t1);
+		System.out.println(MessageFormat.format("t1={0,time,yyyyMMddHHmmss}", t1));
 	}
 
 }

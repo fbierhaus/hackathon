@@ -24,7 +24,7 @@ public class EventReminder implements Runnable {
 	private static final DBPool 	dbPool = DBManager.getDBPool();
 	
 	private static final int CHECK_INTERVAL_SECONDS		= 5;
-	private static final int REMINDER_MINUTES			= 2;		// when to send reminder
+	private static final int REMINDER_MINUTES			= 10;		// when to send reminder
 	
 	
 	private static final String SQL_SEL_EVENTS_FOR_REMINDER = 
@@ -36,7 +36,7 @@ public class EventReminder implements Runnable {
 	
 	
 	private static final String SQL_SEL_MEMBER_FOR_REMINDER = 
-			"select mdn from group_member where group_event_id = > and MEMBER_STATUS = 'ACCEPTED' or MEMBER_STATUS = 'MASTER'";
+			"select mdn from group_member where group_event_id = ? and MEMBER_STATUS = 'ACCEPTED' or MEMBER_STATUS = 'MASTER'";
 	
 	private static final String SQL_FLAG_REMINDER_SENT =
 			"update group_event set reminder_sent = 1 where group_event_id = ?";
@@ -73,7 +73,7 @@ public class EventReminder implements Runnable {
 			
 			// go over the events the show time of which is not REMINDER_MINUTES more minutes than now.
 			geList = DBUtil.query(dbPool, SQL_SEL_EVENTS_FOR_REMINDER, 
-					new DBUtil.BeanListHandlerEx<GroupEvent>(GroupEvent.class), DBUtil.THROW_HANDLER, -REMINDER_MINUTES);
+					new DBUtil.BeanListHandlerEx<GroupEvent>(GroupEvent.class), DBUtil.THROW_HANDLER, REMINDER_MINUTES);
 			
 		}
 		catch (Exception e) {
