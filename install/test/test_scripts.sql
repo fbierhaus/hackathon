@@ -76,6 +76,7 @@ select g.group_event_id, g.mdn, u.name, g.last_channel_id from GROUP_MEMBER g, U
 where u.mdn = g.mdn and g.member_status = 'MASTER' or g.member_status = 'ACCEPTED'
 order by g.GROUP_EVENT_ID, g.mdn;
 
+
 --------------------------------------------------------
 -- 2013-07-17
 
@@ -109,8 +110,8 @@ CREATE INDEX IDX1_USERS ON USERS(MDN);
 
 
 
-========================================
-Fred
+--========================================
+-- Fred
 
 CREATE TABLE FLING (
 	FLING_ID INTEGER PRIMARY KEY NOT NULL,
@@ -118,4 +119,43 @@ CREATE TABLE FLING (
 	FILE_PATH VARCHAR(256) NOT NULL,
 	CREATE_TIME TIMESTAMP DEFAULT CURRENT TIMESTAMP NOT NULL
 );
+
+
+-------------------------------------------------
+-- hud 2013-07-17 2
+drop index IDX1_USERS;
+
+CREATE UNIQUE INDEX IDX1_USERS ON USERS(MDN);
+
+delete from channels;
+
+INSERT INTO CHANNELS (CHANNEL_ID, CHANNEL_NAME)
+VALUES('001##10001', 'channel_1');
+
+INSERT INTO CHANNELS (CHANNEL_ID, CHANNEL_NAME)
+VALUES('002##10001', 'channel_2');
+
+INSERT INTO CHANNELS (CHANNEL_ID, CHANNEL_NAME)
+VALUES('003##10001', 'channel_2');
+
+INSERT INTO CHANNELS (CHANNEL_ID, CHANNEL_NAME)
+VALUES('004##10001', 'channel_2');
+
+----------------------------
+
+INSERT INTO USERS (MDN, "NAME", CHANNEL_ID)
+VALUES ('9250000001', 'John Smith', '001##10001');
+
+INSERT INTO USERS (MDN, "NAME", CHANNEL_ID)
+VALUES ('9250000002', 'Joe Smith', '002##10001');
+
+INSERT INTO USERS (MDN, "NAME", CHANNEL_ID)
+VALUES ('9250000003', 'Marry Smith', '003##10001');
+
+INSERT INTO USERS (MDN, "NAME", CHANNEL_ID)
+VALUES ('9250000004', 'Alice Lee', '004##10001');
+
+
+
+
 
