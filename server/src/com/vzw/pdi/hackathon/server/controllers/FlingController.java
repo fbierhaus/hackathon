@@ -10,6 +10,8 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import net.sf.serfj.RestController;
+import net.sf.serfj.annotations.DoNotRenderPage;
+import net.sf.serfj.annotations.GET;
 import net.sf.serfj.annotations.POST;
 
 import org.apache.commons.fileupload.FileItem;
@@ -18,6 +20,7 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.log4j.Logger;
 
+import com.vzw.pdi.hackathon.server.Fling;
 import com.vzw.pdi.hackathon.server.FlingManager;
 
 /**
@@ -30,6 +33,21 @@ public class FlingController extends RestController {
 
 
 	private static final String FILE_PATH = "/tmp/flings/";
+	
+	
+	@GET
+	@DoNotRenderPage
+	public void show() {
+		
+		int id = Integer.parseInt(this.getId());
+		
+		Fling fling = FlingManager.getInstance().get(id);
+		
+	    // Set the file location
+	    this.getResponseHelper().setFile(new File(fling.getFilePath()));
+	    this.getResponseHelper().setContentType(fling.getContentType());
+	    // SerfJ will download the file
+	}
 	
 	
 	@POST

@@ -29,7 +29,8 @@ public class ComcastAPIHandler {
 		HttpClientProperties props = HttpClientProperties.getInstance();
 		hClient = HttpClientUtil.initClient(props, "", "http://www.google.com");
 		
-		devices.put("9257089093", new ComcastDevice("qObXLdDrwB6h6eDUtsgwoDokI9Q7OEkF", "066e8de4-835a-4ea9-9ad0-0cfe908f3f07066e8de4-835a-4ea9-9ad0-0cfe908f3f07", "1189608792456905643P"));
+		devices.put("9084426933", new ComcastDevice("qObXLdDrwB6h6eDUtsgwoDokI9Q7OEkF", "066e8de4-835a-4ea9-9ad0-0cfe908f3f07", "1189608792456905643P"));
+		devices.put("9253248967", new ComcastDevice("U4u-2t6DVuW7DYTs1Qtflo8Jxh6Aazd5", "ac832698-ca99-4fb2-9960-de0b83d7d049", "4354418166932197300P"));
 		//devices.put("9084426933", new ComcastDevice());
 		
 

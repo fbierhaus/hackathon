@@ -19,6 +19,12 @@ public class Member extends User {
 	public void setLastChannelId(String lastChannelId) {
 		this.lastChannelId = lastChannelId;
 	}
+	@Override
+	public String toString() {
+		return "Member [status=" + status + ", lastChannelId=" + lastChannelId
+				+ ", getMdn()=" + getMdn() + ", getChannelId()="
+				+ getChannelId() + ", getName()=" + getName() + "]";
+	}
 
 
 	
