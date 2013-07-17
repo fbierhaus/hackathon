@@ -1,6 +1,7 @@
 package com.vzw.hackathon;
 
 import java.util.Date;
+import java.util.List;
 
 public class GroupEvent {
 	
@@ -11,6 +12,8 @@ public class GroupEvent {
 	private String showName = null;
 	private Date createTime = null;
 	private String masterMdn = null;
+	
+	private List<Member> memberList = null;
 	
 
 	public GroupEvent() {
@@ -86,6 +89,18 @@ public class GroupEvent {
 
 	public void setShowName(String showName) {
 		this.showName = showName;
+	}
+
+
+
+	public List<Member> getMemberList() {
+		return memberList;
+	}
+
+
+
+	public void setMemberList(List<Member> memberList) {
+		this.memberList = memberList;
 	}
 
 	

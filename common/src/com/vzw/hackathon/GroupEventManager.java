@@ -31,15 +31,21 @@ public class GroupEventManager {
 		
 		return ge;
 	}
-
 	
-
 	/**
 	 * 
+	 * @param ge
 	 */
-	public void schedulePlay() {
-		schedulePlay("");
+	public void createGroupEvent(GroupEvent ge) {
+		
 	}
+
+	
+	public void updateMemberStatus(int groupEventId, String mdn, MemberStatus status) {
+		
+	}
+
+
 	
 	/**
 	 * schedule tuning a show
