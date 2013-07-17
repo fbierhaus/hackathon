@@ -49,7 +49,7 @@ public class EventReminder implements Runnable {
 	public void start() {
 		// check the database every 10 seconds
 		executor = Executors.newScheduledThreadPool(10);
-		executor.scheduleAtFixedRate(this, 10, CHECK_INTERVAL_SECONDS, TimeUnit.SECONDS);
+		executor.scheduleAtFixedRate(this, 1, CHECK_INTERVAL_SECONDS, TimeUnit.SECONDS);
 		
 		Runtime.getRuntime().addShutdownHook(new Thread() {
 			public void run() {
