@@ -10,6 +10,7 @@ import com.vzw.hackathon.Channel;
 import com.vzw.hackathon.GroupEvent;
 import com.vzw.hackathon.GroupEventManager;
 import com.vzw.hackathon.Member;
+import com.vzw.hackathon.MemberStatus;
 import com.vzw.hackathon.User;
 import com.vzw.hackthon.scheduler.SchedulerProperties;
 import com.vzw.util.HttpClientUtil;
@@ -35,9 +36,9 @@ public class GroupEventManagerTest {
 		System.out.println(ge);
 	}
 
-	@Test
+	//@Test
 	public final void testCreateGroupEvent() {
-		String js = "{'masterMdn':'9250000001','showId':'1234455555555','channelId': '101##11111', 'showTime':'1830303000000','memberList': [{ 'mdn': '9250000002'},{ 'mdn': '9250000003'}]}";
+		String js = "{'masterMdn':'9251000001','showId':'2234455555555','channelId': '102##11111', 'showTime':'2830303000000','memberList': [{ 'mdn': '9251000002'},{ 'mdn': '9251000003'}]}";
 		
 		GroupEvent ge = null;
 		try {
@@ -55,12 +56,12 @@ public class GroupEventManagerTest {
 
 	@Test
 	public final void testUpdateMemberStatus() {
-		//gem.updateMemberStatus(groupEventId, mdn, status);
+		gem.updateMemberStatus(101, "9250000002", MemberStatus.ACCEPTED);
 	}
 
 	@Test
 	public final void testUpdateMemberLastChannelId() {
-		fail("Not yet implemented"); // TODO
+		gem.updateMemberLastChannelId(101, "9250000003", "002##10001");
 	}
 
 	@Test
@@ -77,7 +78,7 @@ public class GroupEventManagerTest {
 
 	@Test
 	public final void testSchedulePlay() {
-		fail("Not yet implemented"); // TODO
+		gem.schedulePlay("9250000001", 101);
 	}
 
 }

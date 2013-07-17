@@ -3,6 +3,7 @@ package com.vzw.hackthon.scheduler.test;
 import static org.junit.Assert.*;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -17,10 +18,12 @@ import com.vzw.hackthon.scheduler.EventReminder;
 public class EventReminderTest {
 	
 	private static EventReminder		eventReminder = null;
+	private static GroupEventManager	gem = null;
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		eventReminder = new EventReminder();
+		gem = GroupEventManager.getInstance();
 	}
 
 	@AfterClass
@@ -44,9 +47,21 @@ public class EventReminderTest {
 	
 	@Test
 	public void testBuildReminderString() {
-		GroupEvent ge = GroupEventManager.getInstance().loadGroupEventFromDb(1);
+		GroupEvent ge = gem.loadGroupEventFromDb(1);
 		String s = eventReminder.buildReminderString(ge);
 		System.out.println(s);
+	}
+	
+	@Test
+	public void testRun() {
+		eventReminder.start();
+		
+		try {
+			TimeUnit.SECONDS.sleep(300);
+		}
+		catch (InterruptedException e) {
+			
+		}
 	}
 
 }
