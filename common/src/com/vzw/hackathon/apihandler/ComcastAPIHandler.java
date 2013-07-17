@@ -46,9 +46,9 @@ public class ComcastAPIHandler {
 		
 		boolean success = false;
 
-		HttpClientProperties props = null;
+		//HttpClientProperties props = null;
 		//HttpClientUtil.Client hClient = null;
-		props = HttpClientProperties.getInstance();
+		//props = HttpClientProperties.getInstance();
 
 		String res;
         try {
@@ -97,9 +97,9 @@ public class ComcastAPIHandler {
 		
 		String deviceId = null;
 
-		HttpClientProperties props = null;
+		//HttpClientProperties props = null;
 		//HttpClientUtil.Client hClient = null;
-		props = HttpClientProperties.getInstance();
+		//props = HttpClientProperties.getInstance();
 
 		String res;
         try {
@@ -148,9 +148,9 @@ public class ComcastAPIHandler {
 		
 		String JID = null;
 
-		HttpClientProperties props = null;
+		//HttpClientProperties props = null;
 		//HttpClientUtil.Client hClient = null;
-		props = HttpClientProperties.getInstance();
+		//props = HttpClientProperties.getInstance();
 
 		String res;
         try {
@@ -199,9 +199,9 @@ public class ComcastAPIHandler {
 		
 		String channelId = null;
 
-		HttpClientProperties props = null;
+		//HttpClientProperties props = null;
 		//HttpClientUtil.Client hClient = null;
-		props = HttpClientProperties.getInstance();
+		//props = HttpClientProperties.getInstance();
 
 		String res;
         try {
