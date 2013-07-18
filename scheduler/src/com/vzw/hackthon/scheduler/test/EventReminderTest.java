@@ -47,9 +47,9 @@ public class EventReminderTest {
 	
 	@Test
 	public void testBuildReminderString() {
-		GroupEvent ge = gem.loadGroupEventFromDb(1);
-		String s = eventReminder.buildReminderString(ge);
-		System.out.println(s);
+		//GroupEvent ge = gem.loadGroupEventFromDb(1);
+		//String s = eventReminder.buildReminderString(ge);
+		//System.out.println(s);
 	}
 	
 	@Test

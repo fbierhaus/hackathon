@@ -39,7 +39,7 @@ public class GroupEventManager {
 
 	private static final String SQL_ADD_GROUP_MEMBER =
 			"INSERT INTO GROUP_MEMBER ("
-			+ "	GROUP_EVENT_ID,	MDN, MEMBER_STATUS) VALUES (?, ?, ?)";
+			+ "	GROUP_EVENT_ID,	MDN, MEMBER_STATUS, LAST_CHANNEL_ID) VALUES (?, ?, ?, ?)";
 	
 	
 	private static final String SQL_UPDATE_MEMBER_STATUS =
@@ -56,6 +56,14 @@ public class GroupEventManager {
 	private static final String SQL_GET_USER = 
 			"select mdn, channel_id as channelId, name from users"
 			+ " where mdn = ?";
+	
+	private static final String SQL_GET_LAST_CHANNEL_ID = 
+			"select last_channel_id from group_member "
+			+ " where group_event_id = ? and mdn = ?";
+	
+	
+	private static final String SQL_GET_CHANNEL_ID = 
+			"select channel_id from users where mdn = ?";
 	
 	
 	private ScheduledExecutorService		scheduler = null;
@@ -132,12 +140,15 @@ public class GroupEventManager {
 			
 			// insert members (including master mdn)
 			for (Member m : ge.getMemberList()) {
+				
 				DBUtil.update(dbPool, SQL_ADD_GROUP_MEMBER, DBUtil.THROW_HANDLER, 
-						geId, m.getMdn(), MemberStatus.ACCEPTED.name());
+						geId, m.getMdn(), MemberStatus.ACCEPTED.name(),
+						getChannelId(m.getMdn()));
 			}
 			
 			DBUtil.update(dbPool, SQL_ADD_GROUP_MEMBER, DBUtil.THROW_HANDLER, 
-					geId, ge.getMasterMdn(), MemberStatus.MASTER.name());
+					geId, ge.getMasterMdn(), MemberStatus.MASTER.name(),
+					getChannelId(ge.getMasterMdn()));
 	
 			
 			id = geId;
@@ -212,6 +223,36 @@ public class GroupEventManager {
 		}
 		
 		return channel;
+	}
+	
+	public String getLastChannelId(int geId, String mdn) {
+		String lastChannelId = null;
+		
+		try {
+			lastChannelId = DBUtil.query(dbPool, SQL_GET_LAST_CHANNEL_ID,
+					new ScalarHandler<String>(), DBUtil.THROW_HANDLER, geId, mdn);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			logger.error("Failed to get last channel id, geId=" + geId + ",mdn=" + mdn);
+		}
+		
+		return lastChannelId;
+	}
+	
+	
+	public String getChannelId(String mdn) {
+		String channelId = null;
+		
+		try {
+			channelId = DBUtil.query(dbPool, SQL_GET_CHANNEL_ID,
+					new ScalarHandler<String>(), DBUtil.THROW_HANDLER, mdn);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			logger.error("Failed to get channel id for user: " + mdn);
+		}
+		
+		
+		return channelId;
 	}
 	
 	/**
