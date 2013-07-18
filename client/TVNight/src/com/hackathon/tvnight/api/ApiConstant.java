@@ -9,7 +9,7 @@ public class ApiConstant {
 	public final static String MASHERY_KEY = "api_key=ftqjszvx3rnaa7qh26azy4t2";
 	
 	// Verizon API
-	public final static String VERIZON_SERVER = "dummy";
+	public final static String VERIZON_SERVER = "http://hud.wcmad.com:18080";
 	public final static String SEND_INVITE = "/invite";
 	
 	// Rovi API

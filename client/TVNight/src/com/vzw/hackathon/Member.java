@@ -1,34 +1,31 @@
 package com.vzw.hackathon;
 
-public class Member {
-	private String			mdn = null;
+public class Member extends User {
 	private MemberStatus	status = null;
-	private String			name = null;
-	private String			deviceId = null;
-	public String getMdn() {
-		return mdn;
-	}
-	public void setMdn(String mdn) {
-		this.mdn = mdn;
-	}
+	private String			lastChannelId = null;
+	
+	
+
 	public MemberStatus getStatus() {
 		return status;
 	}
 	public void setStatus(MemberStatus status) {
 		this.status = status;
 	}
-	public String getName() {
-		return name;
+
+	public String getLastChannelId() {
+		return lastChannelId;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setLastChannelId(String lastChannelId) {
+		this.lastChannelId = lastChannelId;
 	}
-	public String getDeviceId() {
-		return deviceId;
+	@Override
+	public String toString() {
+		return "Member [status=" + status + ", lastChannelId=" + lastChannelId
+				+ ", getMdn()=" + getMdn() + ", getChannelId()="
+				+ getChannelId() + ", getName()=" + getName() + "]";
 	}
-	public void setDeviceId(String deviceId) {
-		this.deviceId = deviceId;
-	}
-	
+
+
 	
 }

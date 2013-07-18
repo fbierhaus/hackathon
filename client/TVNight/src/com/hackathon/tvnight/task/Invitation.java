@@ -6,8 +6,10 @@ import java.util.List;
 public class Invitation {
 	private String mSender;
 	private ArrayList<String> mRecipientList = new ArrayList<String>();
-	private String mChannelId;
+	private String mChannelNumber;
+	private String mRoviId;
 	private String mShowId;
+	private long mStartTime;
 	
 	// below only when after it's created
 	private long mId;
@@ -17,10 +19,12 @@ public class Invitation {
 	 * @param channelId		Use the "rovi" in the id list
 	 * @param showId		Use the "rex" in the id list
 	 */
-	public Invitation(String sender, String channelId, String showId) {
+	public Invitation(String sender, String channelNumber, String roviId, String showId, long startTime) {
 		mSender = sender;
-		mChannelId = channelId;
+		mChannelNumber = channelNumber;
+		mRoviId = roviId;
 		mShowId = showId;
+		mStartTime = startTime;
 	}
 	
 	public void addRecipient(String recipient) {
@@ -33,8 +37,12 @@ public class Invitation {
 		return mRecipientList;
 	}
 	
-	public String getChannelId() {
-		return mChannelId;
+	public String getChannelNumber() {
+		return mChannelNumber;
+	}
+	
+	public String getRoviId() {
+		return mRoviId;
 	}
 	
 	public String getShowId() {
@@ -43,5 +51,9 @@ public class Invitation {
 	
 	public String getSender() {
 		return mSender;
+	}
+	
+	public long getStartTime() {
+		return mStartTime;
 	}
 }

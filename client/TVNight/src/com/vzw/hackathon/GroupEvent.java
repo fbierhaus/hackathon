@@ -65,8 +65,8 @@ public class GroupEvent {
 		this.showTime = showTime;
 	}
 	
-	public void setShowTime(String showTimeStr) throws Exception {
-		this.showTime = sdf.parse(showTimeStr);
+	public void setShowTime(long showTimeMs) throws Exception {
+		this.showTime = new Date(showTimeMs);//sdf.parse(showTimeStr);
 	}
 
 
@@ -110,14 +110,34 @@ public class GroupEvent {
 	public void setMemberList(List<Member> memberList) {
 		this.memberList = memberList;
 	}
+	
+	
+	
+	public String[] getMemberMdns() {
+		String[] ret = null;
+		
+		if (memberList != null) {
+			ret = new String[memberList.size()];
+			int i = 0;
+			for (Member m : memberList) {
+				ret[i] = m.getMdn();
+				++ i;
+			}
+		}
+		
+		return ret;
+	}
+
+
+
+	@Override
+	public String toString() {
+		return "GroupEvent [id=" + id + ", showId=" + showId + ", channelId="
+				+ channelId + ", showTime=" + showTime + ", showName="
+				+ showName + ", createTime=" + createTime + ", masterMdn="
+				+ masterMdn + ", memberList=" + memberList + "]";
+	}
 
 	
-	public String toString(){
-		StringBuilder sb = new StringBuilder();
-		
-		sb.append("id:").append(getId()).append(",showId:").append(getShowId()).append(",channelId:").append(getChannelId()).append(",showTime:")
-		  .append(getShowTime()).append(",showName:").append(getShowName()).append(",createTime:").append(getCreateTime()).append(",masterMdn:").append(getMasterMdn());
-		
-		return sb.toString();
-	}
+
 }
