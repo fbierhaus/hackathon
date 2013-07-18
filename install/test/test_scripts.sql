@@ -1,3 +1,42 @@
+alter table group_member
+drop column last_channel_id;
+
+alter table users
+add column last_channel_id varchar(512) default null;
+
+
+alter table GROUP_MEMBER
+add column LAST_CHANNEL_ID varchar(512) default NULL;
+
+
+select last_channel_id from group_member
+where group_event_id = 102 and mdn = '9251000001';
+
+select ge0.group_event_id from group_event ge0
+where ge0.create_time = (
+select max(create_time) from  (select ge.create_time as create_time from group_event ge, group_member gm
+where gm.mdn = '9253248817' and gm.group_event_id = ge.group_event_id) a);
+
+
+select u.mdn, u.name from GROUP_MEMBER g left outer join users u on g.mdn = u.mdn
+where g.group_event_id = 50;
+
+select * from group_member
+where group_event_id = 50;
+
+
+
+select * from group_member
+where mdn = '9253248817';
+
+
+select * from group_event
+where group_event_id = (select max(group_event_id) from group_event);
+
+select * from group_member
+where group_event_id = (select max(group_event_id) from group_event);
+
+
 select group_event_id as id, show_id as showId, channel_id as channelId, show_time as showTime, master_mdn as masterMdn, create_time as createTime
 from GROUP_EVENT
 where show_time between CURRENT_TIMESTAMP AND {fn TIMESTAMPADD(SQL_TSI_MINUTE, 15, CURRENT_TIMESTAMP)};
@@ -245,13 +284,52 @@ add column reminder_sent integer default 0;
 
 --====== DEMO
 --======
+
+-- channel change
+-- 703##6718065
+-- 200##000001
+
 update users
-set channel_id = '703##6718065'
+set channel_id = '200##000001'
 where mdn = '9253248817';
 
 update users
 set channel_id = '200##000001'
 where mdn = '9253248967';
+
+select * from users
+where mdn = '9253248967';
+
+update users
+set channel_id = '703##6718065'
+where mdn = '9255888998';
+
+select * from users
+where mdn = '4085986817';
+
+select last_channel_id from group_member where mdn = '9253248967';
+
+insert into users (MDN, CHANNEL_ID, name) values ('4085986817', '200##000001', 'Eshann');
+
+
+---------------
+update group_event
+set show_time = TIMESTAMP('20130717194048');
+
+
+update group_event
+set show_time = TIMESTAMP('20130717163318')
+WHERE GROUP_EVENT_ID = 1;
+
+
+select * from group_event
+where group_event_id = (select max(group_event_id) from group_event);
+
+select * from group_member
+where group_event_id = (select max(group_event_id) from group_event);
+
+
+
 --======
 --======
 
