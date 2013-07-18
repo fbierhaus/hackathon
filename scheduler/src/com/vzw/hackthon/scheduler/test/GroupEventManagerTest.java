@@ -1,7 +1,5 @@
 package com.vzw.hackthon.scheduler.test;
 
-import static org.junit.Assert.*;
-
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -12,10 +10,7 @@ import com.vzw.hackathon.GroupEventManager;
 import com.vzw.hackathon.Member;
 import com.vzw.hackathon.MemberStatus;
 import com.vzw.hackathon.User;
-import com.vzw.hackthon.scheduler.SchedulerProperties;
-import com.vzw.util.HttpClientUtil;
 import com.vzw.util.JSONUtil;
-import com.vzw.util.db.DBManager;
 
 public class GroupEventManagerTest {
 	
