@@ -4,6 +4,7 @@
 package com.vzw.hackathon.apihandler;
 
 import java.io.IOException;
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -16,13 +17,16 @@ import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 import org.apache.log4j.Logger;
 
 import com.vzw.hackathon.GroupEvent;
 import com.vzw.hackathon.Member;
+import com.vzw.hackathon.MemberStatus;
 import com.vzw.util.HttpClientProperties;
 import com.vzw.util.HttpClientUtil;
 import com.vzw.util.JSONUtil;
@@ -81,6 +85,68 @@ public class RestClient {
 	}
 	
 	
+	
+	public static void rsvp(int groupEventId, String mdn, MemberStatus status, String serverBaseURL){
+        try {
+        	
+        	String url = serverBaseURL + "/server/groupEvents/" + groupEventId + "/rsvp";
+	        URI uri = new URIBuilder(url).addParameter("mdn", mdn).addParameter("status", status.toString()).build();
+        	
+	        HttpGet get = new HttpGet(uri);
+			
+	        String res = hClient.execute(get, new ResponseHandler<String>() {
+
+	        	@Override
+	        	public String handleResponse(HttpResponse resp) throws ClientProtocolException, IOException {
+	        		// TODO Auto-generated method stub
+	        		HttpEntity entity = resp.getEntity();
+
+	        		return EntityUtils.toString(entity);
+	        	}
+	        });
+	        
+	    } catch (Exception e) {
+	        logger.error("error", e);
+	    }
+	}
+	
+	
+	public static void postMessage(String sender, String recipient, String message, String serverBaseURL){
+        try {
+        	
+        	String url = serverBaseURL + "/server/messages";
+        	
+	        HttpPost post = new HttpPost(url);
+	        
+			List<NameValuePair> formParams = new ArrayList<NameValuePair>(3);
+			formParams.add(new BasicNameValuePair("mdn", recipient));
+			formParams.add(new BasicNameValuePair("from", sender));
+			formParams.add(new BasicNameValuePair("message", message));
+
+			UrlEncodedFormEntity entity = new UrlEncodedFormEntity(formParams, "UTF-8");
+			post.setEntity(entity);
+			
+	        String res = hClient.execute(post, new ResponseHandler<String>() {
+
+	        	@Override
+	        	public String handleResponse(HttpResponse resp) throws ClientProtocolException, IOException {
+	        		// TODO Auto-generated method stub
+	        		HttpEntity entity = resp.getEntity();
+
+	        		return EntityUtils.toString(entity);
+	        	}
+	        });
+	        
+	        
+	    } catch (Exception e) {
+	        logger.error("error", e);
+	    }
+		
+	}
+	
+	
+	
+	
 	protected static int extractId(String response){
 		JSONObject jsonObject = JSONObject.fromObject( response );
 		ServerResponse sr = (ServerResponse) JSONUtil.toJava(jsonObject, ServerResponse.class);
@@ -88,8 +154,9 @@ public class RestClient {
 	}
 	
 	public static void main(String[] args) {
-		new RestClient().testGroupEvent();
-		
+//		new RestClient().testGroupEvent();
+//		new RestClient().testRsvp();
+		new RestClient().testPostMessage();
 	}
 	
 	protected void testGroupEvent(){
@@ -113,4 +180,17 @@ public class RestClient {
 		System.out.println("************** id: " + id);
 	}
 
+	protected void testRsvp(){
+		String serverBaseUrl = "http://localhost:8080/";
+		RestClient.rsvp(3, "9259991234", MemberStatus.DECLINED, serverBaseUrl);
+	}
+	
+	protected void testPostMessage(){
+		String sender = "9255551234";
+		String from = "9259991234";
+		String message = "Hello World!";
+		String serverBaseUrl = "http://localhost:8080/";
+
+		RestClient.postMessage(sender, from, message, serverBaseUrl);
+	}
 }

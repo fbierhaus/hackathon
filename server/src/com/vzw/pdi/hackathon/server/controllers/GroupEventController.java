@@ -1,13 +1,14 @@
 package com.vzw.pdi.hackathon.server.controllers;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import net.sf.json.JSONObject;
 import net.sf.serfj.RestController;
 import net.sf.serfj.annotations.DoNotRenderPage;
 import net.sf.serfj.annotations.GET;
 import net.sf.serfj.annotations.POST;
-import net.sf.serfj.annotations.PUT;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,6 +17,7 @@ import com.vzw.hackathon.GroupEvent;
 import com.vzw.hackathon.GroupEventManager;
 import com.vzw.hackathon.Member;
 import com.vzw.hackathon.MemberStatus;
+import com.vzw.hackathon.apihandler.VZWAPIHandler;
 import com.vzw.util.JSONUtil;
 
 public class GroupEventController extends RestController {
@@ -59,6 +61,15 @@ public class GroupEventController extends RestController {
 			int id = gem.createGroupEvent(ge);
 			logger.debug("Created GroupEventController with id: " + id);
 			
+			// send out invites
+			List<Member> members = ge.getMemberList();
+			List<String> toList = new ArrayList<String>(members.size());
+			for (Member member : members) {
+				toList.add(member.getMdn());
+			}
+			VZWAPIHandler.sendSMS(toList, "TVN_" + id);
+			
+			
 			// set for jsp
 			this.putParam("id", id);
 		} catch (Exception e){
@@ -72,23 +83,28 @@ public class GroupEventController extends RestController {
 	/**
 	 * curl -X PUT -i  "http://localhost:8080/server/groupEvents/1/rsvp?status=ACCEPTED&mdn=9255551234"
 	 */
-	@PUT
+	@GET
 	@DoNotRenderPage
 	public void rsvp(){
 		logger.debug("++++++++++ Starting RSVP");
 
-		int id = Integer.parseInt(this.getId());
-		String statusString = this.getStringParam("status");
-		String mdn = this.getStringParam("mdn");
-		MemberStatus status =  MemberStatus.valueOf(statusString);
+		try{
+			int id = Integer.parseInt(this.getId());
+			String statusString = this.getStringParam("status");
+			String mdn = this.getStringParam("mdn");
+			MemberStatus status =  MemberStatus.valueOf(statusString);
 
-		logger.debug("++++++++++ RSVP mdn:" + mdn + " status: " + status );
-		
-		
-		GroupEventManager gem = GroupEventManager.getInstance();
-		
-		// update db to set status to accepted/delcined (mdn, groupeventid, status)
-		gem.updateMemberStatus(id, mdn, status);
+			logger.debug("++++++++++ RSVP mdn:" + mdn + " status: " + status );
+			
+			
+			GroupEventManager gem = GroupEventManager.getInstance();
+			
+			// update db to set status to accepted/delcined (mdn, groupeventid, status)
+			gem.updateMemberStatus(id, mdn, status);
+			
+		} catch (Exception e){
+			logger.error("Error rsvp: ", e);
+		}
 	}
 	
 	

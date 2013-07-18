@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/"
+	xmlns:vmp="http://vmp.vzw.com/schema"
+	xmlns:mm7="http://www.3gpp.org/ftp/Specs/archive/23_series/23.140/schema/REL-6-MM7-1-4"
+	xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://vmp.vzw.com/wsdl"
+	name="vmpService" targetNamespace="http://vmp.vzw.com/wsdl">
+	<wsdl:types>
+		<xs:schema
+			targetNamespace="http://www.3gpp.org/ftp/Specs/archive/23_series/23.140/schema/REL-6-MM7-1-4">
+			<xs:include schemaLocation="REL-6-MM7-1-4-vmp.xsd" />
+		</xs:schema>
+		<xs:schema targetNamespace="http://schemas.xmlsoap.org/soap/envelope/">
+			<xs:include schemaLocation="soap_1-1.xsd" />
+		</xs:schema>
+	</wsdl:types>
+	<wsdl:message name="transactionIDHeader">
+		<wsdl:part name="transactionIDHeader" element="mm7:TransactionID" />
+	</wsdl:message>
+	<wsdl:message name="submitReq">
+		<wsdl:part name="data" element="mm7:SubmitReq" />
+	</wsdl:message>
+	<wsdl:message name="submitRsp">
+		<wsdl:part name="data" element="mm7:SubmitRsp" />
+	</wsdl:message>
+	<wsdl:portType name="MMRelay">
+		<wsdl:operation name="submit">
+			<wsdl:input message="tns:submitReq" />
+			<wsdl:output message="tns:submitRsp" />
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="MMRelayBinding" type="tns:MMRelay">
+		<soap:binding style="document"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="submit">
+			<soap:operation soapAction="" />
+			<wsdl:input>
+				<soap:header message="tns:transactionIDHeader" part="transactionIDHeader"
+					use="literal" />
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:header message="tns:transactionIDHeader" part="transactionIDHeader"
+					use="literal" />
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="MMRelayService">
+		<wsdl:port name="MMRelayPort" binding="tns:MMRelayBinding">
+			<soap:address location="http://vmp.vzw.com/mms/MMRelay" />
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

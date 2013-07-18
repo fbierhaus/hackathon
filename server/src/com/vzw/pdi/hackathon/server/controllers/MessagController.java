@@ -25,11 +25,16 @@ public class MessagController extends RestController {
 	public void create(){
 		logger.debug("Starting create");
 		
-		String mdn = this.getStringParam("mdn");
-		String message = this.getStringParam("message");
-		String from = this.getStringParam("message");
-		
-		MessageManager mm = new MessageManager();
-		mm.postMessage(from, mdn, message);
+		try{
+			String mdn = this.getStringParam("mdn");
+			String message = this.getStringParam("message");
+			String from = this.getStringParam("from");
+			
+			MessageManager mm = new MessageManager();
+			mm.postMessage(from, mdn, message);
+			
+		} catch (Exception e){
+			logger.error("Error posting message", e);
+		}
 	}
 }
