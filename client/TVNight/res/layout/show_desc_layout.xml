@@ -123,7 +123,7 @@
             android:layout_marginTop="15dp"
             android:background="@drawable/btn_white_gradient"
             android:gravity="center"
-            android:text="Purchase Show ($3.99)"
+            android:text="Purchase Show"
             android:visibility="gone" />
     </LinearLayout>
 

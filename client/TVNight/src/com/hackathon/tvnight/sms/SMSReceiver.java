@@ -172,12 +172,12 @@ public class SMSReceiver extends BroadcastReceiver {
 }
 	
 	protected Intent createInvitationIntent(Context context, String msgBody) {
-			String showId = "5093997118356150112";
+			String inviteSender = msgBody.split("_")[2];
 			
 			Intent intent = new Intent(context, InviteProposeActivity.class);
 			intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK); // | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);			
-
-			intent.putExtra(EXTRA_SHOW_ID, showId);
+			
+			intent.putExtra(EXTRA_SENDER, inviteSender);
 //			intent.putExtra(EXTRA_SHOW_STARTTIME, startTime);
 //			intent.putExtra(EXTRA_SHOW_DURATION, duration);
 //			intent.putExtra(EXTRA_SENDER, sender);

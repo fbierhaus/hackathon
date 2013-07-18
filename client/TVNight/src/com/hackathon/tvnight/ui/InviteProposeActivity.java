@@ -8,6 +8,7 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.hackathon.tvnight.R;
+import com.hackathon.tvnight.model.ShowingResult;
 import com.hackathon.tvnight.sms.SMSReceiver;
 
 public class InviteProposeActivity extends Activity {
@@ -29,14 +30,14 @@ public class InviteProposeActivity extends Activity {
 		showDesc = (TextView) findViewById(R.id.show_desc);
 		showTime = (TextView) findViewById(R.id.show_date_and_time);
 		remindMe = (CheckBox) findViewById(R.id.remind_me_checkbox);
-		whosWatching = (TextView) findViewById(R.id.watch_list);
+//		whosWatching = (TextView) findViewById(R.id.watch_list);
 		acceptInvite = (Button) findViewById(R.id.accept_inv);
 		declineInvite = (Button) findViewById(R.id.decline_inv);
 		
-		// just testing
-		Intent intent = getIntent();
-		String id = intent.getStringExtra(SMSReceiver.EXTRA_SHOW_ID);
-		showName.setText(id);
+		String sender = getIntent().getStringExtra(SMSReceiver.EXTRA_SENDER);
+		showName.setText("Invite From: "+sender);
+		
+		showTime.setText(ShowingResult.convertTime(System.currentTimeMillis()+(3*60*1000)));
 		
 		super.onCreate(savedInstanceState);
 	}
