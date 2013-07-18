@@ -7,6 +7,7 @@ import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -223,7 +224,45 @@ public class RestClient {
 	}
 	
 	
-	public static byte[] downloadFling(int flingId){
+	public static File downloadFling(int flingId, String serverBaseURL, String folderPath){
+		String url = serverBaseURL + "/server/flings/" + flingId + ".file";
+
+		
+		URLConnection connection;
+		try {
+			connection = new URL(url).openConnection();
+			InputStream response = connection.getInputStream();
+			
+			String contentType = connection.getHeaderField("Content-Type");
+			String contentDisposition = connection.getHeaderField("Content-Disposition");
+			logger.debug("***** contentDisposition: " + contentDisposition);
+			String filename = null;
+			if (contentDisposition == null) {
+				filename = "defaultFilename";
+			} else {
+				filename = contentDisposition.split(";")[1].split("=")[1];
+			}
+			
+			File tempFile = new File(folderPath, filename);
+
+			// read bytes
+			response = connection.getInputStream();
+			byte[] buffer = new byte[4096];
+			int n = - 1;
+
+			OutputStream output = new FileOutputStream(tempFile);
+			while ( (n = response.read(buffer)) != -1)
+			{
+			    if (n > 0)
+			    {
+			        output.write(buffer, 0, n);
+			    }
+			}
+			output.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 		return null;
 	}
@@ -243,7 +282,8 @@ public class RestClient {
 //		new RestClient().testGroupEvent();
 //		new RestClient().testRsvp();
 //		new RestClient().testPostMessage();
-		new RestClient().testFileUpload();
+//		new RestClient().testFileUpload();
+		new RestClient().testFlingDownload();
 	}
 	
 	protected void testGroupEvent(){
@@ -306,5 +346,14 @@ public class RestClient {
 	    int id = RestClient.sendFling(buffer, "photo.jpg", serverBaseUrl);
 	    
 	    System.out.println("Fling id: " + id);
+	}
+	
+	protected void testFlingDownload(){
+		int flingId = 3;
+		String folderPath = "/tmp/android";
+		
+		String serverBaseUrl = "http://localhost:8080/";
+		
+		RestClient.downloadFling(flingId, serverBaseUrl, folderPath);
 	}
 }
