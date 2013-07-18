@@ -81,7 +81,7 @@ public class ShowDescActivity extends Activity implements OnClickListener {
 		getShowDetails = new GetShowDetailTask(getDetailsHandler, 1);
 		getShowDetails.execute(getIntent().getStringExtra("show_id"));
 		purchaseButt.setOnClickListener(this);
-		if (getIntent().getBooleanExtra("simpaid", false) && selectedNums != null & selectedNums.size() > 0) {
+		if (getIntent().getBooleanExtra("simpaid", false) && selectedNums != null && selectedNums.size() > 0) {
 			purchaseButt.setVisibility(View.VISIBLE);
 		}
 		saveButt.setOnClickListener(this);
