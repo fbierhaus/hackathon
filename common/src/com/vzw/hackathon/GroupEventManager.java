@@ -229,7 +229,7 @@ public class GroupEventManager {
 				logger.debug("User not found in address book, create an  unknown user: mdn=" + mdn);
 				user = new User();
 				user.setMdn(mdn);
-				user.setName("Unnamed");
+				user.setName(mdn);
 				
 			}
 		}
