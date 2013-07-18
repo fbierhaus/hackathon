@@ -19,13 +19,14 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import net.sf.json.JSONObject;
+//import net.sf.json.JSONObject;
 
 import org.apache.log4j.Logger;
 
+import com.hackathon.tvnight.util.JSONHelper;
 import com.vzw.hackathon.GroupEvent;
 import com.vzw.hackathon.MemberStatus;
-import com.vzw.util.JSONUtil;
+//import com.vzw.util.JSONUtil;
 
 public class RestClient2 {
 
@@ -121,8 +122,9 @@ public class RestClient2 {
 
 	
 	protected static int extractId(String response){
-		JSONObject jsonObject = JSONObject.fromObject( response );
-		ServerResponse sr = (ServerResponse) JSONUtil.toJava(jsonObject, ServerResponse.class);
+//		JSONObject jsonObject = JSONObject.fromObject( response );
+//		ServerResponse sr = (ServerResponse) JSONUtil.toJava(jsonObject, ServerResponse.class);
+		ServerResponse sr = JSONHelper.fromJson(response, ServerResponse.class);
 		return sr.getId();
 	}
 	
@@ -131,7 +133,9 @@ public class RestClient2 {
 		
 		try {
 			Map<String, String> pm = new HashMap<String, String>();
-			pm.put("groupEvent", JSONUtil.toJsonString(ge));
+//			String js = JSONUtil.toJsonString(ge);
+			String js = JSONHelper.toJson(ge);
+			pm.put("groupEvent", js);
 			
 			String res = execute(true, serverBaseURL + "/server/groupEvents", pm);
 			

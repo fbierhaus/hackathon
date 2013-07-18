@@ -7,6 +7,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
+import android.util.Log;
+
 import com.hackathon.tvnight.model.ShowEntityList;
 import com.hackathon.tvnight.model.TVShow;
 import com.hackathon.tvnight.util.JSONHelper;
@@ -25,6 +27,7 @@ public class GetShowDetail {
 			URL url = new URL(query);
 			HttpURLConnection conn = (HttpURLConnection)url.openConnection();
 			String response = sendRequest(conn);
+			Log.d(this.getClass().getSimpleName(), "show detail ---> " + response);
 			ShowEntityList detailList = JSONHelper.fromJson(response, ShowEntityList.class);
 			if (detailList != null) {
 				ArrayList<TVShow> list = detailList.getEntities();
