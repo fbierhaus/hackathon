@@ -131,6 +131,7 @@ public class ShowDescActivity extends Activity implements OnClickListener {
 			startActivityForResult(startContactSelect, 0);
 			break;
 		case R.id.save_butt:
+			saveButt.setEnabled(false);
 			final ProgressDialog pd = new ProgressDialog(this);
 			pd.setMessage("Sending...");
 			pd.setCancelable(false);
@@ -139,7 +140,12 @@ public class ShowDescActivity extends Activity implements OnClickListener {
 				@Override
 				public void handleMessage(Message msg) {
 					pd.cancel();
-					Toast.makeText(ShowDescActivity.this, "Invitation Sent!", Toast.LENGTH_SHORT).show();
+					if (msg.obj != null) {
+						Toast.makeText(ShowDescActivity.this, "Invitation Sent!", Toast.LENGTH_SHORT).show();
+					}
+					else {
+						Toast.makeText(ShowDescActivity.this, "Request Failed!", Toast.LENGTH_SHORT).show();						
+					}
 					finish();
 					super.handleMessage(msg);
 				}
