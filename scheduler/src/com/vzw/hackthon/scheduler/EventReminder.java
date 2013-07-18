@@ -149,7 +149,7 @@ public class EventReminder implements Runnable {
 					
 					
 					
-					logger.info("Prepared reminder message: " + msg + ", mdnList=" + mdnList);
+
 					
 					// send to the client
 					//MessagingAPIHandler.sendSMS(mdnList, msg);
@@ -157,6 +157,7 @@ public class EventReminder implements Runnable {
 					
 					for (String mdn : mdnList) {
 						String msg = buildReminderString(ge, mdn, mdnList);
+						logger.info("Prepared reminder message: " + msg);
 						VZWAPIHandler.sendSMS(mdn, msg);
 						flagReminderSent(ge.getId(), mdn);
 					}
