@@ -2,44 +2,62 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_row_gradient_bar">
-    
-    <ImageView android:id="@+id/icon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
+    android:background="@drawable/bg_row_gradient_bar" >
+
+    <FrameLayout
+        android:id="@+id/icon_layout"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_alignParentLeft="true"
-        android:layout_marginLeft="10dp"/>
-    
-    <LinearLayout android:id="@+id/text_layout"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="10dp" >
+
+        <ProgressBar
+            android:id="@+id/loading"
+            style="@android:style/Widget.ProgressBar.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"/>
+
+        <ImageView
+            android:id="@+id/icon"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone" />
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/text_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/icon"
-        android:layout_marginLeft="7dp"
         android:layout_centerVertical="true"
-		android:orientation="vertical">
-		
-        <TextView android:id="@+id/title"
-            android:textColor="#333333"
+        android:layout_marginLeft="7dp"
+        android:layout_toRightOf="@id/icon_layout"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginRight="20dp"
-            android:textStyle="bold"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-        
-        <TextView android:id="@+id/episode_title"
-            android:text="First Episode"
             android:textColor="#333333"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/episode_title"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-        
+            android:layout_height="wrap_content"
+            android:text="First Episode"
+            android:textColor="#333333" />
     </LinearLayout>
-    
-    <ImageView android:id="@+id/arrow_ico"
+
+    <ImageView
+        android:id="@+id/arrow_ico"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_marginRight="10dp"
         android:layout_centerVertical="true"
-        android:src="@drawable/ico_arrow_select"/>
+        android:layout_marginRight="10dp"
+        android:src="@drawable/ico_arrow_select" />
 
 </RelativeLayout>

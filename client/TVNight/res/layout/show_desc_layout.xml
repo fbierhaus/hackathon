@@ -10,6 +10,13 @@
         android:layout_alignParentTop="true"
         layout="@layout/headerlayout" />
 
+    <ProgressBar
+        android:id="@+id/progress_spinner"
+        style="@android:style/Widget.ProgressBar.Large"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true" />
+
     <LinearLayout
         android:id="@+id/save_layout"
         android:layout_width="match_parent"
@@ -29,13 +36,15 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/top_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@id/save_layout"
         android:layout_below="@id/header_layout"
         android:orientation="vertical"
         android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin" >
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:visibility="gone" >
 
         <RelativeLayout
             android:id="@+id/show_layout"
@@ -44,21 +53,36 @@
             android:layout_marginBottom="15dp"
             android:layout_marginTop="10dp" >
 
-            <ImageView
-                android:id="@+id/show_icon"
+            <FrameLayout
+                android:id="@+id/icon_layout"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:layout_alignParentLeft="true"
-                android:layout_marginRight="7dp"
-                android:src="@drawable/ic_missing_thumbnail_video" />
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="7dp" >
+
+                <ProgressBar
+                    android:id="@+id/loading"
+                    style="@android:style/Widget.ProgressBar.Small"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center" />
+
+                <ImageView
+                    android:id="@+id/show_icon"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ic_missing_thumbnail_video"
+                    android:visibility="gone" />
+            </FrameLayout>
 
             <TextView
                 android:id="@+id/show_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignTop="@id/icon"
+                android:layout_alignTop="@id/icon_layout"
                 android:layout_marginLeft="5dp"
-                android:layout_toRightOf="@id/show_icon"
+                android:layout_toRightOf="@id/icon_layout"
                 android:textColor="#333333"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -70,7 +94,7 @@
                 android:layout_alignLeft="@id/show_title"
                 android:layout_below="@id/show_title"
                 android:layout_marginTop="3dp"
-                android:text="Season 3 - Episode 15"
+                android:text="Showtime Unavailable"
                 android:textColor="#333333"
                 android:textSize="17sp"
                 android:textStyle="bold" />

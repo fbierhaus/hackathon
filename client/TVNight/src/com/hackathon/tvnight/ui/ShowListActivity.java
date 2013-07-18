@@ -5,6 +5,8 @@ import java.util.Random;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -16,12 +18,17 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.hackathon.tvnight.R;
+import com.hackathon.tvnight.model.ShowImage;
 import com.hackathon.tvnight.model.TVShow;
+import com.hackathon.tvnight.task.GetShowImageTask;
 import com.hackathon.tvnight.task.GetShowListTask;
+import com.koushikdutta.urlimageviewhelper.UrlImageViewCallback;
+import com.koushikdutta.urlimageviewhelper.UrlImageViewHelper;
 
 public class ShowListActivity extends Activity implements OnClickListener {
 	private final static int MSG_SHOW_LIST = 1;
@@ -37,8 +44,29 @@ public class ShowListActivity extends Activity implements OnClickListener {
 	 * Results returned in Message.obj 
 	 */
 	private GetShowListTask getShowListTask = null;
+	private GetShowImageTask myImageTask = null;
 	private EditText searchTerm;
+	private ProgressBar progressSpinner;
 	private Button submit;
+
+	private Handler imageHandler = new Handler() {
+		@SuppressWarnings("unchecked")
+		@Override
+		public void handleMessage(Message msg) {
+			Bundle data = msg.getData();
+			String roviId = data.getString(TVShow.ID_KEY_ROVI);
+			List<ShowImage> list = (List<ShowImage>) msg.obj;
+			for (TVShow show : showsAdapter.getShows()) {
+				if (show == null || show.getId(TVShow.ID_KEY_ROVI) == null || list == null || list.get(0) == null || list.get(0).getUrl() == null) {
+					continue;
+				}
+				if (show.getId(TVShow.ID_KEY_ROVI).equalsIgnoreCase(roviId)) {
+					show.setImageUrl(list.get(0).getUrl());
+				}
+			}
+			showsAdapter.notifyDataSetChanged();
+		}
+	};
 	
 	private Handler handler = new Handler() {
 		@SuppressWarnings("unchecked")
@@ -46,7 +74,7 @@ public class ShowListActivity extends Activity implements OnClickListener {
 		public void handleMessage(Message msg) {
 			if (msg.what == MSG_SHOW_LIST) {
 
-				findViewById(R.id.progress_spinner).setVisibility(View.GONE);
+				progressSpinner.setVisibility(View.GONE);
 
 				List<TVShow> shows = (List<TVShow>)msg.obj;
 				if (shows == null) {
@@ -63,8 +91,18 @@ public class ShowListActivity extends Activity implements OnClickListener {
 						}
 						
 					}
+					
 					showList.setAdapter(showsAdapter);
 					showList.setVisibility(View.VISIBLE);
+					String[] roviIds = new String[shows.size()];
+					for (int i = 0; i < shows.size(); i++) {
+						roviIds[i] = shows.get(i).getId(TVShow.ID_KEY_ROVI);
+					}
+					if (myImageTask != null) {
+						myImageTask.cancelOperation();
+					}
+					myImageTask = new GetShowImageTask(imageHandler, 1);
+					myImageTask.execute(roviIds);
 				}
 			}
 		}
@@ -84,6 +122,8 @@ public class ShowListActivity extends Activity implements OnClickListener {
 			startActivity(i);
 		}
 		
+		progressSpinner = (ProgressBar) findViewById(R.id.progress_spinner);
+		
 		getShowListTask = new GetShowListTask(handler, MSG_SHOW_LIST, "super-man");
 		getShowListTask.execute(10);	// get 10 at a time
 	}
@@ -93,6 +133,9 @@ public class ShowListActivity extends Activity implements OnClickListener {
 		if (getShowListTask != null) {
 			getShowListTask.cancelOperation();
 		}
+		if (myImageTask != null) {
+			myImageTask.cancelOperation();
+		}
 		super.onDestroy();
 	}
 	
@@ -100,6 +143,7 @@ public class ShowListActivity extends Activity implements OnClickListener {
 		private TextView title;
 		private ImageView icon;
 		private TextView episodeTitle;
+		private ProgressBar loading;
 	}
 	
 	class TVShowAdapter extends BaseAdapter {
@@ -124,6 +168,10 @@ public class ShowListActivity extends Activity implements OnClickListener {
 		public long getItemId(int position) {
 			return position;
 		}
+		
+		public List<TVShow> getShows() {
+			return shows;
+		}
 
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
@@ -134,10 +182,11 @@ public class ShowListActivity extends Activity implements OnClickListener {
 				holder.episodeTitle = (TextView) convertView.findViewById(R.id.episode_title);
 				holder.icon = (ImageView) convertView.findViewById(R.id.icon);
 				holder.title = (TextView) convertView.findViewById(R.id.title);
+				holder.loading = (ProgressBar) convertView.findViewById(R.id.loading);
 				convertView.setTag(holder);
 			}
 			
-			ShowViewHolder myViewData = (ShowViewHolder) convertView.getTag();
+			final ShowViewHolder myViewData = (ShowViewHolder) convertView.getTag();
 			
 			myViewData.title.setText(show.getDefaultTitle());
 			
@@ -147,7 +196,24 @@ public class ShowListActivity extends Activity implements OnClickListener {
 			else {
 				myViewData.episodeTitle.setText("First Episode");
 			}
-						
+			
+			if (show.getImageUrl() != null) {
+				myViewData.icon.setVisibility(View.GONE);
+				myViewData.loading.setVisibility(View.VISIBLE);
+				UrlImageViewHelper.setUrlDrawable(myViewData.icon, show.getImageUrl(), new UrlImageViewCallback() {
+					@Override
+					public void onLoaded(ImageView arg0, Bitmap arg1, String arg2, boolean arg3) {
+						myViewData.icon.setVisibility(View.VISIBLE);
+						myViewData.loading.setVisibility(View.GONE);
+					}
+				});
+			}
+			else {
+				myViewData.icon.setImageResource(R.drawable.ic_missing_thumbnail_video);
+				myViewData.icon.setVisibility(View.VISIBLE);
+				myViewData.loading.setVisibility(View.GONE);
+			}
+			
 			convertView.setOnClickListener(new View.OnClickListener() {
 				
 				@Override
@@ -156,6 +222,8 @@ public class ShowListActivity extends Activity implements OnClickListener {
 					i.putExtra("name", show.getDefaultTitle());
 					i.putExtra("desc", show.getDefaultDescription());
 					i.putExtra("simpaid", show.getSimulatePaid());
+					i.putExtra("imgurl", show.getImageUrl());
+					i.putExtra("show_id", show.getId(TVShow.ID_KEY_MERLIN));
 					startActivity(i);
 				}
 			});
@@ -176,11 +244,14 @@ public class ShowListActivity extends Activity implements OnClickListener {
 			return;
 		}
 		showsAdapter = null;
-		findViewById(R.id.progress_spinner).setVisibility(View.VISIBLE);
+		progressSpinner.setVisibility(View.VISIBLE);
 		showList.setVisibility(View.GONE);
 		
 		if (getShowListTask != null) {
 			getShowListTask.cancelOperation();
+		}
+		if (myImageTask != null) {
+			myImageTask.cancelOperation();
 		}
 		
 		getShowListTask = new GetShowListTask(handler, MSG_SHOW_LIST, search);

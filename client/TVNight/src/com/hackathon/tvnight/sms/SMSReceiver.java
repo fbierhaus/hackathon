@@ -16,10 +16,12 @@ import android.util.Log;
 import java.lang.Exception;
 
 import com.hackathon.tvnight.ui.InviteProposeActivity;
+import com.hackathon.tvnight.ui.ReminderActivity;
 
 public class SMSReceiver extends BroadcastReceiver {
 	private final static String TAG = SMSReceiver.class.getSimpleName();
 	private final static String MSG_PREFIX = "TVN_";
+	private final static String REMINDER_PREFIX = "RMD_";
 		
 	public final static String EXTRA_SHOW_ID = "show_id";
 	public final static String EXTRA_SHOW_STARTTIME = "start_time";
@@ -71,6 +73,10 @@ public class SMSReceiver extends BroadcastReceiver {
 		// display the new SMS messages
 		Toast.makeText(context, str, Toast.LENGTH_SHORT).show();
  	
+		if (msgBody.startsWith(REMINDER_PREFIX)) {
+			context.startActivity(createReminderIntent(context, msgBody));
+		}
+		
    		if (msgBody.startsWith(MSG_PREFIX)) {
    			
 			context.startActivity(createInvitationIntent(context, msgBody));
@@ -156,6 +162,14 @@ public class SMSReceiver extends BroadcastReceiver {
 //    		}
 //    	}
 	};
+	
+	protected Intent createReminderIntent(Context context, String msgBody) {
+		Intent intent = new Intent(context, ReminderActivity.class);
+		intent.putExtra("recips", msgBody.split("_")[1]);
+		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK); // | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);			
+		
+		return intent;
+}
 	
 	protected Intent createInvitationIntent(Context context, String msgBody) {
 			String showId = "5093997118356150112";
