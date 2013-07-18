@@ -162,5 +162,6 @@ public class RestClient2 {
 	        logger.error("error", e);
 	    }
 		
-	}	
+	}
+
 }
