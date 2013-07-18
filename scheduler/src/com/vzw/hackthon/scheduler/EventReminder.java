@@ -24,7 +24,7 @@ public class EventReminder implements Runnable {
 	private static final DBPool 	dbPool = DBManager.getDBPool();
 	
 	private static final int CHECK_INTERVAL_SECONDS		= 5;
-	private static final int REMINDER_SECONDS			= 600;		// when to send reminder 90
+	private static final int REMINDER_SECONDS			= 90;		// when to send reminder 90
 	
 	
 	private static final String SQL_SEL_EVENTS_FOR_REMINDER = 
