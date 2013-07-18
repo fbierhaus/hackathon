@@ -6,6 +6,7 @@ import org.apache.commons.lang3.CharSequenceUtils;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -24,6 +25,9 @@ import com.hackathon.tvnight.R;
 import com.hackathon.tvnight.model.ShowingResult;
 import com.hackathon.tvnight.model.TVShow;
 import com.hackathon.tvnight.task.GetShowDetailTask;
+import com.hackathon.tvnight.task.Invitation;
+import com.hackathon.tvnight.task.SendInvitationTask;
+import com.hackathon.tvnight.util.Util;
 import com.koushikdutta.urlimageviewhelper.UrlImageViewCallback;
 import com.koushikdutta.urlimageviewhelper.UrlImageViewHelper;
 
@@ -125,8 +129,24 @@ public class ShowDescActivity extends Activity implements OnClickListener {
 			startActivityForResult(startContactSelect, 0);
 			break;
 		case R.id.save_butt:
-			//TODO send request to server to send out text message to recips
-			//recpis are in selectedNums
+			final ProgressDialog pd = new ProgressDialog(this);
+			pd.setMessage("Sending...");
+			pd.setCancelable(false);
+			pd.show();
+			SendInvitationTask sendTask = new SendInvitationTask(new Handler() {
+				@Override
+				public void handleMessage(Message msg) {
+					pd.cancel();
+					Toast.makeText(ShowDescActivity.this, "Invitation Sent!", Toast.LENGTH_SHORT).show();
+					finish();
+					super.handleMessage(msg);
+				}
+			}, 1);
+			Invitation i = new Invitation(Util.getPhoneNumber(this), channelId, "");
+			for (String recip : selectedNums) {
+				i.addRecipient(recip);
+			}
+			sendTask.execute(i);
 			break;
 		case R.id.purchase_butt:
 			Builder builder = new Builder(this);

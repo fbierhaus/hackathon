@@ -83,7 +83,7 @@ public class ShowListActivity extends Activity implements OnClickListener {
 				else {
 					showsAdapter = new TVShowAdapter(shows);
 					for (TVShow show : shows) {
-						if (new Random().nextInt(3) == 1) {
+						if (new Random().nextInt(3) == 1 || show.getDefaultTitle().startsWith("Big Bang Theory")) {
 							show.setSimulatePaid(true);
 						}
 						else {

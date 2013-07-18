@@ -47,7 +47,7 @@
                 android:id="@+id/show_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Falling Skies"
+                android:text="Big Bang Theory, The"
                 android:layout_gravity="left"
                 android:layout_marginBottom="7dp"
                 android:layout_marginTop="14dp"
@@ -60,7 +60,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
-                android:text="Tom is now Charleston's leader, and his alliance with a new alien race gains them their first real advantage in the war against the invading espheni. Tom..."
+                android:text="Two nerdy physicists share an apartment and an unlikely friendship with their beautiful neighbor with whom one of them is infatuated. Like the universe after the big bang, the show's popularity expanded, thanks to breakout star Jim Parsons, along with the chemistry among the friends and the developing romance between Leonard and Penny. The addition of Melissa Rauch and Mayim Bialik in later seasons also enhanced the stories and relationships of the leads."
                 android:layout_marginBottom="7dp"
                 android:textColor="#333333" />
 
@@ -87,22 +87,10 @@
                 android:button="@drawable/checkbox_selector"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Remind me 30 minutes before show starts"
+                android:text="Remind me 1 minute before show starts"
                 android:textColor="#333333"
                 android:textSize="16sp"/>
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:layout_marginTop="10dp"
-                android:src="@drawable/gray_divider_line2px" />
-            <TextView android:id="@+id/watch_list"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Watch Group (3): Mark, Joe Fisher, Kristen V"
-                android:textColor="#333333"
-                android:textSize="16sp"/>
-             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
