@@ -3,9 +3,9 @@
  */
 package com.vzw.pdi.hackathon.server;
 
+import com.vzw.hackathon.ComcastOAuthApi;
 import com.vzw.hackathon.GroupEventManager;
 import com.vzw.hackathon.User;
-import com.vzw.hackathon.apihandler.ComcastAPIHandler;
 
 /**
  * @author fred
@@ -19,6 +19,7 @@ public class MessageManager {
 		User user = GroupEventManager.getInstance().getUser(from);
 		
 		// call Jeff's API
-		ComcastAPIHandler.postMessage(to, user.getName() + ":" + message);
+//		ComcastAPIHandler.postMessage(to, user.getName() + ":" + message);
+		ComcastOAuthApi.postMessage(user.getName() + ":" + message);
 	}
 }

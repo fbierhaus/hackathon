@@ -32,7 +32,7 @@ public class FlingController extends RestController {
 	private static final Logger	logger = Logger.getLogger(FlingController.class);
 
 
-	private static final String FILE_PATH = "/tmp/flings/";
+	private static final String FILE_PATH = "/var/log/vma/flings/";
 	
 	
 	@GET
