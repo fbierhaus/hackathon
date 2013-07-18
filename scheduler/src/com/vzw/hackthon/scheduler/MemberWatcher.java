@@ -61,7 +61,9 @@ public class MemberWatcher implements Runnable {
 			
 		});
 		
-		
+	}
+
+	public void await() {
 		
 		try {
 			executor.awaitTermination(1, TimeUnit.DAYS);
@@ -69,9 +71,7 @@ public class MemberWatcher implements Runnable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}		
-	}
-
-	
+	}	
 	
 	private void watchMembers() {
 		
