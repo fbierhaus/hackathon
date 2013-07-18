@@ -5,6 +5,10 @@ import java.util.List;
 import java.util.Map;
 
 public class TVShow {
+	
+	private boolean simulatePaid;
+	private String imageUrl;
+	
 	public final static String ID_KEY_MERLIN = "merlin";
 	public final static String ID_KEY_REX = "rex";
 	public final static String ID_KEY_ROVI = "rovi";
@@ -89,8 +93,8 @@ public class TVShow {
 	 */
 	public List<ShowingResult> getShowingResultList() {
 		// get a list of shows if detail exists
-		if (subresults != null) {
-			return subresults.getShowings().getShowingresults();			
+		if (subresults != null && subresults.getShowings() != null) {
+			return subresults.getShowings().getShowingresults();
 		}
 		return null;
 	}
@@ -182,4 +186,21 @@ public class TVShow {
 	public void setSubresults(SubResults subresults) {
 		this.subresults = subresults;
 	}
+	
+	public void setSimulatePaid(boolean simulatePaid) {
+		this.simulatePaid = simulatePaid;
+	}
+	
+	public boolean getSimulatePaid() {
+		return simulatePaid;
+	}
+	
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
+	}
+	
+	public String getImageUrl() {
+		return imageUrl;
+	}
+	
 }

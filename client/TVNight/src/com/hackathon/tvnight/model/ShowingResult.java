@@ -8,7 +8,11 @@ public class ShowingResult {
 	///////////////////////////////////////////////
 	// helper functions
 	
-	private static final ThreadSafeSimpleDateFormat sdf = new ThreadSafeSimpleDateFormat("yyyy-MM-dd HH:mm");
+	private static final ThreadSafeSimpleDateFormat sdf = new ThreadSafeSimpleDateFormat("MM/dd hh:mm aa");
+	
+	public static final String convertTime(long time) {
+		return sdf.format(new Date(time));
+	}
 	
 	public String getPriceType() {
 		String type = null;
@@ -24,7 +28,7 @@ public class ShowingResult {
 	public String getChannelId() {
 		String id = null;
 		if (channel != null) {
-			id = channel.getStationid();
+			id = channel.getNumber();
 		}
 		return id;
 	}

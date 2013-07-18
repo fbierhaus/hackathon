@@ -12,6 +12,7 @@ import com.hackathon.tvnight.task.Invitation;
 import com.hackathon.tvnight.util.JSONHelper;
 import com.vzw.hackathon.GroupEvent;
 import com.vzw.hackathon.Member;
+import com.vzw.hackathon.apihandler.RestClient2;
 
 public class SendInvitation {
 	private Invitation mInvite;
@@ -30,45 +31,22 @@ public class SendInvitation {
 			for (String mdn : list) {
 				Member member = new Member();
 				member.setMdn(mdn);
-				member.setName("Name " + mdn);
+//				member.setName("Name " + mdn);
 				members.add(member);
 			}
 			
 			GroupEvent event = new GroupEvent();
-			event.setId((int)(System.currentTimeMillis()/1000L));
-			event.setChannelId(mInvite.getChannelId());
+//			event.setId((int)(System.currentTimeMillis()/1000L));
+			event.setChannelId(mInvite.getChannelNumber() + "##" + mInvite.getRoviId());
 			event.setShowId(mInvite.getShowId());
 			event.setMemberList(members);
-			event.setMasterMdn(mInvite.getSender());
+			event.setMasterMdn(mInvite.getSender());		// sender
+			event.setShowTime(mInvite.getStartTime());
 			
-			String json = JSONHelper.toJson(event);
-			json = "groupEvent={ " + json + " }";
+//			String json = JSONHelper.toJson(event);
+//			json = "groupEvent={ " + json + " }";
 			
-			String query = ApiConstant.VERIZON_SERVER + ApiConstant.SEND_INVITE;
-			
-			URL url;
-			try {
-//				url = new URL(query);
-//				HttpURLConnection conn = (HttpURLConnection)url.openConnection();
-//				conn.setRequestMethod("POST");
-//
-//				StringBuilder builder = new StringBuilder();			
-//				BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-//				String line = null;
-//				while ((line = reader.readLine()) != null) {
-//					builder.append(line);
-//				}
-//
-//				String response = builder.toString();
-
-				Thread.sleep(5000);
-				
-				invitationId = event.getId();
-			}
-			catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			invitationId = RestClient2.createGroupEvent(event, ApiConstant.VERIZON_SERVER);
 		}
 		catch (Exception e) {
 			// TODO Auto-generated catch block

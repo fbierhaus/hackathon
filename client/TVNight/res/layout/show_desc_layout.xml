@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#DADADA">
+    android:background="#DADADA" >
 
     <include
         android:layout_width="match_parent"
@@ -10,66 +10,121 @@
         android:layout_alignParentTop="true"
         layout="@layout/headerlayout" />
 
-    <LinearLayout android:id="@+id/save_layout"
-        android:layout_width="match_parent"
+    <ProgressBar
+        android:id="@+id/progress_spinner"
+        style="@android:style/Widget.ProgressBar.Large"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="gone"
-        android:padding="12dp"
-        android:background="#5A5A5A"
-        android:layout_alignParentBottom="true">
-    
-    <Button android:id="@+id/save_butt"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-		android:text="Save"
-        android:background="@drawable/btn_white_gradient"/>
-    </LinearLayout>
-    
+        android:layout_centerInParent="true" />
+
     <LinearLayout
+        android:id="@+id/save_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="#5A5A5A"
+        android:padding="12dp"
+        android:visibility="gone" >
+
+        <Button
+            android:id="@+id/save_butt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/btn_white_gradient"
+            android:gravity="center"
+            android:text="Send Invites" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/top_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/header_layout"
         android:layout_above="@id/save_layout"
+        android:layout_below="@id/header_layout"
         android:orientation="vertical"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
-        android:paddingLeft="@dimen/activity_horizontal_margin">
+        android:visibility="gone" >
 
-        <ImageView
-            android:id="@+id/show_ico"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-        
-        <TextView android:id="@+id/show_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="7dp"
-            android:layout_marginBottom="7dp"
-            android:textColor="#333333"
-            android:textStyle="bold"
-            android:textSize="18sp"/>
-        
-        <Spinner android:id="@+id/season_select"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-        
-        <Spinner android:id="@+id/episode_select"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-        
-        <TextView android:id="@+id/show_desc"
-            android:textColor="#333333"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="7dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-        
-        <Button android:id="@+id/create_watch_group_butt"
+        <RelativeLayout
+            android:id="@+id/show_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Create a Watch Group"
+            android:layout_marginBottom="15dp"
+            android:layout_marginTop="10dp" >
+
+            <FrameLayout
+                android:id="@+id/icon_layout"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="7dp" >
+
+                <ProgressBar
+                    android:id="@+id/loading"
+                    style="@android:style/Widget.ProgressBar.Small"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center" />
+
+                <ImageView
+                    android:id="@+id/show_icon"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ic_missing_thumbnail_video"
+                    android:visibility="gone" />
+            </FrameLayout>
+
+            <TextView
+                android:id="@+id/show_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/icon_layout"
+                android:layout_marginLeft="5dp"
+                android:layout_toRightOf="@id/icon_layout"
+                android:textColor="#333333"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/season_ep_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@id/show_title"
+                android:layout_below="@id/show_title"
+                android:layout_marginTop="3dp"
+                android:text="Showtime Unavailable"
+                android:textColor="#333333"
+                android:textSize="17sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/show_desc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@id/season_ep_text"
+                android:layout_below="@id/season_ep_text"
+                android:textColor="#333333" />
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/create_watch_group_butt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:background="@drawable/btn_white_gradient"
-            android:gravity="center"/>
+            android:gravity="center"
+            android:text="Create a Watch Group" />
+
+        <Button
+            android:id="@+id/purchase_butt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/btn_white_gradient"
+            android:gravity="center"
+            android:text="Purchase Show ($3.99)"
+            android:visibility="gone" />
     </LinearLayout>
 
 </RelativeLayout>
