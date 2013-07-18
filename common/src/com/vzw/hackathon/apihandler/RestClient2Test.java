@@ -5,7 +5,8 @@ import com.vzw.hackathon.GroupEventManager;
 import com.vzw.hackathon.MemberStatus;
 
 public class RestClient2Test {
-	private static final String serverBaseURL = "http://hud.wcmad.com:8080";
+	//private static final String serverBaseURL = "http://hud.wcmad.com:8080";
+	private static final String serverBaseURL = "http://localhost:8080";
 	
 	//ssh -nNT -R 8080:localhost:8080 -l hud hud.wcmad.com
 	
@@ -13,9 +14,9 @@ public class RestClient2Test {
 
 		
 		
-		testGroupEvent();
+		//testGroupEvent();
 		testRsvp();
-		testPostMessage();
+		//stestPostMessage();
 		
 
 		
@@ -23,12 +24,12 @@ public class RestClient2Test {
 	}
 
 	public static void testGroupEvent() {
-		GroupEvent ge = GroupEventManager.getInstance().loadGroupEventFromDb(1);
+		GroupEvent ge = GroupEventManager.getInstance().loadGroupEventFromDb(3);
 		RestClient2.createGroupEvent(ge, serverBaseURL);
 	}
 	
 	public static void testRsvp() {
-		RestClient2.rsvp(1, "9251000001", MemberStatus.ACCEPTED, serverBaseURL);
+		RestClient2.rsvp(4, "9258881234", MemberStatus.ACCEPTED, serverBaseURL);
 	}
 	
 	public static void testPostMessage() {

@@ -56,7 +56,7 @@ public class RestClient2 {
 				connection.setRequestMethod("POST");
 				connection.setRequestProperty("Content-Type",
 						"application/x-www-form-urlencoded");
-				connection.setDoInput(true);
+				connection.setDoOutput(true);
 			}
 			else {
 				connection.setRequestMethod("GET");
@@ -68,7 +68,7 @@ public class RestClient2 {
 
 			connection.setReadTimeout(10000);
 			connection.setUseCaches(false);
-			connection.setDoOutput(true);
+			connection.setDoInput(true);
 
 			// Send request
 			DataOutputStream wr = new DataOutputStream(
