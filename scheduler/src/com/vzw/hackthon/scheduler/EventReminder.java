@@ -9,6 +9,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.dbutils.handlers.ArrayListHandler;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 
 import com.vzw.hackathon.GroupEvent;
@@ -145,15 +146,19 @@ public class EventReminder implements Runnable {
 				List<String> mdnList = getMemberMdnForReminder(ge.getId());
 				if (!CollectionUtils.isEmpty(mdnList)) {
 					
-					String msg = buildReminderString(ge);
 					
-					logger.info("Prepared reminder message: " + msg + ", mdnList=" + mdnList);
+					
+					
+
 					
 					// send to the client
 					//MessagingAPIHandler.sendSMS(mdnList, msg);
-					VZWAPIHandler.sendSMS(mdnList, msg);
+					
 					
 					for (String mdn : mdnList) {
+						String msg = buildReminderString(ge, mdn, mdnList);
+						logger.info("Prepared reminder message: " + msg);
+						VZWAPIHandler.sendSMS(mdn, msg);
 						flagReminderSent(ge.getId(), mdn);
 					}
 				}
@@ -178,9 +183,17 @@ public class EventReminder implements Runnable {
 	 * @param ge
 	 * @return
 	 */
-	public String buildReminderString(GroupEvent ge) {
-		return MessageFormat.format("MNREMINDER##{0}##{1,time,yyyy-MM-dd HH:mm}", 
-				ge.getShowId(), ge.getShowTime());
+	public String buildReminderString(GroupEvent ge, String mdnEx, List<String> mdnList) {
+		
+		List<String> to1 = new ArrayList<String>();
+		for (String _mdn : mdnList) {
+			if (!StringUtils.equals(_mdn, mdnEx)) {
+				to1.add(_mdn);
+			}
+		}
+		
+		String tos = StringUtils.join(to1.toArray(new String[0]), ";");
+		return MessageFormat.format("RMD_{0}",  tos);
 	}
 
 	@Override

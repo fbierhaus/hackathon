@@ -153,7 +153,7 @@ public class MemberWatcher implements Runnable {
 			logger.info("member: " + m);
 			
 			if (!StringUtils.equals(m.getChannelId(), m.getLastChannelId())) {
-				String msg = m.getName() + " changed channel to " + channel.getName();
+				String msg = m.getName() + " just changed channel to " + channel.getName();
 				logger.info("channel changed, to=" + toStr + ", msg = " + msg);
 				
 				// need to send the group message of this change
