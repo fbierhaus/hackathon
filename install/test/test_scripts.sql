@@ -243,8 +243,8 @@ alter table group_member
 add column reminder_sent integer default 0;
 
 
---=====
---==
+--====== DEMO
+--======
 update users
 set channel_id = '703##6718065'
 where mdn = '9253248817';
@@ -252,6 +252,8 @@ where mdn = '9253248817';
 update users
 set channel_id = '200##000001'
 where mdn = '9253248967';
+--======
+--======
 
 ----------------------------------------------------
 -- hud 3
