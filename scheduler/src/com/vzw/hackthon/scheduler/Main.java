@@ -13,7 +13,14 @@ public class Main {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		EventReminder er = new EventReminder();
+		MemberWatcher mw = new MemberWatcher();
+		
+		er.start();
+		mw.start();
+		
+		// will wait for a day or interrupt it
+		
 
 	}
 

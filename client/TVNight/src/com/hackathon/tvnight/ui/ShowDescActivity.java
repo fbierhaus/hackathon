@@ -38,9 +38,11 @@ public class ShowDescActivity extends Activity implements OnClickListener {
 	private TextView showTitle;
 	private TextView showDesc;
 	private TextView mySeasonAndEp;
+	private long startTime;
 	private Button purchaseButt;
 	private String channelId;
 	private ImageView showIcon;
+	private String roviId;
 	private String showName;
 	private Button saveButt;
 	private ArrayList<String> selectedNums;
@@ -48,8 +50,9 @@ public class ShowDescActivity extends Activity implements OnClickListener {
 	private Handler getDetailsHandler = new Handler() {
 		public void handleMessage(Message msg) {
 			TVShow show = (TVShow) msg.obj;
-			long time = System.currentTimeMillis()+(3*60*1000);
-			String stringTime = ShowingResult.convertTime(time);
+			roviId = show.getId(TVShow.ID_KEY_ROVI);
+			startTime = System.currentTimeMillis()+(3*60*1000);
+			String stringTime = ShowingResult.convertTime(startTime);
 			channelId = "703";
 			if (show != null && show.getShowingResultList() != null && show.getShowingResultList().size() > 0) {
 				channelId = ((TVShow) msg.obj).getShowingResultList().get(0).getChannelId(); //show first showing result
@@ -142,7 +145,7 @@ public class ShowDescActivity extends Activity implements OnClickListener {
 					super.handleMessage(msg);
 				}
 			}, 1);
-			Invitation i = new Invitation(Util.getPhoneNumber(this), channelId, "");
+			Invitation i = new Invitation(Util.getPhoneNumber(this), channelId, roviId, "", startTime);
 			for (String recip : selectedNums) {
 				i.addRecipient(recip);
 			}
