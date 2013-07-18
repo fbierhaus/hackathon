@@ -3,8 +3,19 @@
  */
 package com.vzw.hackathon.apihandler;
 
+import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
 import java.net.URI;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -145,9 +156,84 @@ public class RestClient {
 	}
 	
 	
+	public static int sendFling(byte[] data, String fileName, String serverBaseURL){
+		int id = -1;
+		
+		String boundary = Long.toHexString(System.currentTimeMillis()); // Just generate some unique random value.
+		String CRLF = "\r\n"; // Line separator required by multipart/form-data.
+		
+		String url = serverBaseURL + "/server/flings";
+		PrintWriter writer = null;
+		URLConnection connection = null;
+		String charset = "UTF-8";
+		try {
+			connection = new URL(url).openConnection();
+			connection.setDoOutput(true);
+			connection.setRequestProperty("Content-Type", "multipart/form-data; boundary=" + boundary);
+			
+		    OutputStream output = connection.getOutputStream();
+		    writer = new PrintWriter(new OutputStreamWriter(output, charset), true); // true = autoFlush, important!
+
+		    // Send binary file.
+		    writer.append("--" + boundary).append(CRLF);
+		    writer.append("Content-Disposition: form-data; name=\"fling\"; filename=\"" + fileName + "\"").append(CRLF);
+		    writer.append("Content-Type: " + URLConnection.guessContentTypeFromName(fileName)).append(CRLF);
+		    writer.append("Content-Transfer-Encoding: binary").append(CRLF);
+		    writer.append(CRLF).flush();
+		    InputStream input = null;
+		    try {
+		        input = new ByteArrayInputStream(data);
+		        byte[] buffer = new byte[1024];
+		        for (int length = 0; (length = input.read(buffer)) > 0;) {
+		            output.write(buffer, 0, length);
+		        }
+		        output.flush(); // Important! Output cannot be closed. Close of writer will close output as well.
+		    } finally {
+		        if (input != null) try { input.close(); } catch (IOException logOrIgnore) {}
+		    }
+		    writer.append(CRLF).flush(); // CRLF is important! It indicates end of binary boundary.
+
+		    // End of multipart/form-data.
+		    writer.append("--" + boundary + "--").append(CRLF);
+		    
+		} catch (Exception e) {
+			System.out.println("Error uploading fling" + e);
+		} finally {
+		    if (writer != null) writer.close();
+		}
+		
+		// read response
+		try {
+			InputStream response = connection.getInputStream();
+			BufferedReader reader = new BufferedReader(new InputStreamReader(response, charset));
+			StringBuilder sb = new StringBuilder();
+		    for (String line; (line = reader.readLine()) != null;) {
+		            sb.append(line);
+		    }
+			if (sb.length() > 0) {
+				id = extractId(sb.toString());
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		return id;
+	}
+	
+	
+	public static byte[] downloadFling(int flingId){
+		
+		return null;
+	}
+	
+	
 	
 	
 	protected static int extractId(String response){
+		logger.debug("Extracting id from: " + response);
+		
 		JSONObject jsonObject = JSONObject.fromObject( response );
 		ServerResponse sr = (ServerResponse) JSONUtil.toJava(jsonObject, ServerResponse.class);
 		return sr.getId();
@@ -156,7 +242,8 @@ public class RestClient {
 	public static void main(String[] args) {
 //		new RestClient().testGroupEvent();
 //		new RestClient().testRsvp();
-		new RestClient().testPostMessage();
+//		new RestClient().testPostMessage();
+		new RestClient().testFileUpload();
 	}
 	
 	protected void testGroupEvent(){
@@ -192,5 +279,32 @@ public class RestClient {
 		String serverBaseUrl = "http://localhost:8080/";
 
 		RestClient.postMessage(sender, from, message, serverBaseUrl);
+	}
+	
+	
+	protected void testFileUpload(){
+		File file = new File("/tmp/flings/photo.jpg");
+		
+	    byte []buffer = new byte[(int) file.length()];
+	    InputStream ios = null;
+	    try {
+	        ios = new FileInputStream(file);
+	        if ( ios.read(buffer) == -1 ) {
+	            throw new IOException("EOF reached while trying to read the whole file");
+	        }    
+	    } catch (Exception e){
+	    	e.printStackTrace();
+	    } finally { 
+	        try {
+	             if ( ios != null ) 
+	                  ios.close();
+	        } catch ( IOException e) {
+	        }
+	    }
+	    
+		String serverBaseUrl = "http://localhost:8080/";
+	    int id = RestClient.sendFling(buffer, "photo.jpg", serverBaseUrl);
+	    
+	    System.out.println("Fling id: " + id);
 	}
 }
