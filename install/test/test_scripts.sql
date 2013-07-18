@@ -19,10 +19,10 @@ where gm.mdn = '9253248817' and gm.group_event_id = ge.group_event_id) a);
 
 
 select u.mdn, u.name from GROUP_MEMBER g left outer join users u on g.mdn = u.mdn
-where g.group_event_id = 50;
+where g.group_event_id = 52;
 
 select * from group_member
-where group_event_id = 50;
+where group_event_id = 52;
 
 
 
@@ -295,6 +295,10 @@ where mdn = '9253248817';
 
 update users
 set channel_id = '200##000001'
+where mdn = '9253248817';
+
+update users
+set channel_id = '200##000001'
 where mdn = '9253248967';
 
 select * from users
@@ -350,6 +354,29 @@ INSERT INTO CHANNELS (CHANNEL_ID, CHANNEL_NAME)
 VALUES('703##6718065', 'NBC');
 INSERT INTO CHANNELS (CHANNEL_ID, CHANNEL_NAME)
 VALUES('200##000001', 'CBS');
+
+
+
+select * from users;
+
+delete from users
+where mdn in ('9253248817','9253248967','9084426933','4085986817','9257089093','9255888998');
+
+
+
+
+INSERT INTO USERS (MDN, "NAME", CHANNEL_ID, LAST_CHANNEL_ID)
+VALUES ('9253248817', 'Dongliang Hu', '001##10001', '001##10001');
+INSERT INTO USERS (MDN, "NAME", CHANNEL_ID, LAST_CHANNEL_ID)
+VALUES ('9253248967', 'Fred Bierhaus', '001##10001', '001##10001');
+INSERT INTO USERS (MDN, "NAME", CHANNEL_ID, LAST_CHANNEL_ID)
+VALUES ('9084426933', 'Jeff Lin', '001##10001', '001##10001');
+INSERT INTO USERS (MDN, "NAME", CHANNEL_ID, LAST_CHANNEL_ID)
+VALUES ('4085986817', 'Eshaan', '001##10001', '001##10001');
+INSERT INTO USERS (MDN, "NAME", CHANNEL_ID, LAST_CHANNEL_ID)
+VALUES ('9257089093', 'Jeff2 Lin', '001##10001', '001##10001');
+INSERT INTO USERS (MDN, "NAME", CHANNEL_ID, LAST_CHANNEL_ID)
+VALUES ('9255888998', 'Fred Bierhaus Jr', '001##10001', '001##10001');
 
 
 
