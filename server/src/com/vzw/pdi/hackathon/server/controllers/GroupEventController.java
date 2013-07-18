@@ -2,6 +2,7 @@ package com.vzw.pdi.hackathon.server.controllers;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import net.sf.json.JSONObject;
@@ -56,6 +57,8 @@ public class GroupEventController extends RestController {
 			GroupEvent ge = (GroupEvent) JSONUtil.toJava(jsonObject, GroupEvent.class, "memberList", Member.class);
 			logger.debug("+++++++++++ deserialzed GroupEventController:" + ge);
 			
+			long tm = jsonObject.optLong("showTime");
+			ge.setShowTime(new Date(tm));
 			
 			// save to db both groupevent and group_member
 			GroupEventManager gem = GroupEventManager.getInstance();

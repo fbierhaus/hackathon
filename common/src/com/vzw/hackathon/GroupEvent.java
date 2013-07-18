@@ -68,6 +68,8 @@ public class GroupEvent {
 	public void setShowTime(long showTimeMs) throws Exception {
 		this.showTime = new Date(showTimeMs);//sdf.parse(showTimeStr);
 	}
+	
+	
 
 
 	public Date getCreateTime() {
