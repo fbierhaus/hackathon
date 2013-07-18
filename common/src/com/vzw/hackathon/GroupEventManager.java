@@ -321,7 +321,8 @@ public class GroupEventManager {
 				if (delay < 0) {
 					// tune right away
 					if (!TEST) {
-						ComcastAPIHandler.tuneChannel(mdn, ge.getChannelId());
+						//ComcastAPIHandler.tuneChannel(mdn, ge.getChannelId());
+						ComcastOAuthApi.tuneChannel(null);
 					}
 				}
 				else {
@@ -331,7 +332,7 @@ public class GroupEventManager {
 						@Override
 						public void run() {
 							if (!TEST) {
-								ComcastAPIHandler.tuneChannel(mdn, ge.getChannelId());
+								ComcastOAuthApi.tuneChannel(null);
 							}
 							
 						}
