@@ -133,7 +133,7 @@ public class GroupEventManager {
 			// insert members (including master mdn)
 			for (Member m : ge.getMemberList()) {
 				DBUtil.update(dbPool, SQL_ADD_GROUP_MEMBER, DBUtil.THROW_HANDLER, 
-						geId, m.getMdn(), MemberStatus.INVITED.name());
+						geId, m.getMdn(), MemberStatus.ACCEPTED.name());
 			}
 			
 			DBUtil.update(dbPool, SQL_ADD_GROUP_MEMBER, DBUtil.THROW_HANDLER, 
@@ -229,7 +229,7 @@ public class GroupEventManager {
 				logger.debug("User not found in address book, create an  unknown user: mdn=" + mdn);
 				user = new User();
 				user.setMdn(mdn);
-				user.setName("Unnamed");
+				user.setName(mdn);
 				
 			}
 		}

@@ -5,8 +5,8 @@ import com.vzw.hackathon.GroupEventManager;
 import com.vzw.hackathon.MemberStatus;
 
 public class RestClient2Test {
-	//private static final String serverBaseURL = "http://hud.wcmad.com:8080";
-	private static final String serverBaseURL = "http://localhost:8080";
+	private static final String serverBaseURL = "http://hud.wcmad.com:18080";
+	//private static final String serverBaseURL = "http://localhost:8080";
 	
 	//ssh -nNT -R 8080:localhost:8080 -l hud hud.wcmad.com
 	
@@ -15,8 +15,8 @@ public class RestClient2Test {
 		
 		
 		//testGroupEvent();
-		testRsvp();
-		//stestPostMessage();
+		//testRsvp();
+		testPostMessage();
 		
 
 		

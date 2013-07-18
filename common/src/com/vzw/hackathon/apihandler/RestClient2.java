@@ -59,7 +59,7 @@ public class RestClient2 {
 				url = new URL(targetURL);
 			}
 			else  {
-				url = new URL(targetURL + urlParameters);
+				url = new URL(targetURL + "?" + urlParameters);
 			}
 			connection = (HttpURLConnection) url.openConnection();
 			
