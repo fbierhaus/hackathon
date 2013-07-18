@@ -241,3 +241,36 @@ drop column reminder_sent;
 
 alter table group_member
 add column reminder_sent integer default 0;
+
+
+--=====
+--==
+update users
+set channel_id = '703##6718065'
+where mdn = '9253248817';
+
+update users
+set channel_id = '200##000001'
+where mdn = '9253248967';
+
+----------------------------------------------------
+-- hud 3
+INSERT INTO USERS (MDN, "NAME", CHANNEL_ID)
+VALUES ('9253248817', 'Dongliang Hu', '200##000001');
+INSERT INTO USERS (MDN, "NAME", CHANNEL_ID)
+VALUES ('9253248967', 'Fred Bierhaus', '200##000001');
+INSERT INTO USERS (MDN, "NAME", CHANNEL_ID)
+VALUES ('9084426933', 'Jeff Lin', '200##000001');
+
+
+
+
+-- insert channels
+INSERT INTO CHANNELS (CHANNEL_ID, CHANNEL_NAME)
+VALUES('703##6718065', 'NBC');
+INSERT INTO CHANNELS (CHANNEL_ID, CHANNEL_NAME)
+VALUES('200##000001', 'CBS');
+
+
+
+
