@@ -17,6 +17,7 @@ import com.vzw.hackathon.GroupEvent;
 import com.vzw.hackathon.GroupEventManager;
 import com.vzw.hackathon.Member;
 import com.vzw.hackathon.MemberStatus;
+import com.vzw.hackathon.User;
 import com.vzw.hackathon.apihandler.VZWAPIHandler;
 import com.vzw.util.JSONUtil;
 
@@ -67,7 +68,8 @@ public class GroupEventController extends RestController {
 			for (Member member : members) {
 				toList.add(member.getMdn());
 			}
-			VZWAPIHandler.sendSMS(toList, "TVN_" + id);
+			User user = GroupEventManager.getInstance().getUser(ge.getMasterMdn());
+			VZWAPIHandler.sendSMS(toList, "TVN_" + id + "_" + user.getName());
 			
 			
 			// set for jsp
