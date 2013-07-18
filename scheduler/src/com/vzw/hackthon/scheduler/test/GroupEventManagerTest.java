@@ -64,7 +64,7 @@ public class GroupEventManagerTest {
 
 	//@Test
 	public final void testUpdateMemberLastChannelId() {
-		gem.updateMemberLastChannelId(101, "9250000003", "002##10001");
+		gem.updateMemberLastChannelId("9250000003", "002##10001");
 	}
 
 	@Test
