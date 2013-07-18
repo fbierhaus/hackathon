@@ -20,6 +20,8 @@ public class Main {
 		mw.start();
 		
 		// will wait for a day or interrupt it
+		er.await();
+		mw.await();
 		
 
 	}
