@@ -37,7 +37,7 @@ public class EventReminder implements Runnable {
 	
 	private static final String SQL_SEL_MEMBER_FOR_REMINDER = 
 			"select mdn from group_member where group_event_id = ? and "
-			+ " REMINDER_SENT = 0 and MEMBER_STATUS = 'ACCEPTED' or MEMBER_STATUS = 'MASTER'";
+			+ " REMINDER_SENT = 0 and (MEMBER_STATUS = 'ACCEPTED' or MEMBER_STATUS = 'MASTER')";
 	
 	private static final String SQL_FLAG_REMINDER_SENT =
 			"update group_member set reminder_sent = 1 where group_event_id = ? and mdn = ?";

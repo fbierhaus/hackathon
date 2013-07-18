@@ -1,8 +1,10 @@
 package com.vzw.hackathon;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -47,15 +49,26 @@ public class GroupEventManager {
 	
 	
 	private static final String SQL_UPDATE_MEMBER_LAST_CHANNEL_ID = 
-			"update GROUP_MEMBER set LAST_CHANNEL_ID = ? where GROUP_EVENT_ID = ? and MDN = ?";
+			"update USERS set LAST_CHANNEL_ID = ? where MDN = ?";
 	
 	private static final String SQL_GET_CHANNEL = 
 			"select channel_id as \"id\", channel_name as \"name\", channel_desc as \"desc\" "
 			+ " from channels where channel_id = ?";
 	
 	private static final String SQL_GET_USER = 
-			"select mdn, channel_id as channelId, name from users"
+			"select mdn, channel_id as channelId, last_channel_id as lastChannelId, name from users"
 			+ " where mdn = ?";
+	
+	private static final String SQL_GET_USERS = 
+			"select mdn, channel_id as channelId, last_channel_id as lastChannelId, name from users";	
+	
+	private static final String SQL_GET_LAST_CHANNEL_ID = 
+			"select last_channel_id from group_member "
+			+ " where group_event_id = ? and mdn = ?";
+	
+	
+	private static final String SQL_GET_CHANNEL_ID = 
+			"select channel_id from users where mdn = ?";
 	
 	
 	private ScheduledExecutorService		scheduler = null;
@@ -132,12 +145,15 @@ public class GroupEventManager {
 			
 			// insert members (including master mdn)
 			for (Member m : ge.getMemberList()) {
+				
 				DBUtil.update(dbPool, SQL_ADD_GROUP_MEMBER, DBUtil.THROW_HANDLER, 
 						geId, m.getMdn(), MemberStatus.ACCEPTED.name());
+						//getChannelId(m.getMdn()));
 			}
 			
 			DBUtil.update(dbPool, SQL_ADD_GROUP_MEMBER, DBUtil.THROW_HANDLER, 
 					geId, ge.getMasterMdn(), MemberStatus.MASTER.name());
+					//getChannelId(ge.getMasterMdn()));
 	
 			
 			id = geId;
@@ -176,10 +192,10 @@ public class GroupEventManager {
 	 * @param mdn
 	 * @param lastChannelId
 	 */
-	public void updateMemberLastChannelId(int groupEventId, String mdn, String lastChannelId) {
+	public void updateMemberLastChannelId(String mdn, String lastChannelId) {
 		try {
 			DBUtil.update(dbPool, SQL_UPDATE_MEMBER_LAST_CHANNEL_ID, DBUtil.THROW_HANDLER,
-					lastChannelId, groupEventId, mdn);
+					lastChannelId, mdn);
 			
 			logger.debug("updated last channel id to " + lastChannelId);
 		}
@@ -214,6 +230,36 @@ public class GroupEventManager {
 		return channel;
 	}
 	
+	public String getLastChannelId(String mdn) {
+		String lastChannelId = null;
+		
+		try {
+			lastChannelId = DBUtil.query(dbPool, SQL_GET_LAST_CHANNEL_ID,
+					new ScalarHandler<String>(), DBUtil.THROW_HANDLER, mdn);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			logger.error("Failed to get last channel id, mdn=" + mdn);
+		}
+		
+		return lastChannelId;
+	}
+	
+	
+	public String getChannelId(String mdn) {
+		String channelId = null;
+		
+		try {
+			channelId = DBUtil.query(dbPool, SQL_GET_CHANNEL_ID,
+					new ScalarHandler<String>(), DBUtil.THROW_HANDLER, mdn);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			logger.error("Failed to get channel id for user: " + mdn);
+		}
+		
+		
+		return channelId;
+	}
+	
 	/**
 	 * 
 	 * @param mdn
@@ -240,6 +286,21 @@ public class GroupEventManager {
 		return user;
 	}
 	
+	
+	public List<User> getUsers() {
+		List<User> userList = new ArrayList<User>();
+		try {
+			userList = DBUtil.query(dbPool, SQL_GET_USERS, 
+					new DBUtil.BeanListHandlerEx<User>(User.class), DBUtil.THROW_HANDLER);
+			
+
+		}
+		catch (Exception e) {
+			logger.error("Failed to get users", e);
+		}
+		
+		return userList;		
+	}
 	
 
 	
