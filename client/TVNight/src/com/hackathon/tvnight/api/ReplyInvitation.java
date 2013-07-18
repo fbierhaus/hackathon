@@ -1,60 +1,23 @@
 package com.hackathon.tvnight.api;
 
+import com.hackathon.tvnight.util.Util;
+import com.vzw.hackathon.MemberStatus;
+import com.vzw.hackathon.apihandler.RestClient2;
+
 
 public class ReplyInvitation {
 	private int mInvitationId;
+	private String mMdn;
 	
-	public ReplyInvitation(int invitationId) {
+	public ReplyInvitation(int invitationId, String mdn) {
 		mInvitationId = invitationId;
+		mMdn = mdn;
 	}
 	
 	public boolean send(boolean accept) {
-		try {
-//			// create the member list
-//			ArrayList<Member> members = new ArrayList<Member>();
-//			List<String> list = mInvite.getRecipientList();
-//			for (String mdn : list) {
-//				Member member = new Member();
-//				member.setMdn(mdn);
-//				member.setName("Name " + mdn);
-//				members.add(member);
-//			}
-//			
-//			GroupEvent event = new GroupEvent();
-//			event.setId((int)(System.currentTimeMillis()/1000L));
-//			event.setChannelId(mInvite.getChannelId());
-//			event.setShowId(mInvite.getShowId());
-//			event.setMemberList(members);
-//			event.setMasterMdn(mInvite.getSender());
-//			
-//			String json = JSONHelper.toJson(event);
-//			json = "groupEvent={ " + json + " }";
-//			
-//			String query = ApiConstant.VERIZON_SERVER + ApiConstant.SEND_INVITE;
-//			
-//			URL url;
-//			try {
-////				url = new URL(query);
-////				HttpURLConnection conn = (HttpURLConnection)url.openConnection();
-////				conn.setRequestMethod("POST");
-////
-////				StringBuilder builder = new StringBuilder();			
-////				BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-////				String line = null;
-////				while ((line = reader.readLine()) != null) {
-////					builder.append(line);
-////				}
-////
-////				String response = builder.toString();
+		RestClient2.rsvp(mInvitationId, mMdn,
+				MemberStatus.ACCEPTED, ApiConstant.VERIZON_SERVER);
 
-			Thread.sleep(5000);
-			return true;
-		}
-		catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
 		return false;
 	}
 }
