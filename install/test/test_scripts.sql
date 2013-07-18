@@ -12,6 +12,39 @@ show_time between CURRENT_TIMESTAMP AND {fn TIMESTAMPADD(SQL_TSI_MINUTE, 10, CUR
 
 
 
+update group_event
+set show_time = TIMESTAMP('20130717163318');
+
+-----------------------------------------------------------------------
+
+
+select g.group_event_id, g.mdn, u.name, u.channel_id, g.member_status, g.last_channel_id
+from GROUP_MEMBER g, USERS u
+where u.mdn = g.mdn and g.member_status = 'MASTER' or g.member_status = 'ACCEPTED'
+order by g.GROUP_EVENT_ID, g.mdn;
+
+
+select g.group_event_id, g.mdn, g.member_status, g.last_channel_id, u.name, u.channel_id
+from GROUP_MEMBER g left outer join users u on g.mdn = u.mdn
+where g.member_status = 'MASTER' or g.member_status = 'ACCEPTED'
+order by g.GROUP_EVENT_ID, g.mdn;
+
+
+update group_member
+set member_status = 'ACCEPTED'
+where member_status = 'INVITED';
+
+delete from group_member;
+delete from group_event;
+
+
+
+
+
+
+
+
+
 
 select mdn from group_member
 where group_event_id = 1 and MEMBER_STATUS = 'ACCEPTED';
@@ -92,8 +125,6 @@ order by g.GROUP_EVENT_ID, g.mdn;
 select mdn, channel_id as channelId, name from madhack.users
 where mdn = '9250000001';
 
-update group_event
-set show_time = TIMESTAMP('20130717135803');
 
 --------------------------------------------------------
 -- 2013-07-17
@@ -176,3 +207,37 @@ VALUES ('9250000004', 'Alice Lee', '004##10001');
 
 
 
+-------------------------------------------------------
+INSERT INTO USERS (MDN, "NAME", CHANNEL_ID)
+VALUES ('9251000001', 'John Johnson', '001##10001');
+
+INSERT INTO USERS (MDN, "NAME", CHANNEL_ID)
+VALUES ('9251000002', 'James Johnson', '002##10001');
+
+INSERT INTO USERS (MDN, "NAME", CHANNEL_ID)
+VALUES ('9251000003', 'Mary Johnson', '003##10001');
+
+INSERT INTO USERS (MDN, "NAME", CHANNEL_ID)
+VALUES ('9252000001', 'David Miller', '001##10002');
+
+INSERT INTO USERS (MDN, "NAME", CHANNEL_ID)
+VALUES ('9252000002', 'Robert Miller', '002##10002');
+
+INSERT INTO USERS (MDN, "NAME", CHANNEL_ID)
+VALUES ('9252000003', 'Linda Miller', '003##10002');
+
+INSERT INTO USERS (MDN, "NAME", CHANNEL_ID)
+VALUES ('9253000001', 'Mark Lee', '001##10002');
+
+INSERT INTO USERS (MDN, "NAME", CHANNEL_ID)
+VALUES ('9253000002', 'Paul Lee', '002##10002');
+
+INSERT INTO USERS (MDN, "NAME", CHANNEL_ID)
+VALUES ('9253000003', 'Laura Lee', '003##10002');
+
+
+alter table group_event
+drop column reminder_sent;
+
+alter table group_member
+add column reminder_sent integer default 0;
