@@ -15,12 +15,15 @@ public class ReplyInvitationTask extends AsyncTask<Void, Void, Boolean> {
 	private int mMsgCode;
 	private int mInvitationId;
 	private boolean mAccept;
+	private String mMdn;
 	
-	public ReplyInvitationTask(Handler handler, int msgCode, int invitationId, boolean accept) {
+	public ReplyInvitationTask(Handler handler, int msgCode, int invitationId,
+			String mdn, boolean accept) {
 		mHandler = handler;
 		mMsgCode = msgCode;
 		mInvitationId = invitationId;
 		mAccept = accept;
+		mMdn = mdn;
 	}
 	
 	public void cancelOperation() {
@@ -36,7 +39,7 @@ public class ReplyInvitationTask extends AsyncTask<Void, Void, Boolean> {
 
 	@Override
 	protected Boolean doInBackground(Void... params) {
-		boolean success = (new ReplyInvitation(mInvitationId).send(mAccept));					
+		boolean success = (new ReplyInvitation(mInvitationId, mMdn).send(mAccept));					
 		return Boolean.valueOf(success);
 	}
 
