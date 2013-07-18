@@ -77,7 +77,7 @@ public class EventReminder implements Runnable {
 	 * Get group events (list of group events)
 	 * @return
 	 */
-	public List<GroupEvent> getGroupEventsForReminder() {
+	public List<GroupEvent> getGroupEventsForReminder(int reminderSecs) {
 		
 		List<GroupEvent> geList = null;
 		
@@ -85,7 +85,7 @@ public class EventReminder implements Runnable {
 			
 			// go over the events the show time of which is not REMINDER_MINUTES more minutes than now.
 			geList = DBUtil.query(dbPool, SQL_SEL_EVENTS_FOR_REMINDER, 
-					new DBUtil.BeanListHandlerEx<GroupEvent>(GroupEvent.class), DBUtil.THROW_HANDLER, REMINDER_SECONDS);
+					new DBUtil.BeanListHandlerEx<GroupEvent>(GroupEvent.class), DBUtil.THROW_HANDLER, reminderSecs);
 			
 		}
 		catch (Exception e) {
@@ -134,11 +134,11 @@ public class EventReminder implements Runnable {
 	/**
 	 * 
 	 */
-	public void sendReminders() {
+	public void sendReminders(int reminderSecs) {
 		
 		logger.info("Start sending reminders");
 		
-		List<GroupEvent> geList = getGroupEventsForReminder();
+		List<GroupEvent> geList = getGroupEventsForReminder(reminderSecs);
 		
 		if (!CollectionUtils.isEmpty(geList)) {
 			for (GroupEvent ge : geList) {
@@ -198,7 +198,7 @@ public class EventReminder implements Runnable {
 
 	@Override
 	public void run() {
-		sendReminders();
+		sendReminders(REMINDER_SECONDS);
 		
 	}
 

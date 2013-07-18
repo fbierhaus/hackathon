@@ -40,9 +40,9 @@ public class EventReminderTest {
 
 	@Test
 	public void testGetGroupEventsForReminder() {
-		List<GroupEvent> geList = eventReminder.getGroupEventsForReminder();
+		//List<GroupEvent> geList = eventReminder.getGroupEventsForReminder();
 		
-		System.out.println("done " + geList);
+		//System.out.println("done " + geList);
 	}
 	
 	@Test

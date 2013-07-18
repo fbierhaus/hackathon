@@ -284,6 +284,14 @@ add column reminder_sent integer default 0;
 
 --====== DEMO
 --======
+delete from group_event;
+
+delete from group_member;
+
+select * from group_member;
+
+
+
 
 -- channel change
 -- 703##6718065

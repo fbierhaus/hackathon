@@ -159,7 +159,7 @@ public class ComcastOAuthApi {
 		
 		HttpURLConnection request = null, req2 = null;
         try {
-        	String urlStr = "https://xip.comcast.net/xip/proxy/rtune/device/" + DEVICE_KEY + "/tune/message/" + msg;
+        	String urlStr = "https://xip.comcast.net/xip/proxy/rtune/device/" + DEVICE_KEY + "/tune/message/" + URLEncoder.encode(msg, "UTF-8");
 			
 			// create a consumer object and configure it with the access
 	        // token and token secret obtained from the service provider

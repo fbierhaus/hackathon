@@ -2,7 +2,7 @@
    <!-- the first argument is the ConnectionFactory -->
    <object class="org.apache.commons.dbcp.DriverConnectionFactory">
       <object class="org.apache.derby.jdbc.ClientDriver"/>	<!-- actual jdbc driver -->
-      <string value="jdbc:derby://localhost:1527/madhack;user=madhack;password=madhack"/>		<!-- connection string -->
+      <string value="jdbc:derby://hud.wcmad.com:18088/madhack;user=madhack;password=madhack"/>		<!-- connection string -->
       <object class="java.util.Properties" null="false"/>
    </object>
    <!-- the next argument is the ObjectPool -->

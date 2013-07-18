@@ -24,6 +24,7 @@ import org.junit.Test;
 
 import com.vzw.hackathon.ComcastOAuthApi;
 import com.vzw.hackathon.apihandler.ComcastAPIHandler;
+import com.vzw.hackthon.scheduler.EventReminder;
 import com.vzw.hackthon.scheduler.SchedulerProperties;
 import com.vzw.util.HttpClientUtil;
 import com.vzw.util.config.AbstractProperties;
@@ -125,4 +126,9 @@ public class CommonTest {
 		ComcastOAuthApi.postMessage("abcd");
 	}
 
+	//@Test
+	public void demoSendReminders() {
+		EventReminder er = new EventReminder();
+		er.sendReminders(600);
+	}
 }
