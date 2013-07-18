@@ -21,7 +21,7 @@ import com.vzw.util.db.DBUtil;
 
 public class GroupEventManager {
 	private static final Logger	logger = Logger.getLogger(GroupEventManager.class);
-	private static boolean TEST = true;
+	private static boolean TEST = false;
 	
 	
 	private  DBPool dbPool = null;
