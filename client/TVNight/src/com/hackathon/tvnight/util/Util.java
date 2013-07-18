@@ -18,6 +18,10 @@ public class Util {
     public static String getPhoneNumber(Context context) {   	
     	TelephonyManager telephonyManager = (TelephonyManager)context.getSystemService(Context.TELEPHONY_SERVICE); 
     	String phoneNumber = telephonyManager.getLine1Number();
+    	// remove preceding +1
+    	if (phoneNumber.startsWith("+1")) {
+    		phoneNumber = phoneNumber.substring(2);
+    	}
     	return phoneNumber;
     }
     
