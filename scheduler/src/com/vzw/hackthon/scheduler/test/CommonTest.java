@@ -22,6 +22,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import com.vzw.hackathon.ComcastOAuthApi;
 import com.vzw.hackathon.apihandler.ComcastAPIHandler;
 import com.vzw.hackthon.scheduler.SchedulerProperties;
 import com.vzw.util.HttpClientUtil;
@@ -116,7 +117,12 @@ public class CommonTest {
 	
 	@Test
 	public void demoTuneChannel() {
-		ComcastAPIHandler.tuneChannel("9253248967", "703##6718065");
+		ComcastOAuthApi.tuneChannel(null);
+	}
+	
+	//@Test
+	public void demoPostMessage() {
+		ComcastOAuthApi.postMessage("abcd");
 	}
 
 }

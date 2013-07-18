@@ -8,6 +8,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 
+import org.apache.log4j.Logger;
+
 import oauth.signpost.OAuthConsumer;
 import oauth.signpost.OAuthProvider;
 import oauth.signpost.basic.DefaultOAuthConsumer;
@@ -22,12 +24,16 @@ public class ComcastOAuthApi {
 	public static final String  DEVICE_KEY = "Ed8EoFlo0fKDkdfESrijdJC68-lg1k9TJvFkq75hSUkKV-IGkYTYa6dzAqwdQFR2.c.I9sTOWWoSO6y4nhKJOSAMXrf1iEFmhi7gLOfsTvl8HEwW8t0XDwc5vcYsGTOOJYu5WSc4aietpHA11oVi_t3FQ**.a.2";
 	
 	
+	public static final Logger	logger = Logger.getLogger(ComcastOAuthApi.class);
+	
 	
 	public static void tuneChannel(Channel channel) {
 		String urlStr = "https://xip.comcast.net/xip/proxy/rtune/device/" + DEVICE_KEY + "/tune/tv/vcn/703";
 
 		String chValue = null;
 		
+		
+		logger.info("Start to tune channel");
 		HttpURLConnection request = null, req2 = null;
         try {
 	        
@@ -148,7 +154,7 @@ public class ComcastOAuthApi {
 	
 	public static void postMessage(String msg) {
 		
-
+		logger.info("Start to post message");
 		String chValue = null;
 		
 		HttpURLConnection request = null, req2 = null;
