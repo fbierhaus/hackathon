@@ -31,104 +31,7 @@
         android:layout_below="@id/tv_reminder_header"
         android:background="#787878" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/seperator"
-        android:orientation="vertical"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin" >
-
-        <RelativeLayout
-            android:id="@+id/show_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp" >
-
-            <ImageView
-                android:id="@+id/icon"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
-                android:layout_alignParentLeft="true"
-                android:layout_marginRight="7dp"
-                android:src="@drawable/ic_missing_thumbnail_video" />
-
-            <TextView
-                android:id="@+id/tv_title_and_season"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignTop="@id/icon"
-                android:layout_marginLeft="5dp"
-                android:layout_toRightOf="@id/icon"
-                android:text="Falling Skies, Season 3"
-                android:textColor="#333333"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/episode_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignLeft="@id/tv_title_and_season"
-                android:layout_below="@id/tv_title_and_season"
-                android:layout_marginTop="3dp"
-                android:text="At All Costs"
-                android:textColor="#333333"
-                android:textSize="16sp" />
-
-            <TextView
-                android:id="@+id/show_desc"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignLeft="@id/episode_name"
-                android:layout_below="@id/episode_name"
-                android:text="Astronaut David Lister survives a disaster in space that wipes out the crew of the mining ship Red Dwarf in this BBC production. However, Lister is not alone. A hologram of his dead bunkmate Arnold and a creature that was once the ship's cat join him in his journey toward Earth. Along the way, they're joined by a robot and a woman from a parallel universe."
-                android:textColor="#333333" />
-        </RelativeLayout>
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="7dp"
-            android:layout_marginTop="7dp"
-            android:src="@drawable/gray_divider_line2px" />
-
-        <TextView
-            android:id="@+id/show_stats"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="42:07 / HD / TV-14 / CC"
-            android:textColor="#333333" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:layout_marginTop="10dp"
-            android:src="@drawable/gray_divider_line2px" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="30dp"
-            android:text="Show Starts In:"
-            android:textColor="#333333"
-            android:textSize="16sp" />
-
-        <TextView
-            android:id="@+id/date_and_time"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:text="00:00:00"
-            android:gravity="center"
-            android:textColor="#333333"
-            android:textSize="45sp"
-            android:textStyle="bold" />
-    </LinearLayout>
-
-    <Button
+     <Button
         android:id="@+id/enter_group_chat"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -138,5 +41,109 @@
         android:layout_marginRight="22dp"
         android:background="@drawable/btn_white_gradient"
         android:text="Enter Group Chat" />
+    
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/seperator"
+        android:layout_above="@id/enter_group_chat"
+        android:layout_marginBottom="12dp"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <RelativeLayout
+                android:id="@+id/show_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp" >
+
+                <ImageView
+                    android:id="@+id/icon"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginRight="7dp"
+                    android:src="@drawable/ic_missing_thumbnail_video" />
+
+                <TextView
+                    android:id="@+id/tv_title_and_season"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@id/icon"
+                    android:layout_marginLeft="5dp"
+                    android:layout_toRightOf="@id/icon"
+                    android:text="The Big Bang Theory, Season 6"
+                    android:textColor="#333333"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/episode_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@id/tv_title_and_season"
+                    android:layout_below="@id/tv_title_and_season"
+                    android:layout_marginTop="3dp"
+                    android:text="The Date Night Variable"
+                    android:textColor="#333333"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/show_desc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@id/episode_name"
+                    android:layout_below="@id/episode_name"
+                    android:text="Two nerdy physicists share an apartment and an unlikely friendship with their beautiful neighbor with whom one of them is infatuated. Like the universe after the big bang, the show&apos;s popularity expanded, thanks to breakout star Jim Parsons, along with the chemistry among the friends and the developing romance between Leonard and Penny. The addition of Melissa Rauch and Mayim Bialik in later seasons also enhanced the stories and relationships of the leads."
+                    android:textColor="#333333" />
+            </RelativeLayout>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="7dp"
+                android:layout_marginTop="7dp"
+                android:src="@drawable/gray_divider_line2px" />
+
+            <TextView
+                android:id="@+id/show_stats"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="42:07 / HD / TV-14 / CC"
+                android:textColor="#333333" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/gray_divider_line2px" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="30dp"
+                android:text="Show Starts In:"
+                android:textColor="#333333"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/date_and_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center"
+                android:text="00:00:00"
+                android:textColor="#333333"
+                android:textSize="45dp"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </ScrollView>
 
 </RelativeLayout>

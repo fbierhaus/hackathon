@@ -80,9 +80,6 @@ public class ShowDescActivity extends Activity implements OnClickListener {
 		saveButt = (Button) findViewById(R.id.save_butt);
 		getShowDetails = new GetShowDetailTask(getDetailsHandler, 1);
 		getShowDetails.execute(getIntent().getStringExtra("show_id"));
-		if (getIntent().getBooleanExtra("simpaid", false)) {
-			purchaseButt.setVisibility(View.VISIBLE);
-		}
 		purchaseButt.setOnClickListener(this);
 		saveButt.setOnClickListener(this);
 		createWatchGroup.setOnClickListener(this);
@@ -104,6 +101,15 @@ public class ShowDescActivity extends Activity implements OnClickListener {
 		}
 		super.onCreate(savedInstanceState);
 	}
+	
+	@Override
+	protected void onResume() {
+		startTime = System.currentTimeMillis()+(3*60*1000);
+		String stringTime = ShowingResult.convertTime(startTime);
+		mySeasonAndEp.setText(stringTime+" on Ch. "+channelId);
+		super.onResume();
+	}
+	
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -136,6 +142,7 @@ public class ShowDescActivity extends Activity implements OnClickListener {
 			pd.setMessage("Sending...");
 			pd.setCancelable(false);
 			pd.show();
+			startTime = System.currentTimeMillis()+(3*60*1000);
 			SendInvitationTask sendTask = new SendInvitationTask(new Handler() {
 				@Override
 				public void handleMessage(Message msg) {

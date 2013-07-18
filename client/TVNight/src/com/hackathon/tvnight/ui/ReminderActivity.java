@@ -7,6 +7,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.util.TypedValue;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -56,6 +57,7 @@ public class ReminderActivity extends Activity implements OnClickListener {
 
 		@Override
 		public void onFinish() {
+			time.setTextSize(TypedValue.COMPLEX_UNIT_SP, 25);
 			time.setText("Your show is starting! Server is attempting to change your channel to the designated show!");
 		}
 
