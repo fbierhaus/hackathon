@@ -60,6 +60,15 @@ public class MemberWatcher implements Runnable {
 			}
 			
 		});
+		
+		
+		
+		try {
+			executor.awaitTermination(1, TimeUnit.DAYS);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
 	}
 
 	
