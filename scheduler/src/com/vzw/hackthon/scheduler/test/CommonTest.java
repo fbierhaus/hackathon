@@ -108,7 +108,7 @@ public class CommonTest {
 		long t = new Date().getTime();
 		System.out.println("t=" + t);
 		
-		long t1 = TimeUnit.MILLISECONDS.convert(9, TimeUnit.MINUTES) + t;
+		long t1 = TimeUnit.MILLISECONDS.convert(2, TimeUnit.MINUTES) + t;
 		System.out.println(t1);
 		System.out.println(MessageFormat.format("t1={0,time,yyyyMMddHHmmss}", t1));
 	}
