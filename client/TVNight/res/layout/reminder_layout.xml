@@ -48,6 +48,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="22dp"
         android:layout_marginRight="22dp"
+        android:layout_marginBottom="5dp"
     	android:layout_above="@id/enter_group_chat"
         android:background="@drawable/btn_white_gradient"
         android:text="Tune to Channel (703)" />
@@ -56,7 +57,6 @@
      <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="5dp"
         android:layout_below="@id/seperator"
         android:layout_above="@id/switch_channel"
         android:layout_marginBottom="12dp"
