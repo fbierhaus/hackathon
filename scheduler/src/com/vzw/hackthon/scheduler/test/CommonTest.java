@@ -22,6 +22,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import com.vzw.hackathon.apihandler.ComcastAPIHandler;
 import com.vzw.hackthon.scheduler.SchedulerProperties;
 import com.vzw.util.HttpClientUtil;
 import com.vzw.util.config.AbstractProperties;
@@ -103,7 +104,7 @@ public class CommonTest {
 		
 	}
 	
-	@Test
+	//@Test
 	public void testTimestamp() {
 		long t = new Date().getTime();
 		System.out.println("t=" + t);
@@ -111,6 +112,11 @@ public class CommonTest {
 		long t1 = TimeUnit.MILLISECONDS.convert(2, TimeUnit.MINUTES) + t;
 		System.out.println(t1);
 		System.out.println(MessageFormat.format("t1={0,time,yyyyMMddHHmmss}", t1));
+	}
+	
+	@Test
+	public void demoTuneChannel() {
+		ComcastAPIHandler.tuneChannel("9253248967", "703##6718065");
 	}
 
 }
