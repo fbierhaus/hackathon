@@ -191,10 +191,10 @@ public class ShowListActivity extends Activity implements OnClickListener {
 			myViewData.title.setText(show.getDefaultTitle());
 			
 			if (show.getSimulatePaid()) {
-				myViewData.episodeTitle.setText("First Episode -- $$$");
+				myViewData.episodeTitle.setText("$$$");
 			}
 			else {
-				myViewData.episodeTitle.setText("First Episode");
+				myViewData.episodeTitle.setText(null);
 			}
 			
 			if (show.getImageUrl() != null) {

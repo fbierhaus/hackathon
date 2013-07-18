@@ -42,7 +42,7 @@ public class ShowDescActivity extends Activity implements OnClickListener {
 	private Button purchaseButt;
 	private String channelId;
 	private ImageView showIcon;
-	private String roviId;
+	private final String roviId = "6718065";
 	private String showName;
 	private Button saveButt;
 	private ArrayList<String> selectedNums;
@@ -50,7 +50,6 @@ public class ShowDescActivity extends Activity implements OnClickListener {
 	private Handler getDetailsHandler = new Handler() {
 		public void handleMessage(Message msg) {
 			TVShow show = (TVShow) msg.obj;
-			roviId = show.getId(TVShow.ID_KEY_ROVI);
 			startTime = System.currentTimeMillis()+(3*60*1000);
 			String stringTime = ShowingResult.convertTime(startTime);
 			channelId = "703";
@@ -186,7 +185,7 @@ public class ShowDescActivity extends Activity implements OnClickListener {
 		
 		builder.setMessage((group) ? 
 					"Would you like to buy \""+showName+"\" for a group of "+selectedNums.size()+" people? For a total of: $"+selectedNums.size()*2 :
-					"Would you like to buy \""+showName+"\" for $3 for yourself? (If you buy for a group you get a $1 discout)");
+					"Would you like to buy \""+showName+"\" for $3 for yourself? (If you buy for a group you get a $1 discount)");
 		builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
 			
 			@Override
