@@ -42,11 +42,23 @@
         android:background="@drawable/btn_white_gradient"
         android:text="Enter Group Chat" />
     
-    <ScrollView
+	 <Button
+        android:id="@+id/switch_channel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="22dp"
+        android:layout_marginRight="22dp"
+    	android:layout_above="@id/enter_group_chat"
+        android:background="@drawable/btn_white_gradient"
+        android:text="Tune to Channel (703)" />
+    
+     
+     <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
         android:layout_below="@id/seperator"
-        android:layout_above="@id/enter_group_chat"
+        android:layout_above="@id/switch_channel"
         android:layout_marginBottom="12dp"
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin" >
@@ -96,9 +108,10 @@
                 <TextView
                     android:id="@+id/show_desc"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="100dp"
                     android:layout_alignLeft="@id/episode_name"
                     android:layout_below="@id/episode_name"
+                    android:ellipsize="marquee"
                     android:text="Two nerdy physicists share an apartment and an unlikely friendship with their beautiful neighbor with whom one of them is infatuated. Like the universe after the big bang, the show&apos;s popularity expanded, thanks to breakout star Jim Parsons, along with the chemistry among the friends and the developing romance between Leonard and Penny. The addition of Melissa Rauch and Mayim Bialik in later seasons also enhanced the stories and relationships of the leads."
                     android:textColor="#333333" />
             </RelativeLayout>
@@ -114,7 +127,7 @@
                 android:id="@+id/show_stats"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="42:07 / HD / TV-14 / CC"
+                android:text="22:07 / HD / TV-14 / CC"
                 android:textColor="#333333" />
 
             <ImageView

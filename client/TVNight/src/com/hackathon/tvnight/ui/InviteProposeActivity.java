@@ -50,7 +50,7 @@ public class InviteProposeActivity extends Activity {
 		});
 		declineInvite.setEnabled(false); //disabled for demo
 		String sender = getIntent().getStringExtra(SMSReceiver.EXTRA_SENDER);
-		showName.setText("Invite From: " + sender);
+		invitationFrom.setText("Invite From: " + sender);
 
 		showTime.setText(ShowingResult.convertTime(System.currentTimeMillis()
 				+ (3 * 60 * 1000)));

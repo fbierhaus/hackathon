@@ -4,15 +4,16 @@ import java.util.List;
 import java.util.Random;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -33,7 +34,7 @@ import com.koushikdutta.urlimageviewhelper.UrlImageViewHelper;
 public class ShowListActivity extends Activity implements OnClickListener {
 	private final static int MSG_SHOW_LIST = 1;
 
-	public static final boolean TEST_INVITE_ACTIVITY = false;
+	public static final boolean TEST_ACTIVITY = false;
 	
 	private ListView showList;
 	private TVShowAdapter showsAdapter;
@@ -117,7 +118,7 @@ public class ShowListActivity extends Activity implements OnClickListener {
 		submit = (Button) findViewById(R.id.submit);
 		submit.setOnClickListener(this);
 				
-		if (getIntent().getBooleanExtra("fromnotif", false) || TEST_INVITE_ACTIVITY) {
+		if (getIntent().getBooleanExtra("fromnotif", false) || TEST_ACTIVITY) {
 			Intent i = new Intent(this, ReminderActivity.class);
 			startActivity(i);
 		}
@@ -243,6 +244,11 @@ public class ShowListActivity extends Activity implements OnClickListener {
 			Toast.makeText(this, "Please enter a valid search term.", Toast.LENGTH_SHORT).show();
 			return;
 		}
+		
+		InputMethodManager imm = (InputMethodManager)getSystemService(
+				Context.INPUT_METHOD_SERVICE);
+		imm.hideSoftInputFromWindow(searchTerm.getWindowToken(), 0);
+		
 		showsAdapter = null;
 		progressSpinner.setVisibility(View.VISIBLE);
 		showList.setVisibility(View.GONE);
